@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/wincom/static/css/main.2d50fdcc.chunk.css",
-    "main.js": "/wincom/static/js/main.d933d6ab.chunk.js",
-    "main.js.map": "/wincom/static/js/main.d933d6ab.chunk.js.map",
+    "main.js": "/wincom/static/js/main.1b253c36.chunk.js",
+    "main.js.map": "/wincom/static/js/main.1b253c36.chunk.js.map",
     "runtime-main.js": "/wincom/static/js/runtime-main.21b6fed9.js",
     "runtime-main.js.map": "/wincom/static/js/runtime-main.21b6fed9.js.map",
     "static/css/2.2cba102f.chunk.css": "/wincom/static/css/2.2cba102f.chunk.css",
     "static/js/2.c229abbe.chunk.js": "/wincom/static/js/2.c229abbe.chunk.js",
     "static/js/2.c229abbe.chunk.js.map": "/wincom/static/js/2.c229abbe.chunk.js.map",
     "index.html": "/wincom/index.html",
-    "precache-manifest.a292e9a54d3a4949e39361a7370dfc86.js": "/wincom/precache-manifest.a292e9a54d3a4949e39361a7370dfc86.js",
+    "precache-manifest.c72cd444c6ffc2d26bcf553f08d54f8b.js": "/wincom/precache-manifest.c72cd444c6ffc2d26bcf553f08d54f8b.js",
     "service-worker.js": "/wincom/service-worker.js",
     "static/css/2.2cba102f.chunk.css.map": "/wincom/static/css/2.2cba102f.chunk.css.map",
     "static/css/main.2d50fdcc.chunk.css.map": "/wincom/static/css/main.2d50fdcc.chunk.css.map",
@@ -24,6 +24,6 @@
     "static/css/2.2cba102f.chunk.css",
     "static/js/2.c229abbe.chunk.js",
     "static/css/main.2d50fdcc.chunk.css",
-    "static/js/main.d933d6ab.chunk.js"
+    "static/js/main.1b253c36.chunk.js"
   ]
 }
