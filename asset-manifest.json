@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/wincom/static/css/main.2d50fdcc.chunk.css",
+    "main.js": "/wincom/static/js/main.aeee42aa.chunk.js",
+    "main.js.map": "/wincom/static/js/main.aeee42aa.chunk.js.map",
+    "runtime-main.js": "/wincom/static/js/runtime-main.21b6fed9.js",
+    "runtime-main.js.map": "/wincom/static/js/runtime-main.21b6fed9.js.map",
+    "static/css/2.2cba102f.chunk.css": "/wincom/static/css/2.2cba102f.chunk.css",
+    "static/js/2.d6b31f05.chunk.js": "/wincom/static/js/2.d6b31f05.chunk.js",
+    "static/js/2.d6b31f05.chunk.js.map": "/wincom/static/js/2.d6b31f05.chunk.js.map",
+    "index.html": "/wincom/index.html",
+    "precache-manifest.664b6049f5896c6aaa5a654b859be4bc.js": "/wincom/precache-manifest.664b6049f5896c6aaa5a654b859be4bc.js",
+    "service-worker.js": "/wincom/service-worker.js",
+    "static/css/2.2cba102f.chunk.css.map": "/wincom/static/css/2.2cba102f.chunk.css.map",
+    "static/css/main.2d50fdcc.chunk.css.map": "/wincom/static/css/main.2d50fdcc.chunk.css.map",
+    "static/js/2.d6b31f05.chunk.js.LICENSE.txt": "/wincom/static/js/2.d6b31f05.chunk.js.LICENSE.txt",
+    "static/media/common.scss": "/wincom/static/media/Raleway-SemiBold.55508842.woff2",
+    "static/media/Datepicker.module.scss": "/wincom/static/media/icon-arrow-calendar.09d6db7d.svg",
+    "static/media/license.png": "/wincom/static/media/license.52d9ffd9.png",
+    "static/media/truck-dummy.jpg": "/wincom/static/media/truck-dummy.defeb78e.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.21b6fed9.js",
+    "static/css/2.2cba102f.chunk.css",
+    "static/js/2.d6b31f05.chunk.js",
+    "static/css/main.2d50fdcc.chunk.css",
+    "static/js/main.aeee42aa.chunk.js"
+  ]
+}
