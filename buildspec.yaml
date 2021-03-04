@@ -24,7 +24,7 @@ phases:
       - echo Build started on `date`
       - npm install
       - npm run build
-      - docker build -t wincom-web
+      - docker build -t wincom-web .
       - docker tag wincom-web 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
   post_build:
     commands:
