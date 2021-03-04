@@ -19,6 +19,7 @@ const Button = ({
         [css.buttonBordered]: palette === ButtonPalettes.BORDERED,
         [css.buttonRegular]: height === ButtonHeights.REGULAR,
         [css.buttonLarge]: height === ButtonHeights.LARGE,
+        [css.buttonSmall]: height === ButtonHeights.SMALL,
       })}
       type={type}
     >

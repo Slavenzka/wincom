@@ -16,7 +16,6 @@ const Datepicker = ({
   isSingleDaySelection = true,
   isRangeStyle,
   isCalendarAlwaysOpen,
-  isCustomDropdownIcon,
   isSelectedOnDayClick,
   externalResetRef,
   children,
@@ -291,7 +290,9 @@ const Datepicker = ({
 
   return (
     <div className={classnames(css.wrapper, className)}>
-      {isCalendarOpen && <div className={css.background} ref={calendarWrapperRef} />}
+      {isCalendarOpen && !isCalendarAlwaysOpen &&
+        <div className={css.background} ref={calendarWrapperRef} />
+      }
       { children && children({
         data: calendarState,
         onClick: handleToggleCalendar,
