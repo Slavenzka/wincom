@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wincom-web
+  name: wincom-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wincom-web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: wincom-web
+    spec:
+      containers:
+        - image: 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
+          imagePullPolicy: "Always"
+          name: wincom-web
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wincom-web
+  name: wincom-web
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: wincom-web
