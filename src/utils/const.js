@@ -17,6 +17,7 @@ export const ButtonPalettes = {
 export const ButtonHeights = {
   REGULAR: 'REGULAR',
   LARGE: 'LARGE',
+  SMALL: 'SMALL'
 }
 
 export const HeadingTypes = {

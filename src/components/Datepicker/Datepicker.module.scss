@@ -32,13 +32,14 @@
   }
 
   .datepicker {
+    --daypicker-padding-h: 1.8rem;
     :global {
       .DayPicker {
         &-Caption {
           @include fontLabel(500, $colorFontDarkest);
 
           padding: 0 1.8rem;
-          margin-bottom: 0;
+          margin: 0 calc(-1 * var(--daypicker-padding-h));
           font-weight: 500;
           text-transform: uppercase;
           text-align: center;
@@ -72,13 +73,27 @@
         }
 
         &-Weekdays {
+          position: relative;
           vertical-align: center;
-          border-bottom: 1px solid $colorBorderDatepicker;
+
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 1.3rem;
+            left: calc(-1 * var(--daypicker-padding-h));
+            width: calc(100% + 2 * var(--daypicker-padding-h) );
+            height: 1px;
+            background-color: $colorBorderDatepicker;
+          }
+        }
+
+        &-Months {
+          padding: 0 var(--daypicker-padding-h);
         }
 
         &-Month {
           margin: 0;
-          width: calc(3rem * 7);
+          width: calc(7 * 3rem);
         }
 
         &-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
@@ -115,11 +130,12 @@
             &::before {
               content: "";
               position: absolute;
-              bottom: 0.7rem;
-              left: calc(50% - 1rem / 2);
-              width: 1rem;
-              height: 0.2rem;
-              background-color: $colorBgLightest;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border: 1px solid $colorBorderDatepickerDark;
+              border-radius: 50%;
             }
           }
         }
@@ -127,17 +143,9 @@
         &-Weekday {
           @include fontLegend(500, $colorFontItemPassive);
 
-          padding: 1.8rem 0 1.2rem 0;
+          padding: 1.8rem 0 2.5rem 0;
           text-transform: capitalize;
-          text-align: left;
-
-          &:first-child {
-            padding-left: 1.8rem;
-          }
-
-          &:last-child {
-            padding-right: 1.8rem;
-          }
+          text-align: center
         }
       }
 
@@ -224,7 +232,7 @@
 
 .select {
   &:not(:first-of-type) {
-    margin-left: 1rem;
+    margin-left: 3rem;
   }
 
   :global {
