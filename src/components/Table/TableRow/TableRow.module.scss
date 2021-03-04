@@ -1,0 +1,24 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  position: relative;
+  display: grid;
+  align-items: center;
+  padding: 1rem $paddingTableHor;
+  height: 100%;
+  background-color: $colorBgLightest;
+  border-bottom: 1px solid $colorBorderTable;
+  transition-duration: $transitionDuration;
+}
+
+.wrapperHoverable {
+  &:hover {
+    box-shadow: 0 0.4rem 1rem 0 $colorBorderTable;
+    z-index: 2;
+  }
+}
+
+.wrapperOdd {
+  background-color: $colorBgRowEven;
+}

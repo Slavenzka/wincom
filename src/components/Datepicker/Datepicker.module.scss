@@ -1,0 +1,273 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  position: relative;
+
+  .label {
+    @include fontLabel(500, $colorFontDarkest);
+
+    display: flex;
+    align-items: center;
+    padding: 0 1.2rem;
+    width: 32rem;
+    cursor: pointer;
+  }
+
+  .labelContent {
+    color: $colorFontLightest;
+    margin-left: auto;
+    transition-duration: $transitionDuration;
+    transition-property: color;
+
+    &Active {
+      color: $colorFontHighlight;
+    }
+  }
+
+  .iconCalendar {
+    margin-left: 1rem;
+    width: 1.5rem;
+    fill: $colorFontHighlight;
+  }
+
+  .datepicker {
+    :global {
+      .DayPicker {
+        &-Caption {
+          @include fontLabel(500, $colorFontDarkest);
+
+          padding: 0 1.8rem;
+          margin-bottom: 0;
+          font-weight: 500;
+          text-transform: uppercase;
+          text-align: center;
+          background-color: $colorBgHighlight;
+        }
+
+        &-NavButton {
+          @include resetButton;
+
+          top: 1.2rem;
+          width: 4rem;
+          height: 4rem;
+          background-image: url("../../assets/icons/icon-arrow-calendar.svg");
+          background-size: 1.4rem auto;
+          background-position: center;
+          background-repeat: no-repeat;
+
+          &--prev {
+            left: 1.1rem;
+            transform: rotate(180deg);
+          }
+
+          &--next {
+            right: 1.1rem;
+          }
+        }
+
+        &-wrapper {
+          padding-bottom: 1rem;
+          background-color: $colorBgLightest;
+        }
+
+        &-Weekdays {
+          vertical-align: center;
+          border-bottom: 1px solid $colorBorderDatepicker;
+        }
+
+        &-Month {
+          margin: 0;
+          width: calc(3rem * 7);
+        }
+
+        &-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+          background-color: $colorBgHighlight !important;
+          color: $colorFontLightest;
+        }
+
+        &-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+          background-color: $colorBgHighlight;
+        }
+
+        &-Day {
+          @include fontLabel(500, $colorFontDarkest);
+
+          padding: 0;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+
+          &--disabled,
+          &--outside {
+            opacity: 0.3;
+
+            &.DayPicker-Day--today {
+              &::before {
+                display: none;
+              }
+            }
+          }
+
+          &--today {
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              bottom: 0.7rem;
+              left: calc(50% - 1rem / 2);
+              width: 1rem;
+              height: 0.2rem;
+              background-color: $colorBgLightest;
+            }
+          }
+        }
+
+        &-Weekday {
+          @include fontLegend(500, $colorFontItemPassive);
+
+          padding: 1.8rem 0 1.2rem 0;
+          text-transform: capitalize;
+          text-align: left;
+
+          &:first-child {
+            padding-left: 1.8rem;
+          }
+
+          &:last-child {
+            padding-right: 1.8rem;
+          }
+        }
+      }
+
+      .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+        background-color: transparent !important;
+        box-shadow: inset 0 0 0 2px $colorBgHighlight;
+      }
+
+      .rdrMonthAndYearPickers {
+        @include fontLabel(500, $colorFontDarkest);
+
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .rdrDayPassive {
+        .rdrDayNumber > span {
+          opacity: 0.3;
+        }
+      }
+
+      .rdrDayHovered {
+        .rdrDayStartPreview,
+        .rdrDayEndPreview {
+          border-color: $colorBorderInputPassive;
+        }
+      }
+    }
+  }
+}
+
+.background {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  top: calc(100% + 1.3rem);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 0.3rem 2.5rem 0 rgba(0, 0, 0, 0.15);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.contentRange {
+  box-shadow: none;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  background-color: $colorBgContent;
+  border-top: 0.1rem solid rgba(240, 240, 240, 0.15);
+}
+
+.btnControl {
+  @include resetButton;
+  @include fontLabel(500, $colorFontDarkest);
+
+  padding: 1.4rem 1rem;
+  transition-duration: $transitionDuration;
+  transition-property: background-color;
+
+  &:hover {
+    background-color: $colorBgHighlight;
+  }
+}
+
+.selectWrapper {
+  display: flex;
+}
+
+.select {
+  &:not(:first-of-type) {
+    margin-left: 1rem;
+  }
+
+  :global {
+    .select {
+      &__control {
+        background-color: transparent;
+        border: none;
+      }
+
+      &__value-container {
+        padding: 0;
+        width: 11rem;
+      }
+
+      &__single-value {
+        @include fontButton(500, $colorFontLightest);
+
+        left: 0;
+        color: $colorFontLightest;
+        text-transform: capitalize;
+      }
+
+      &__dropdown-indicator {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.selectYear {
+  :global {
+    .select {
+      &__value-container {
+        width: 5.5rem;
+      }
+    }
+  }
+}
+
+.arrow {
+  position: relative;
+  border-top: 0.7rem solid $colorBgLightest;
+  border-right: 0.6rem solid transparent;
+  border-left: 0.6rem solid transparent;
+}

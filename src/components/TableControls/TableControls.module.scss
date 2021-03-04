@@ -1,0 +1,11 @@
+.wrapper {
+  padding-top: 3rem;
+}
+
+.button {
+  min-width: 17rem;
+
+  &:not(:first-child) {
+    margin-left: 1.5rem;
+  }
+}

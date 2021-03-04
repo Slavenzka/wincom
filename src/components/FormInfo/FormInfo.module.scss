@@ -1,0 +1,44 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.label {
+  @include fontLabel(500, $colorFontItemPassive);
+
+  opacity: 0.7;
+}
+
+.aux {
+  margin-left: auto;
+}
+
+.list {
+  @include resetList;
+
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  margin-top: 0.7rem;
+  padding: 1.4rem 2rem 1.7rem 2rem;
+  background-color: $colorBgStats;
+}
+
+.item {
+  @include fontInfo;
+
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-left: 10%;
+  }
+}
+
+.value {
+  margin: 0 0 0 0.5rem;
+  font-weight: 600;
+}

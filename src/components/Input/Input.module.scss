@@ -1,0 +1,60 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.label {
+  @include fontLabel(500, $colorFontItemPassive);
+
+  opacity: 0.7;
+}
+
+.input {
+  @include resetInput;
+  @include fontInfo(600);
+
+  margin-top: 0.7rem;
+  padding: 1.4rem 2rem;
+  height: 5rem;
+  border: 1px solid $colorBorderInputPassive;
+  border-radius: 0.2rem;
+  transition-duration: $transitionDuration;
+
+  &:hover,
+  &:focus {
+    border-color: $colorFontHighlight;
+  }
+}
+
+.inputError {
+  color: $colorFontWarning;
+  border-color: $colorFontWarning;
+}
+
+.inputDisabled {
+  background-color: $colorBgStats;
+  border-color: $colorBgStats;
+  pointer-events: none;
+}
+
+.wrapperCash {
+  position: relative;
+
+  &::before {
+    @include fontInfo(600);
+
+    content: "€";
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2rem;
+  }
+
+  .input {
+    padding-left: 3.5rem;
+  }
+}

@@ -1,0 +1,12 @@
+.wrapper {
+  margin-top: 2.2rem;
+
+  &::-webkit-scrollbar,
+  & *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.rowClickable {
+  cursor: pointer;
+}

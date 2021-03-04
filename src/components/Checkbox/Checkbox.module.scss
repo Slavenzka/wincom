@@ -1,0 +1,45 @@
+@import "styles/variables";
+
+.label {
+  position: relative;
+  display: inline-block;
+  height: 1.4rem;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3rem;
+    height: 1.4rem;
+    background-color: $colorBgThumbPassive;
+    border-radius: 0.7rem;
+    transition-duration: $transitionDuration;
+    transition-timing-function: ease-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 2rem / 2);
+    left: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: $colorBgLightest;
+    border-radius: 50%;
+    box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.28);
+    transition-duration: $transitionDuration;
+    transform: translateX(0);
+  }
+}
+
+.labelChecked {
+  &::before {
+    background-color: $colorBgHighlight;
+  }
+
+  &::after {
+    transform: translateX(1rem);
+  }
+}

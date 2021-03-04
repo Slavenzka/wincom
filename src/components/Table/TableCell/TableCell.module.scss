@@ -1,0 +1,92 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.cell {
+  @include tableItem(500, $colorFontDarkest);
+
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+  transition-duration: $transitionDuration;
+  transition-property: text-decoration;
+}
+
+.cellHovered {
+  font-weight: 600;
+}
+
+.cellCentered {
+  padding-left: 25%;
+}
+
+.cellThin {
+  font-weight: 300;
+}
+
+.link {
+  position: relative;
+  display: block;
+  color: inherit;
+  width: fit-content;
+}
+
+.linkHovered {
+  text-decoration: underline;
+
+  .linkContent {
+    text-decoration: underline;
+  }
+
+  .hint {
+    opacity: 1;
+  }
+}
+
+.hint {
+  @include fontHint;
+
+  position: absolute;
+  left: -2.5rem;
+  padding-top: 2.5rem;
+  width: max-content;
+  transition-duration: $transitionDuration;
+  opacity: 0;
+}
+
+.value {
+  @include fontLegend;
+
+  display: block;
+  text-transform: capitalize;
+  opacity: 0.45;
+}
+
+.iconTrust {
+  width: $iconTrustWidth;
+  fill: $colorFontHighlightLight;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+
+  .contact {
+    &:not(:first-child) {
+      margin-top: 0.2rem;
+    }
+  }
+}
+
+.previewTrigger {
+  @include resetButton;
+}
+
+.preview {
+  max-width: 10rem;
+  max-height: 25rem;
+}
+
+.full {
+  max-width: 70vw;
+  max-height: 70vh;
+}

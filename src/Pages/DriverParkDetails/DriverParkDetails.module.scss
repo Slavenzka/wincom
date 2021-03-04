@@ -1,0 +1,9 @@
+.wrapper {
+  padding-bottom: 14rem;
+}
+
+.card {
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
+}

@@ -1,0 +1,23 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.subheading {
+  @include fontButton;
+
+  margin: 0;
+  text-transform: none;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 2rem;
+  margin-top: 1.6rem;
+  padding: 4rem 3rem 5rem 3rem;
+  background-color: $colorBgContent;
+}
+
+.button {
+  margin-top: auto;
+  width: 100%;
+}

@@ -1,0 +1,79 @@
+@import "fonts";
+@import "mixins";
+@import "variables";
+
+html {
+  font-size: 10px;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: $colorBgMain;
+  overflow-y: scroll;
+
+  .simplebar-placeholder {
+    display: none;
+  }
+
+  .simplebar-scrollbar:before {
+    position: absolute;
+    content: '';
+    background: red;
+    border-radius: 0.7rem;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity .2s linear
+  }
+
+  .simplebar-scrollbar.simplebar-visible:before {
+    opacity: 1;
+    transition: opacity 0s linear
+  }
+
+  .simplebar-track.simplebar-vertical {
+    top: 0;
+    right: 0;
+    width: 0.5rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: $colorBgSidebarActive transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  font-size: 0;
+}
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
+
+.calendar {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  width: 3rem;
+  fill: $colorFontHighlight;
+  pointer-events: none;
+}

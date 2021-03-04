@@ -1,0 +1,9 @@
+@import "styles/variables";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  min-height: $headerMinHeight;
+  color: $colorFontLightest;
+  background-color: $colorBgDarkest;
+}

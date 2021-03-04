@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>C41299CB-E254-4ABF-8FD1-4F2E69D6042C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M9.86739935,5 L6,1.41 L7.52226721,-1.51717377e-16 L14,6 L7.52226721,12 L6,10.59 L9.86739935,7 L-1.2246468e-16,7 L0,5 L9.86739935,5 Z" id="path-1"></path>
+    </defs>
+    <g id="Admin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="orders_filter_04_01" transform="translate(-961.000000, -153.000000)">
+            <g id="Calendar" transform="translate(680.000000, 121.000000)">
+                <g id="ic_arrow_calendar" transform="translate(281.000000, 32.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="arrow" fill="#1DCA69" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

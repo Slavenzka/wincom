@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.filter {
+  &:not(:first-child) {
+    margin-left: 3rem;
+  }
+}

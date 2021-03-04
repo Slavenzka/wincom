@@ -1,0 +1,20 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.label {
+  @include fontTiny;
+
+  margin: 0;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  min-width: 6.7rem;
+  letter-spacing: 0.09rem;
+}
+
+.labelLight {
+  background-color: $colorBgHighlight;
+}
+
+.labelDark {
+  color: $colorFontLabelDark;
+  background-color: $colorBgLabelDark;
+}

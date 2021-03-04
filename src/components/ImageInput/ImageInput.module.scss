@@ -1,0 +1,22 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  position: relative;
+}
+
+.label {
+  @include fontLabel(500, $colorFontItemPassive);
+
+  display: block;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed $colorFontItemPassive;
+  opacity: 0.7;
+  transition-duration: $transitionDuration;
+
+  &:hover {
+    color: $colorFontHighlightDark;
+    border-color: $colorFontHighlightDark;
+  }
+}

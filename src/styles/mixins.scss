@@ -1,0 +1,124 @@
+@import "variables";
+
+// font mixins
+@mixin h2 ($weight: 900, $color: $colorFontDarkest) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 2.6rem;
+  font-weight: $weight;
+  line-height: 3rem;
+  color: $color;
+}
+
+@mixin fontBanner ($weight: 600, $color: $colorFontDarkest) {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: $weight;
+  line-height: 2.2rem;
+  color: $color;
+}
+
+@mixin fontButton ($weight: 600, $color: $colorFontHighlightDark) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: $weight;
+  line-height: 2.8rem;
+  color: $color;
+  text-transform: uppercase;
+}
+
+@mixin fontInput ($weight: 300, $color: $colorFontLightest) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: $weight;
+  line-height: 1.7rem;
+  color: $color;
+}
+
+@mixin fontSidebar ($weight: 600, $color: $colorFontLightest, $transform: uppercase) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: $weight;
+  line-height: 2.6rem;
+  color: $color;
+  text-transform: $transform;
+}
+
+@mixin tableItem ($weight: 600, $color: $colorFontLightest) {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: $weight;
+  line-height: 2.6rem;
+  color: $color;
+}
+
+@mixin fontInfo ($weight: 400, $color: $colorFontDarkest) {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: $weight;
+  line-height: 1.9rem;
+  color: $color;
+}
+
+@mixin fontLabel ($weight: 500, $color: $colorFontLightest) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: $weight;
+  line-height: 1.6rem;
+  color: $color;
+}
+
+@mixin fontLegend ($weight: 500, $color: $colorFontDarkest) {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: $weight;
+  line-height: 1.5rem;
+  color: $color;
+}
+
+@mixin fontHint ($weight: 600, $color: $colorFontHighlight) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: $weight;
+  line-height: 1.6rem;
+  color: $color;
+}
+
+@mixin fontTiny ($weight: 400, $color: $colorFontDarkest) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: $weight;
+  line-height: 1.4rem;
+  color: $color;
+}
+
+// reset mixins
+@mixin resetButton {
+  padding: 0;
+  font-size: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+@mixin resetList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin resetFieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+@mixin resetInput {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+// style mixins

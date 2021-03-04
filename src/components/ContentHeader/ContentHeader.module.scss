@@ -1,0 +1,39 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+
+  .heading {
+    line-height: 4rem;
+  }
+}
+
+.back {
+  @include fontSidebar(600, $colorFontItemPassive);
+
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3.4rem;
+  text-transform: lowercase;
+
+  .icon {
+    margin-right: 1rem;
+    width: 1.5rem;
+    fill: $colorFontItemPassive;
+    transform: rotate(180deg);
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  grid-column: 1 / -1;
+  margin-top: 2.5rem;
+}

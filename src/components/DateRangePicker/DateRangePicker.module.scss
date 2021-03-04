@@ -1,0 +1,46 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  position: relative;
+}
+
+.trigger {
+  @include resetButton;
+  @include tableItem(600, $colorFontDarkest);
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .icon {
+    margin-left: 0.5rem;
+    width: 1.5rem;
+    fill: $colorFontHighlight;
+  }
+}
+
+.datepickerWrapper {
+  display: none;
+}
+
+.datepickerWrapperOpened {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 52.4rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.date {
+  position: static;
+}
+
+.controls {
+  width: 100%;
+  background-color: red;
+}

@@ -1,0 +1,14 @@
+@import "styles/variables";
+
+.wrapper {
+  padding-left: $paddingGlobal;
+  padding-right: $paddingGlobal;
+}
+
+.wrapperLeft {
+  padding-left: $paddingGlobal;
+}
+
+.wrapperRight {
+  padding-right: $paddingGlobal;
+}

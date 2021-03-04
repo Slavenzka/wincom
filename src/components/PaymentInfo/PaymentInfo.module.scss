@@ -1,0 +1,66 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.label {
+  @include fontLabel(500, $colorFontItemPassive);
+
+  opacity: 0.7;
+}
+
+.wrapper {
+  margin-top: 0.7rem;
+  padding: 3rem 1.5rem 3rem 1.5rem;
+  background-color: $colorBgLightest;
+  height: 100%;
+}
+
+.client {
+  @include fontButton;
+
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-bottom: 1.7rem;
+  text-transform: none;
+  border-bottom: 1px solid $colorBorderLight;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  width: $iconTrustWidth;
+  fill: $colorFontItemPassive;
+  opacity: 0.7;
+  transition-duration: $transitionDuration;
+}
+
+.iconTrusted {
+  fill: $colorFontHighlightLight;
+  opacity: 1;
+}
+
+.list {
+  @include resetList;
+
+  margin-top: 2.5rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+
+  &:not(:first-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+.key {
+  @include fontBanner(400);
+
+  font-size: 1.5rem;
+}
+
+.value {
+  @include fontBanner;
+
+  margin: 0;
+}

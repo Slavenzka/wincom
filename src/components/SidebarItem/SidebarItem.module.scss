@@ -1,0 +1,44 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  border-bottom: 1px solid $colorBorderSidebar;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 1.7rem 3rem 1.7rem $paddingGlobal;
+  transition-duration: $transitionDuration;
+  transition-property: opacity, background-color;
+
+  &:hover {
+    background-color: $colorBgSidebarActive;
+
+    .label {
+      font-weight: 900;
+      opacity: 1;
+    }
+  }
+}
+
+.iconDummy {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: $colorFontIcon;
+}
+
+.label {
+  @include fontSidebar;
+
+  margin-left: 1.2rem;
+  opacity: 0.6;
+}
+
+.counter {
+  @include fontSidebar;
+
+  margin-left: auto;
+  opacity: 0.6;
+}

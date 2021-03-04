@@ -1,0 +1,11 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.button {
+  @include resetButton;
+  @include fontLabel(600, $colorFontHighlight);
+}
+
+.image {
+  padding-top: 2.5rem;
+}

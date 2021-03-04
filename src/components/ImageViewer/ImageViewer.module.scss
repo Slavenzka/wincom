@@ -1,0 +1,55 @@
+@import "styles/mixins";
+
+.wrapper {
+  @include resetList;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 23rem;
+  grid-auto-rows: 7rem;
+  grid-gap: 2rem;
+  margin-top: 2.2rem;
+}
+
+.item {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $colorBgHover;
+    transition-duration: $transitionDuration;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+.itemLarge {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+}
+
+.trigger {
+  @include resetButton;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

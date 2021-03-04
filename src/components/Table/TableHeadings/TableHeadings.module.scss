@@ -1,0 +1,15 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.list {
+  @include resetList;
+
+  display: grid;
+  align-items: center;
+  padding: 2.3rem $paddingTableHor 2.1rem $paddingTableHor;
+  background-color: $colorBgContent;
+}
+
+.item {
+  @include fontLabel(500, $colorFontItemPassive)
+}

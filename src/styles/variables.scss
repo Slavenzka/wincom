@@ -1,0 +1,49 @@
+// screen sizes
+$adaptiveMax: 1200px;
+
+// colors
+  // fonts
+$colorFontLightest: rgb(255, 255, 255);
+$colorFontDarkest: rgb(54, 54, 54);
+$colorFontItemPassive: rgb(121, 121, 121);
+$colorFontHighlightDark: rgb(4, 27, 71);
+$colorFontHighlight: rgb(249, 207, 28);
+$colorFontHighlightLight: rgb(96, 211, 89);
+$colorFontWarning: rgb(236, 140, 29);
+$colorFontIcon: rgba(216, 216, 216, 0.17);
+$colorFontLabelDark: rgba(255, 255, 255, 0.45);
+
+  // backgrounds
+$colorBgDarkest: rgb(8, 29, 71);
+$colorBgLabelDark: rgb(62, 62, 62);
+$colorBgSidebar: rgb(121, 121, 121);
+$colorBgSidebarActive: rgb(146, 146, 146);
+$colorBgMain: rgb(226, 226, 226);
+$colorBgContent: rgb(238, 238, 238);
+$colorBgLightest: rgb(253, 253, 253);
+$colorBgTabs: rgb(212, 212, 212);
+$colorBgRowEven: rgb(249, 246, 251);
+$colorBgHighlight: rgb(249, 207, 28);
+$colorBgThumbPassive: rgb(201, 201, 201);
+$colorBgStats: rgb(218, 218, 218);
+$colorBgHover: rgba(255, 255, 255, 0.3);
+
+  // borders
+$colorBorderSidebar: rgba(242, 242, 242, 0.09);
+$colorBorderLight: rgb(238, 238, 238);
+$colorBorderInputPassive: rgb(195, 195, 195);
+$colorBorderTable: rgba(0, 0, 0, 0.07);
+$colorBorderDatepicker: rgb(216, 216, 216);
+  // shadows
+
+  // misc
+$retina__dpi: 144dpi;
+$retina__dppx: 1.5dppx;
+// transitions
+$transitionDuration: 0.3s;
+
+// spaces
+$headerMinHeight: 6rem;
+$paddingGlobal: 7rem;
+$paddingTableHor: 3rem;
+$iconTrustWidth: 2rem;

@@ -1,0 +1,19 @@
+@import "styles/mixins";
+@import "styles/variables";
+
+.table {
+  margin-top: 2rem;
+}
+
+.columns {
+  grid-template-columns:
+    calc(100% * 111 / 1003)
+    calc(100% * 90 / 1003)
+    calc(100% * 117 / 1003)
+    calc(100% * 82 / 1003)
+    calc(100% * 134 / 1003)
+    calc(100% * 104 / 1003)
+    calc(100% * 86 / 1003)
+    calc(100% * 120 / 1003)
+    1fr;
+}
