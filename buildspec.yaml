@@ -10,7 +10,7 @@ phases:
       - aws sts get-caller-identity
       - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 015404077857.dkr.ecr.eu-central-1.amazonaws.com
 
-#      - curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.11.10/2019-06-21/bin/linux/amd64/kubectl
+#      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl
 #      - chmod +x ./kubectl
 #      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 #      - kubectl version --short --client
@@ -18,7 +18,7 @@ phases:
 #      - chmod +x ./aws-iam-authenticator
 #      - mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
 #      - aws-iam-authenticator help
-#      - aws eks --region eu-central-1 update-kubeconfig --name wincom-web
+#      - aws eks --region eu-central-1 update-kubeconfig --name wincom-wb
   build:
     commands:
       - echo Build started on `date`
@@ -30,7 +30,7 @@ phases:
     commands:
       - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
       - aws sts get-caller-identity
-      - kubectl apply -f wincom-web-eks.yaml
-      - kubectl rollout restart deployment/wincom-web
+#      - kubectl apply -f wincom-web-eks.yaml
+#      - kubectl rollout restart deployment/wincom-web
 artifacts:
   type: image
