@@ -8,7 +8,7 @@ export const filterOrders = {
     {
       label: 'Payment',
       field: 'payment.value',
-      type: DetailedFilterTypes.LIST,
+      type: DetailedFilterTypes.INPUT,
     },
     {
       label: 'Status',
@@ -33,7 +33,7 @@ export const filterOrders = {
     {
       label: 'Customer name',
       field: 'clientName',
-      type: DetailedFilterTypes.LIST,
+      type: DetailedFilterTypes.INPUT
     },
   ]
 }

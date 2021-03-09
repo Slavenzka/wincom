@@ -1,17 +1,19 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { applyFiltration } from 'store/actions/filtration'
 import useFilterDefaults from 'hooks/useFilterDefaults'
+import { applyFiltration } from 'store/actions'
 
 const useFilterData = (rawData, filter = {}) => {
   const activePrimary = useSelector(store => store.filter.activePrimary)
   const activeSecondary = useSelector(store => store.filter.activeSecondary)
   const activeDate = useSelector(store => store.filter.activeDate)
+  const detailedFilter = useSelector(store => store.filter.detailedFilter)
   const dispatch = useDispatch()
 
   useFilterDefaults({
     primaryList: filter?.primary?.list,
     secondaryList: filter?.secondary?.list,
+    detailedList: filter?.detailed
   })
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const useFilterData = (rawData, filter = {}) => {
       rawData: rawData,
       filter
     }))
-  }, [activeSecondary, activePrimary, activeDate])
+  }, [activeSecondary, activePrimary, activeDate, detailedFilter])
 }
 
 export default useFilterData

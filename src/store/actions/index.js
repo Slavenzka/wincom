@@ -13,4 +13,7 @@ export {
   setPrimaryFilterValue,
   setSecondaryFilterValue,
   setFilteredData,
+  setSecondaryFilteredData,
+  setDetailedFilteredValues,
+  applyFiltration
 } from './filtration'

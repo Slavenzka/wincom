@@ -131,3 +131,5 @@ export const getObjPropertyViaString = (object, string) => {
     return total
   }, object)
 }
+
+export const checkIfNonEmptyArray = value => value && Array.isArray(value) && value.length > 0

@@ -1,10 +1,12 @@
 import {
-  RESET_FILTERS, SET_DATE_FILTER_VALUE,
+  RESET_FILTERS, SET_DATE_FILTER_VALUE, SET_DETAILED_FILTER,
   SET_FILTERED_DATA,
-  SET_PRIMARY_FILTER_VALUE,
+  SET_PRIMARY_FILTER_VALUE, SET_SECONDARY_FILTER_DATA,
   SET_SECONDARY_FILTER_VALUE,
 } from 'store/actions/actionTypes'
-import { getObjPropertyViaString } from 'utils'
+import { checkIfNonEmptyArray, getObjPropertyViaString } from 'utils'
+import { DetailedFilterTypes } from 'utils/const'
+import { getDetailedFilteredData, isDetailedFilterEmpty } from 'utils/filter'
 
 export const setDateFilterValue = ({from, to}) => ({
   type: SET_DATE_FILTER_VALUE,
@@ -29,20 +31,74 @@ export const setFilteredData = data => ({
   payload: data
 })
 
-export const resetFilters = ({primaryList, secondaryList}) => {
+export const setSecondaryFilteredData = data => ({
+  type: SET_SECONDARY_FILTER_DATA,
+  payload: data
+})
+
+export const setDetailedFilteredValues = ({field, type, values}) => {
+  return (dispatch, getState) => {
+    if (type === DetailedFilterTypes.LIST) {
+      const detailedFilter = JSON.parse(JSON.stringify(getState().filter.detailedFilter))
+      const indexToModify = detailedFilter.findIndex(item => item.field === field)
+      const existingValues = detailedFilter[indexToModify].values
+      const existingIndex = existingValues.findIndex(item => item === values)
+
+      if (existingIndex < 0) {
+        existingValues.push(values)
+      }
+
+      if (existingIndex >= 0) {
+        detailedFilter[indexToModify].values = [].concat(existingValues.slice(0, existingIndex), existingValues.slice(existingIndex + 1))
+      }
+
+      dispatch({
+        type: SET_DETAILED_FILTER,
+        payload: detailedFilter
+      })
+    }
+  }
+}
+
+export const resetFilters = ({primaryList, secondaryList, detailedList}) => {
   return dispatch => {
     const defaultPrimary = primaryList
       ? primaryList.find(item => item.isDefault)
       : null
+
     const defaultSecondary = secondaryList
       ? secondaryList.find(item => item.isDefault)
       : null
+
+    const defaultDetailed = detailedList.map(item => {
+      switch (item.type) {
+        case DetailedFilterTypes.INPUT:
+          return {
+            ...item,
+            value: null
+          }
+        case DetailedFilterTypes.RANGE:
+          return {
+            ...item,
+            value: {
+              from: null,
+              to: null,
+            }
+          }
+        default:
+          return {
+            ...item,
+            values: []
+          }
+      }
+    })
 
     dispatch({
       type: RESET_FILTERS,
       payload: {
         activePrimary: defaultPrimary,
         activeSecondary: defaultSecondary,
+        detailedFilter: defaultDetailed
       }
     })
   }
@@ -54,7 +110,12 @@ export const applyFiltration = ({rawData, filter = {}}) => {
     const activePrimary = filterState.activePrimary
     const activeSecondary = filterState.activeSecondary
     const activeDate = filterState.activeDate
-    const {primary, secondary, date} = filter
+    const activeDetailed = filterState.detailedFilter
+    const {primary, secondary, detailed, date} = filter
+
+    const isNoDateFilterApplied = !activeDate || (!activeDate?.from && !activeDate.to)
+    const isNoFilterApplied = !activePrimary && !activeSecondary && isNoDateFilterApplied && isDetailedFilterEmpty(activeDetailed)
+    const isDetailedFilterRequired = detailed && Array.isArray(detailed) && detailed.length > 0
 
     const dateFilter = date && activeDate?.from
       ? rawData.filter(item => {
@@ -85,13 +146,16 @@ export const applyFiltration = ({rawData, filter = {}}) => {
         })
       : primaryFiltered
 
-    const isNoDateFilterApplied = !activeDate || (!activeDate?.from && !activeDate.to)
-    const isNoFilterApplied = !activePrimary && !activeSecondary && isNoDateFilterApplied
+    const detailedFiltered = checkIfNonEmptyArray(detailed)
+      ? getDetailedFilteredData(secondaryFiltered, activeDetailed)
+      : secondaryFiltered
 
     if (isNoFilterApplied) {
       dispatch(setFilteredData(rawData))
+      isDetailedFilterRequired && dispatch(setSecondaryFilteredData(rawData))
     } else {
-      dispatch(setFilteredData(secondaryFiltered))
+      dispatch(setFilteredData(detailedFiltered))
+      isDetailedFilterRequired && dispatch(setSecondaryFilteredData(secondaryFiltered))
     }
   }
 }

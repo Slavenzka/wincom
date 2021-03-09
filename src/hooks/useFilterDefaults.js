@@ -2,15 +2,11 @@ import {useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { resetFilters } from 'store/actions'
 
-const useFilterDefaults = ({primaryList = [], secondaryList = []}) => {
+const useFilterDefaults = ({primaryList = [], secondaryList = [], detailedList = []}) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(resetFilters({primaryList, secondaryList}))
-
-    return () => {
-      dispatch(resetFilters({primaryList, secondaryList}))
-    }
+    dispatch(resetFilters({primaryList, secondaryList, detailedList}))
   }, [dispatch])
 }
 

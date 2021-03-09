@@ -1,6 +1,7 @@
 import React from 'react'
 import css from './FilterDetailed.module.scss'
 import classnames from 'classnames'
+import FilterDetailedItem from 'components/Filters/FilterDetailedItem/FilterDetailedItem'
 
 const FilterDetailed = ({
   className,
@@ -8,10 +9,10 @@ const FilterDetailed = ({
 }) => {
   if (!detailedList || !Array.isArray(detailedList) || detailedList.length === 0) return null
 
-  const renderFilterItems = () => detailedList.map(({label, type}, index) => {
+  const renderFilterItems = () => detailedList.map((item, index) => {
     return (
       <li className={css.item} key={index}>
-        { label }
+        <FilterDetailedItem {...item} />
       </li>
     )
   })
