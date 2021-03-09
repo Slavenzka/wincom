@@ -1,10 +1,11 @@
 import React from 'react'
 import css from './Sidebar.module.scss'
+import classnames from 'classnames'
 import SidebarItem from 'components/SidebarItem/SidebarItem'
 import SidebarCollapse from 'components/SidebarCollapse/SidebarCollapse'
 import { SIDEBAR_LIST } from 'Pages/Routes'
 
-const Sidebar = ({handleClickCollapse, style}) => {
+const Sidebar = ({className, handleClickCollapse, style}) => {
   const data = SIDEBAR_LIST
 
   const list = data.map((item, index) => (
@@ -14,7 +15,7 @@ const Sidebar = ({handleClickCollapse, style}) => {
   ))
 
   return (
-    <aside className={css.wrapper} style={{...style}}>
+    <aside className={classnames(css.wrapper, className)} style={{...style}}>
       <ul className={css.list}>
         { list }
       </ul>

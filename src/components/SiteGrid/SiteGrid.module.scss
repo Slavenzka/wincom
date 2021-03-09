@@ -23,8 +23,10 @@
 
 .wrapper {
   display: grid;
+  grid-template-rows: #{$headerMinHeight} auto;
   animation-name: expandMenu;
   animation-fill-mode: both;
+  min-height: 100vh;
 }
 
 .wrapperUncollapsed {

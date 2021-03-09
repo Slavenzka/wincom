@@ -2,13 +2,10 @@
 @import "styles/mixins";
 
 .wrapper {
-  position: fixed;
   display: flex;
   flex-direction: column;
   padding-top: $headerMinHeight;
-  width: 32.8rem;
   background-color: $colorBgSidebar;
-  z-index: 3;
 }
 
 .list {

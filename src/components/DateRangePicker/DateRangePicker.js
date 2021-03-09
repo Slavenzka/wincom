@@ -6,6 +6,8 @@ import { getDateComponents } from 'utils'
 import IconCalendarSimplified from 'assets/icons/IconCalendarSimplified'
 import Button from 'components/Button/Button'
 import { ButtonHeights, ButtonPalettes } from 'utils/const'
+import { useDispatch } from 'react-redux'
+import { setDateFilterValue } from 'store/actions/filtration'
 
 const DateRangePicker = () => {
   const INITIAL_STATE = {
@@ -21,10 +23,17 @@ const DateRangePicker = () => {
   const [isOpen, setOpenStatus] = useState(false)
   const [resetRef, setResetRef] = useState(0)
   const bgRef = useRef(null)
+  const dispatch = useDispatch()
 
   const handleClickCancel = () => {
     setResetRef(prevState => prevState + 1)
     setRange(INITIAL_STATE)
+
+    dispatch(setDateFilterValue({
+      from: INITIAL_STATE.from,
+      to: INITIAL_STATE.to
+    }))
+
     setOpenStatus(false)
   }
 
@@ -33,13 +42,17 @@ const DateRangePicker = () => {
   }
 
   const handleClickApply = () => {
-    setRange(prevState => ({
-      ...prevState,
-      selected: {
-        from: prevState.from,
-        to: prevState.to
+    setRange(prevState => {
+      return {
+        ...prevState,
+        selected: {
+          from: prevState.from,
+          to: prevState.to
+        }
       }
-    }))
+    })
+
+    setOpenStatus(false)
   }
 
   const renderDateRange = (from, to) => {
@@ -68,16 +81,25 @@ const DateRangePicker = () => {
   }, [])
 
   useEffect(() => {
-    if (bgRef.current && isOpen) {
-      bgRef.current.addEventListener('click', handleClickOutside)
+    const backgroundNode = bgRef.current
+
+    if (backgroundNode && isOpen) {
+      backgroundNode.addEventListener('click', handleClickOutside)
     }
 
     return () => {
-      if (bgRef.current) {
-       bgRef.current.removeEventListener('click', handleClickOutside)
+      if (backgroundNode) {
+        backgroundNode.removeEventListener('click', handleClickOutside)
       }
     }
   }, [isOpen])
+
+  useEffect(() => {
+    dispatch(setDateFilterValue({
+      from: range.selected.from,
+      to: range.selected.to
+    }))
+  }, [range.selected])
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './TableCell.module.scss'
 import classnames from 'classnames'
-import { TableCellTypes, VehicleOwners } from 'utils/const'
+import { TableCellTypes } from 'utils/const'
 import TableImage from 'components/Table/TableImage/TableImage'
 import Checkbox from 'components/Checkbox/Checkbox'
 import { useForm, Controller } from 'react-hook-form'
@@ -49,7 +49,7 @@ const TableCell = ({
     return (
       <TableImage
         url={cellData}
-        label={rowData?.isPartner ? VehicleOwners.PARTNER : VehicleOwners.WINCOM}
+        label={rowData?.owner}
         altLabel={ `Photo of vehicle ${rowData?.id}` }
         isHovered={isHovered}
       />
@@ -99,6 +99,22 @@ const TableCell = ({
   }
 
   if (type === TableCellTypes.DATE.type) {
+    if (typeof cellData === 'object' && cellData?.from && cellData?.to) {
+      const {from, to} = cellData
+      const dateFrom = new Date(from)
+      const {year: yearFrom, month: monthFrom, day: dayFrom} = getDateComponents(dateFrom)
+      const dateTo = new Date(to)
+      const {year: yearTo, month: monthTo, day: dayTo} = getDateComponents(dateTo)
+
+      return (
+        <div className={classnames(css.cell, {
+          [css.cellHovered]: isHovered && isRowClickable
+        })}>
+          { `${yearFrom}.${monthFrom}.${dayFrom} - ${yearTo}.${monthTo}.${dayTo}` }
+        </div>
+      )
+    }
+
     const dateObj = new Date(cellData)
     const {year, month, day} = getDateComponents(dateObj)
 

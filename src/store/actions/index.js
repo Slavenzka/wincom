@@ -10,8 +10,7 @@ export {
 
 export {
   resetFilters,
-  setStatusFilterValue,
-  setOwnerFilterValue,
-  setCategoryFilterValue,
-  setDriversFilterValue,
+  setPrimaryFilterValue,
+  setSecondaryFilterValue,
+  setFilteredData,
 } from './filtration'

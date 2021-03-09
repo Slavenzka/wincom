@@ -7,18 +7,19 @@ const Tabs = ({
   list,
   activeTab,
   handleClickTab,
-  isDecorated,
+  isPrimary,
 }) => {
   if (!list || !Array.isArray(list) || list.length === 0 || !activeTab) return null
 
   const items = list.map((item, index) => {
-    const {value, label} = item
+    const {values, label} = item
+
     return (
       <li className={css.item} key={index}>
         <button
           onClick={() => handleClickTab(item)}
           className={classnames(css.trigger, {
-            [css.triggerActive]: value === activeTab.value
+            [css.triggerActive]: values === activeTab.values
           })}
         >
           { label }
@@ -30,7 +31,7 @@ const Tabs = ({
   return (
     <ul
       className={classnames(css.list, className, {
-        [css.listDecorated]: isDecorated
+        [css.listDecorated]: isPrimary
       })}
     >
       { items }

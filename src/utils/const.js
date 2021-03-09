@@ -46,7 +46,7 @@ export const TableCellTypes = {
     type: 'switch'
   },
   DATE_AND_TIME: {
-    values: ['createdAt'],
+    values: ['dateTime'],
     type: 'dateAndTime'
   },
   DATE: {
@@ -92,22 +92,28 @@ export const TableCellTypes = {
 }
 
 export const VehicleOwners = {
-  PARTNER: 'Partner',
+  PARTNER: 'PARTNER',
   WINCOM: 'WINCOM',
+}
+
+const ServiceTypes = {
+  ECONOMY: 'ECONOMY',
+  COMFORT: 'COMFORT',
+  PREMIUM: 'PREMIUM'
 }
 
 export const SERVICE_TYPES_OPTIONS = [
   {
     label: 'Economy',
-    value: 'Economy',
+    value: ServiceTypes.ECONOMY,
   },
   {
     label: 'Comfort',
-    value: 'Comfort',
+    value: ServiceTypes.COMFORT,
   },
   {
     label: 'Premium',
-    value: 'Premium',
+    value: ServiceTypes.PREMIUM,
   },
 ]
 
@@ -151,3 +157,9 @@ export const CarOrderTypes = [
     value: 'confirmation'
   },
 ]
+
+export const DetailedFilterTypes = {
+  LIST: 'LIST',
+  INPUT: 'INPUT',
+  RANGE: 'RANGE'
+}

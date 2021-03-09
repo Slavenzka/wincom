@@ -56,6 +56,7 @@ const Datepicker = ({
       to: null,
       enteredTo: null
     },
+    month: null,
   }
 
   const dispatch = useDispatch()
@@ -93,7 +94,8 @@ const Datepicker = ({
       }))
 
       if (isSelectedOnDayClick) {
-        updateCalendarState({
+        updateCalendarState(prevState => ({
+          ...prevState,
           from: day,
           to: day,
           enteredTo: null,
@@ -102,8 +104,7 @@ const Datepicker = ({
             to: day,
             enteredTo: null
           }
-        })
-        console.log(111111)
+        }))
         handleCloseCalendar()
       }
       // dispatch(setCalendarData(day, day, null))
@@ -149,7 +150,7 @@ const Datepicker = ({
           enteredTo: null,
         }
     })
-  }, [])
+  }, [defaultDate])
 
   const handleCloseCalendar = useCallback(() => {
     !isCalendarAlwaysOpen && setCalendarOpen(false)
@@ -160,7 +161,7 @@ const Datepicker = ({
   }
 
   const YearMonthSelector = ({ date, onChange }) => {
-    const fromMonth = new Date(2021, new Date().getMonth())
+    const fromMonth = new Date(2021, calendarState?.from ? calendarState.from.getMonth() : new Date().getMonth())
     const toMonth = new Date(2021 + 10, 11)
 
     const monthOptions = localization.months.map(item => ({
@@ -228,9 +229,14 @@ const Datepicker = ({
 
   const handleYearMonthChange = month => {
     updateCalendarState(prevState => {
+      const selectedYear = month.getFullYear()
+      const selectedMonth = month.getMonth()
+
       return {
         ...prevState,
-        month
+        from: new Date(selectedYear, selectedMonth, calendarState?.from ? calendarState.from.getDate() : new Date().getDate()),
+        to: new Date(selectedYear, selectedMonth, calendarState?.to ? calendarState.to.getDate() : new Date().getDate()),
+        month,
       }
     })
   }

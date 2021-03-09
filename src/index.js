@@ -10,12 +10,12 @@ import thunk from 'redux-thunk'
 import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { uiReducer } from 'store/reducers/ui'
 import ViewSwitcher from 'ViewSwitcher/ViewSwitcher'
-import { filterReduces } from 'store/reducers/filtration'
+import { filterReducer } from 'store/reducers/filtration'
 
 const rootReducer = combineReducers({
   elastic: elasticAdaptive,
   ui: uiReducer,
-  filter: filterReduces
+  filter: filterReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

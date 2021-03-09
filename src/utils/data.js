@@ -1,103 +1,59 @@
 import truckImage from 'assets/images/truck-dummy.jpg'
 import license from 'assets/images/license.png'
+import { VehicleOwners } from 'utils/const'
 
 export const FILTER_OWNERS = [
   {
     label: 'All Cars',
-    value: 'all',
+    values: [],
+    field: 'owner',
     isDefault: true,
   },
   {
     label: 'WINCOM Cars',
-    value: 'wincom',
+    values: ['WINCOM'],
+    field: 'owner',
   },
   {
     label: 'Partner Cars',
-    value: 'partner',
-  },
-]
-
-export const FILTER_CATEGORY = [
-  {
-    label: 'All',
-    value: 'all',
-    isDefault: true,
-  },
-  {
-    label: 'Economy',
-    value: 'economy',
-  },
-  {
-    label: 'Comfort',
-    value: 'comfort',
-  },
-  {
-    label: 'Premium',
-    value: 'premium',
+    values: ['PARTNER'],
+    field: 'owner',
   },
 ]
 
 export const FILTER_DELIVERY_STATUS = [
   {
     label: 'All',
-    value: 'all',
+    values: ['all'],
+    field: 'transportDetails.key',
     isDefault: true,
   },
   {
     label: 'Loaded',
-    value: 'loaded',
+    values: ['loaded'],
+    field: 'transportDetails.key',
   },
   {
     label: 'Delivered',
-    value: 'delivered',
+    values: ['delivered'],
+    field: 'transportDetails.key',
   },
   {
     label: 'Unloaded',
-    value: 'unloaded',
+    values: ['unloaded'],
+    field: 'transportDetails.key',
   },
   {
     label: 'Waiting for Bill',
-    value: 'waiting for bill',
+    values: ['waiting for bill'],
+    field: 'transportDetails.key',
   },
   {
     label: 'Paid',
-    value: 'paid',
+    values: ['paid'],
+    field: 'transportDetails.key',
   },
 ]
-
-export const FILTER_DRIVERS = [
-  {
-    label: 'All Drivers',
-    value: 'all',
-    isDefault: true,
-  },
-  {
-    label: 'WINCOM Drivers',
-    value: 'wincom',
-  },
-  {
-    label: 'Partner Drivers',
-    value: 'partner',
-  },
-]
-
-export const CAR_INFO_DATA = {
-  id: '3415',
-  // separate endpoint for images
-  img: truckImage,
-  isPublished: true,
-  // enum
-  isPartner: false,
-  carNumber: {
-    key: 'HU788d',
-    value: 'Mercedes'
-  },
-  type: 'premium',
-  places: 1,
-  status: 'On road',
-  payment: 'Not confirmed',
-  freePlaces: 0,
-}
 
 export const CAR_PARK_DATA = [
   {
@@ -105,7 +61,7 @@ export const CAR_PARK_DATA = [
     img: truckImage,
     isPublished: true,
     // enum
-    isPartner: false,
+    owner: VehicleOwners.WINCOM,
     carNumber: {
       key: 'HU788d',
       value: 'Mercedes'
@@ -120,7 +76,7 @@ export const CAR_PARK_DATA = [
     id: '3416',
     img: truckImage,
     isPublished: true,
-    isPartner: true,
+    owner: VehicleOwners.PARTNER,
     carNumber: {
       key: 'HU788UK',
       value: 'Mercedes'
@@ -135,7 +91,7 @@ export const CAR_PARK_DATA = [
     id: '3417',
     img: truckImage,
     isPublished: true,
-    isPartner: true,
+    owner: VehicleOwners.PARTNER,
     carNumber: {
       key: 'HU789K',
       value: 'Audi'
@@ -151,7 +107,7 @@ export const CAR_PARK_DATA = [
     id: '3418',
     img: truckImage,
     isPublished: false,
-    isPartner: false,
+    owner: VehicleOwners.WINCOM,
     carNumber: {
       key: 'HU7001',
       value: 'Audi'
@@ -166,7 +122,7 @@ export const CAR_PARK_DATA = [
     id: '3419',
     img: truckImage,
     isPublished: true,
-    isPartner: false,
+    owner: VehicleOwners.WINCOM,
     carNumber: {
       key: '89djKKd',
       value: 'BMW'
@@ -217,11 +173,12 @@ export const CAR_PARK_COLUMNS = [
 export const ORDERS_COLUMNS = [
   {
     label: 'Order ID',
-    value: 'id'
+    value: 'id',
+    type: ''
   },
   {
     label: 'Date',
-    value: 'createdAt'
+    value: 'date'
   },
   {
     label: 'Trusted Client',
@@ -248,8 +205,8 @@ export const ORDERS_COLUMNS = [
     value: 'carNumber'
   },
   {
-    label: 'Client ID',
-    value: 'clientID'
+    label: 'Client Name',
+    value: 'clientName'
   },
 ]
 
@@ -257,7 +214,7 @@ export const ORDERS_DATA = [
   {
     id: '0115',
     // iso format
-    createdAt: new Date(2021, 10, 8, 12, 45).getTime(),
+    date: new Date(2021, 10, 20).getTime(),
     isTrusted: true,
     payment: {
       currency: 'EUR',
@@ -270,7 +227,7 @@ export const ORDERS_DATA = [
     },
     // two seprarate fileds
     transportDetails: {
-      key: 'WINCOME',
+      key: 'WINCOM',
       value: 'Econom'
     },
     // will require adaptor, array expected
@@ -283,11 +240,14 @@ export const ORDERS_DATA = [
       key: 'HU788UK',
       value: 'Mercedes'
     },
-    clientID: '0115'
+    clientName: 'Jim Carrey'
   },
   {
     id: '0116',
-    createdAt: new Date(2021, 10, 8, 12, 45).getTime(),
+    date: {
+      from: new Date(2021, 10, 8).getTime(),
+      to: new Date(2021, 10, 20).getTime(),
+    },
     isTrusted: false,
     payment: {
       currency: 'EUR',
@@ -298,7 +258,7 @@ export const ORDERS_DATA = [
       value: 'waiting for bill'
     },
     transportDetails: {
-      key: 'WINCOME',
+      key: 'WINCOM',
       value: 'Comfort'
     },
     places: {
@@ -308,7 +268,7 @@ export const ORDERS_DATA = [
       key: 'HU788uu',
       value: 'Audi'
     },
-    clientID: '0116',
+    clientName: 'Old McFarth',
     info: 'Additional info block'
   },
 ]
@@ -391,7 +351,8 @@ export const DRIVERS_DATA = [
     },
     cars: 1,
     services: ['Comfort'],
-    license: license
+    license: license,
+    owner: VehicleOwners.WINCOM,
   },
   {
     id: '0116',
@@ -402,7 +363,8 @@ export const DRIVERS_DATA = [
     },
     cars: 2,
     services: ['Comfort', 'Premium'],
-    license: license
+    license: license,
+    owner: VehicleOwners.PARTNER,
   },
   {
     id: '0117',
@@ -413,7 +375,8 @@ export const DRIVERS_DATA = [
     },
     cars: 1,
     services: ['Econom'],
-    license: license
+    license: license,
+    owner: VehicleOwners.WINCOM,
   },
 ]
 
@@ -452,7 +415,7 @@ export const DRIVER_PARK_DATA = [
     img: [truckImage, truckImage, truckImage],
     isPublished: true,
     // enum
-    isPartner: false,
+    owner: VehicleOwners.WINCOM,
     places: {
       loaded: 3,
       total: 14
@@ -472,7 +435,7 @@ export const DRIVER_PARK_DATA = [
     id: '3416',
     img: [truckImage],
     isPublished: true,
-    isPartner: false,
+    owner: VehicleOwners.WINCOM,
     places: {
       loaded: 14,
       total: 14

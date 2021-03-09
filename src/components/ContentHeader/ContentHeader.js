@@ -39,4 +39,4 @@ const ContentHeader = ({
   )
 }
 
-export default ContentHeader
+export default React.memo(ContentHeader)

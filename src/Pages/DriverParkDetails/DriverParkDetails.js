@@ -32,7 +32,7 @@ const DriverParkDetails = ({match}) => {
       type: 'input',
       label: 'Car',
       name: `car-details-owner`,
-      defaultValue: data?.isPartner ? 'Partner' : 'WINCOM',
+      defaultValue: data?.owner,
       validation: {
         required: true,
       }

@@ -4,16 +4,26 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   grid-column: 1 / -1;
+  width: 100%;
+  height: $headerMinHeight;
   z-index: 2;
 }
 
 .main {
   grid-column: 2 / 3;
+  grid-row: 2 / 3;
 }
 
 .wrapperContent {
   padding: 6rem $paddingGlobal 4rem 4rem;
   min-height: 100%;
+}
+
+.sidebar {
+  position: fixed;
+  top: $headerMinHeight;
+  width: 32.8rem;
+  min-height: calc(100vh - #{$headerMinHeight});
+  z-index: 3;
 }
