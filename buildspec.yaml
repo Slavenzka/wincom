@@ -28,20 +28,12 @@ phases:
       - docker tag wincom-web 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
   post_build:
     commands:
-      - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web      
-      - aws sts get-caller-identity
-     #   - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
-     #   - export AWS_ACCESS_KEY_ID=$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')
-      #  - export AWS_SECRET_ACCESS_KEY=$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')
-      #  - export AWS_SESSION_TOKEN=$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')
-      #  - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
+      - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
       #  updates the default kubeconfig file to use your cluster as the current context
       - aws eks --region eu-central-1 update-kubeconfig --name wincom-wb
  # создать ресурсы
-      - kubectl apply -f wincom-web-eks.yaml
+      # - kubectl apply -f wincom-web-eks.yaml
   # Перезапуск плавающего развёртывания "frontend"
       - kubectl rollout restart deployment/wincom-web
-#      - kubectl apply -f wincom-web-eks.yaml
-#      - kubectl rollout restart deployment/wincom-web
 artifacts:
   type: image
