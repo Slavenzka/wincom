@@ -28,8 +28,7 @@ phases:
       - docker tag wincom-web 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
   post_build:
     commands:
-      - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
-      - aws ecr get-login-password --region eu-central-1
+      - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web      
       - aws sts get-caller-identity
      #   - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
      #   - export AWS_ACCESS_KEY_ID=$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')
