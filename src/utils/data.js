@@ -133,6 +133,83 @@ export const CAR_PARK_DATA = [
     payment: 'Not confirmed',
     freePlaces: 5,
   },
+  {
+    id: '3415',
+    img: truckImage,
+    isPublished: true,
+    // enum
+    owner: VehicleOwners.WINCOM,
+    carNumber: {
+      key: 'HU788d',
+      value: 'Mercedes'
+    },
+    type: 'premium',
+    places: 1,
+    status: 'On road',
+    payment: 'Not confirmed',
+    freePlaces: 0,
+  },
+  {
+    id: '3416',
+    img: truckImage,
+    isPublished: true,
+    owner: VehicleOwners.PARTNER,
+    carNumber: {
+      key: 'HU788UK',
+      value: 'Mercedes'
+    },
+    type: 'economy',
+    places: 15,
+    status: 'Free',
+    payment: 'Confirmed',
+    freePlaces: 'none',
+  },
+  {
+    id: '3417',
+    img: truckImage,
+    isPublished: true,
+    owner: VehicleOwners.PARTNER,
+    carNumber: {
+      key: 'HU789K',
+      value: 'Audi'
+    },
+    type: 'comfort',
+    places: 5,
+    status: 'On road',
+    payment: 'Not confirmed',
+    freePlaces: 'filled',
+    info: 'Some additional info about car'
+  },
+  {
+    id: '3418',
+    img: truckImage,
+    isPublished: false,
+    owner: VehicleOwners.WINCOM,
+    carNumber: {
+      key: 'HU7001',
+      value: 'Audi'
+    },
+    type: 'economy',
+    places: 15,
+    status: 'none',
+    payment: 'Confirmed',
+    freePlaces: 'none',
+  },
+  {
+    id: '3419',
+    img: truckImage,
+    isPublished: true,
+    owner: VehicleOwners.WINCOM,
+    carNumber: {
+      key: '89djKKd',
+      value: 'BMW'
+    },
+    type: 'economy',
+    places: 13,
+    status: 'On road',
+    payment: 'Not confirmed',
+    freePlaces: 5,
+  },
 ]
 
 export const CAR_PARK_COLUMNS = [

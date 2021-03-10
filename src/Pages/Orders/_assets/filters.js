@@ -8,7 +8,7 @@ export const filterOrders = {
     {
       label: 'Payment',
       field: 'payment.value',
-      type: DetailedFilterTypes.INPUT,
+      type: DetailedFilterTypes.RANGE,
     },
     {
       label: 'Status',

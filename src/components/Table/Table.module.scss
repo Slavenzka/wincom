@@ -1,9 +1,14 @@
 .wrapper {
   margin-top: 2.2rem;
+}
 
-  &::-webkit-scrollbar,
-  & *::-webkit-scrollbar {
+.table {
+  & > *::-webkit-scrollbar-button {
     display: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: red !important;
   }
 }
 

@@ -18,7 +18,12 @@ const FilterDetailed = ({
   })
 
   return (
-    <ul className={classnames(css.list, className)}>
+    <ul
+      className={classnames(css.list, className)}
+      style={{
+        gridTemplateColumns: `repeat(${detailedList.length}, 1fr)`
+      }}
+    >
       { renderFilterItems() }
     </ul>
   )

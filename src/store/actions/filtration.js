@@ -38,9 +38,10 @@ export const setSecondaryFilteredData = data => ({
 
 export const setDetailedFilteredValues = ({field, type, values}) => {
   return (dispatch, getState) => {
+    const detailedFilter = JSON.parse(JSON.stringify(getState().filter.detailedFilter))
+    const indexToModify = detailedFilter.findIndex(item => item.field === field)
+
     if (type === DetailedFilterTypes.LIST) {
-      const detailedFilter = JSON.parse(JSON.stringify(getState().filter.detailedFilter))
-      const indexToModify = detailedFilter.findIndex(item => item.field === field)
       const existingValues = detailedFilter[indexToModify].values
       const existingIndex = existingValues.findIndex(item => item === values)
 
@@ -51,12 +52,14 @@ export const setDetailedFilteredValues = ({field, type, values}) => {
       if (existingIndex >= 0) {
         detailedFilter[indexToModify].values = [].concat(existingValues.slice(0, existingIndex), existingValues.slice(existingIndex + 1))
       }
-
-      dispatch({
-        type: SET_DETAILED_FILTER,
-        payload: detailedFilter
-      })
+    } else {
+      detailedFilter[indexToModify].value = values
     }
+
+    dispatch({
+      type: SET_DETAILED_FILTER,
+      payload: detailedFilter
+    })
   }
 }
 

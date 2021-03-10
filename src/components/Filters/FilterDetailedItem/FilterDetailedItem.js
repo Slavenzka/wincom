@@ -1,51 +1,106 @@
 import React, { useState } from 'react'
 import css from './FilterDetailedItem.module.scss'
-import { getObjPropertyViaString } from 'utils'
+import { checkIfNonEmptyArray, getObjPropertyViaString } from 'utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDetailedFilteredValues } from 'store/actions'
+import { DetailedFilterTypes } from 'utils/const'
 
 const FilterDetailedItem = ({
   label,
   field,
   type,
+  value,
+  values
 }) => {
   const [isOpen, setOpenStatus] = useState(false)
   const secondaryFilteredData = useSelector(store => store.filter.secondaryFilteredData) || []
-  const detailedFilter = useSelector(store => store.filter.detailedFilter)
   const dispatch = useDispatch()
 
-  const getDataOptions = field => secondaryFilteredData.reduce((total, item) => {
-    total.push(getObjPropertyViaString(item, field))
-    return total
-  }, [])
+  const getDataOptions = field => {
+    const list = secondaryFilteredData.reduce((total, item) => {
+      const fieldValue = getObjPropertyViaString(item, field)
+      total.push(fieldValue)
+      return total
+    }, [])
+
+    return [...new Set(list)]
+  }
+
+  const handleUpdateFilter = (field, type, value) => {
+    dispatch(setDetailedFilteredValues({
+      field,
+      type,
+      values: value
+    }))
+  }
 
   const renderOption = ({item, field, type, index}) => {
     switch (type) {
+      case DetailedFilterTypes.INPUT:
+        return (
+          <>
+            <input
+              onChange={evt => handleUpdateFilter(field, type, evt.target.value)}
+              value={value || ''}
+              type='text'
+            />
+          </>
+        )
+      case DetailedFilterTypes.RANGE:
+        return (
+          <>
+            <label htmlFor={field} className={css.label}>
+              From:
+            </label>
+            <input
+              onChange={evt => {
+                !Number.isNaN(+evt.target.value) && handleUpdateFilter(field, type, {
+                  ...value,
+                  from: evt.target.value
+                })
+              }}
+              value={value?.from || ''}
+              type='text'
+            />
+            <label htmlFor={field} className={css.label}>
+              To:
+            </label>
+            <input
+              onChange={evt => {
+                !Number.isNaN(+evt.target.value) && handleUpdateFilter(field, type, {
+                  ...value,
+                  to: evt.target.value
+                })
+              }}
+              value={value?.to || ''}
+              type='text'
+            />
+          </>
+        )
       default:
         const itemID = `${field}.${index}`
+        const isChecked = checkIfNonEmptyArray(values) && values.indexOf(item) >= 0
+        let itemLabel = item
 
-        const handleClickOption = (field, type, value) => {
-          dispatch(setDetailedFilteredValues({
-            field,
-            type,
-            values: value
-          }))
+        if (`${item}`.toUpperCase() === 'TRUE') {
+          itemLabel = 'Yes'
         }
 
-        const isChecked = !!detailedFilter
-          .find(filter => filter?.values && Array.isArray(filter.values) && filter.values.length > 0 && filter.values.indexOf(item) >= 0)
+        if (`${item}`.toUpperCase() === 'FALSE') {
+          itemLabel = 'No'
+        }
 
         return (
           <>
             <label htmlFor={field} className={css.label}>
-              { item }
+              { itemLabel }
             </label>
             <input
               type='checkbox'
               id={itemID}
               name={itemID}
               checked={isChecked}
-              onChange={() => handleClickOption(field, type, item)}
+              onChange={() => handleUpdateFilter(field, type, item)}
             />
           </>
         )
@@ -56,11 +111,16 @@ const FilterDetailedItem = ({
     const list = getDataOptions(field)
 
     const items = list.map((item, index) => {
-      return (
-        <li className={css.subitem} key={index}>
-          { renderOption({item, field, type, index}) }
-        </li>
-      )
+    // special flag to render only one input or range
+    const isRenderRequired = type === DetailedFilterTypes.LIST || index === 0
+
+      return isRenderRequired
+        ? (
+          <li className={css.subitem} key={index}>
+            { renderOption({item, field, type, index}) }
+          </li>
+        )
+        : null
     })
 
     return (

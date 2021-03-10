@@ -1,0 +1,8 @@
+@import "styles/mixins";
+
+.list {
+  @include resetList;
+
+  display: grid;
+  width: 100%;
+}

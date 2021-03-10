@@ -262,12 +262,30 @@ const TableCell = ({
     )
   }
 
+  const getCellData = data => {
+    if (`${cellData}`.toUpperCase() === 'NONE') {
+      return '-'
+    }
+
+    if (Array.isArray(cellData)) {
+      return cellData.reduce((total, item, index) => {
+        total += index !== cellData.length - 1
+          ? `${item}<br />`
+          : `${item}`
+        return total
+      }, ``)
+    }
+
+    return data
+  }
+
   return (
-    <div className={classnames(css.cell, {
-      [css.cellHovered]: isHovered && isRowClickable
-    })}>
-      { `${cellData}`.toUpperCase() === 'NONE' ? '-' : cellData }
-    </div>
+    <div
+      className={classnames(css.cell, {
+        [css.cellHovered]: isHovered && isRowClickable
+      })}
+      dangerouslySetInnerHTML={{ __html: getCellData(cellData) }}
+    />
   )
 }
 

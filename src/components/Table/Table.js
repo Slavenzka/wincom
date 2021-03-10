@@ -94,7 +94,9 @@ const Table = ({
         columnsClass={columnsClass}
         setRef={headingsRef}
       />
-      { renderTable() }
+      <div className={css.table}>
+        { renderTable() }
+      </div>
     </div>
   )
 }

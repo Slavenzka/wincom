@@ -1,44 +1,31 @@
-import { VehicleOwners } from 'utils/const'
+import { DetailedFilterTypes } from 'utils/const'
 
 export const filterCarPark = {
-  primary: {
-    field: 'owner',
-    list: [
-      {
-        label: 'All Cars',
-        values: [],
-        isDefault: true,
-      },
-      {
-        label: 'WINCOM Cars',
-        values: [VehicleOwners.WINCOM],
-      },
-      {
-        label: 'Partner Cars',
-        values: [VehicleOwners.PARTNER],
-      },
-    ]
-  },
-  secondary: {
-    field: 'type',
-    list: [
-      {
-        label: 'All',
-        values: [],
-        isDefault: true,
-      },
-      {
-        label: 'Economy',
-        values: ['ECONOMY'],
-      },
-      {
-        label: 'Comfort',
-        values: ['COMFORT'],
-      },
-      {
-        label: 'Premium',
-        values: ['PREMIUM'],
-      },
-    ]
-  },
+  detailed: [
+    {
+      label: 'Car ID',
+      field: 'id',
+      type: DetailedFilterTypes.LIST,
+    },
+    {
+      label: 'Published',
+      field: 'isPublished',
+      type: DetailedFilterTypes.LIST,
+    },
+    {
+      label: 'Car Number',
+      field: 'carNumber.key',
+      type: DetailedFilterTypes.INPUT,
+    },
+    {
+      label: 'Type',
+      field: 'type',
+      type: DetailedFilterTypes.LIST,
+    },
+    {
+      label: 'Free places',
+      field: 'freePlaces',
+      type: DetailedFilterTypes.LIST,
+    },
+  ]
 }

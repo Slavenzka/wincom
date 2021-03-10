@@ -1,22 +1,21 @@
-import { VehicleOwners } from 'utils/const'
+import { DetailedFilterTypes } from 'utils/const'
 
 export const filterDrivers = {
-  primary: {
-    field: 'owner',
-    list: [
-      {
-        label: 'All Cars',
-        values: [],
-        isDefault: true,
-      },
-      {
-        label: 'WINCOM Cars',
-        values: [VehicleOwners.WINCOM],
-      },
-      {
-        label: 'Partner Cars',
-        values: [VehicleOwners.PARTNER],
-      },
-    ]
-  },
+  detailed: [
+    {
+      label: 'Name',
+      field: 'name',
+      type: DetailedFilterTypes.INPUT,
+    },
+    {
+      label: 'Cars',
+      field: 'cars',
+      type: DetailedFilterTypes.RANGE,
+    },
+    {
+      label: 'Rides',
+      field: 'services',
+      type: DetailedFilterTypes.INPUT,
+    },
+  ]
 }

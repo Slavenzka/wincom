@@ -6,7 +6,7 @@ import { setPrimaryFilterValue, setSecondaryFilterValue } from 'store/actions'
 import FilterDetailed from 'components/Filters/FilterDetailed/FilterDetailed'
 
 const Filters = ({
-  filter
+  filter = {}
 }) => {
   const dispatch = useDispatch()
 
@@ -14,6 +14,7 @@ const Filters = ({
 
   const activePrimary = useSelector(store => store.filter.activePrimary)
   const activeSecondary = useSelector(store => store.filter.activeSecondary)
+  const activeDetailed = useSelector(store => store.filter.detailedFilter)
 
   const handleClickPrimary = evt => dispatch(setPrimaryFilterValue(evt))
   const handleClickSecondary = evt => dispatch(setSecondaryFilterValue(evt))
@@ -39,7 +40,7 @@ const Filters = ({
       }
       {detailed &&
         <FilterDetailed
-          detailedList={detailed}
+          detailedList={activeDetailed}
         />
       }
     </div>
