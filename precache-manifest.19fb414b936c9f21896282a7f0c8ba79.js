@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a789fcfaee06b515edad2b27aa4c17bf",
+    "revision": "d70c3209e24b514008dbf05f529a34c3",
     "url": "/wincom/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wincom/static/css/2.1ccefc1b.chunk.css"
   },
   {
-    "revision": "e91858c203ffc0920ba2",
-    "url": "/wincom/static/css/main.dba0fdca.chunk.css"
+    "revision": "d3c9c63bc501dfcd7b5a",
+    "url": "/wincom/static/css/main.8a68e35f.chunk.css"
   },
   {
     "revision": "c062ca9fbc5af9930b8c",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wincom/static/js/2.d99360a2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e91858c203ffc0920ba2",
-    "url": "/wincom/static/js/main.d04f8ae1.chunk.js"
+    "revision": "d3c9c63bc501dfcd7b5a",
+    "url": "/wincom/static/js/main.76fdc7bd.chunk.js"
   },
   {
     "revision": "6d81dce4baab94fe95e6",
