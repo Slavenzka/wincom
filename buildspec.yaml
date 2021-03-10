@@ -30,7 +30,7 @@ phases:
     commands:
       - docker push 015404077857.dkr.ecr.eu-central-1.amazonaws.com/wincom-web
       #  updates the default kubeconfig file to use your cluster as the current context
-     #  - aws eks --region eu-central-1 update-kubeconfig --name wincom-wb --role-arn arn:aws:iam::015404077857:role/service-role/codebuild-wincom-web-service-role
+      - aws eks --region eu-central-1 update-kubeconfig --name wincom-wb
      #  - aws sts get-caller-identity
       # создать ресурсы
  # - kubectl apply -f wincom-web-eks.yaml
