@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1834848ebef3b7a018daa3608aefeed2",
+    "revision": "8cf7a11554e1f0871e655170736210dd",
     "url": "/wincom/index.html"
   },
   {
-    "revision": "dc03ed294ef178d0500c",
-    "url": "/wincom/static/css/2.2cba102f.chunk.css"
+    "revision": "47bbfb48a76335a69b1d",
+    "url": "/wincom/static/css/2.1ccefc1b.chunk.css"
   },
   {
-    "revision": "c326267b7a71baecd49b",
-    "url": "/wincom/static/css/main.2d50fdcc.chunk.css"
+    "revision": "8eb6fab90ec3f732d540",
+    "url": "/wincom/static/css/main.dba0fdca.chunk.css"
   },
   {
-    "revision": "dc03ed294ef178d0500c",
-    "url": "/wincom/static/js/2.c229abbe.chunk.js"
+    "revision": "47bbfb48a76335a69b1d",
+    "url": "/wincom/static/js/2.e8532dc4.chunk.js"
   },
   {
     "revision": "5b099948b207b77f6fa04ff33fa98702",
-    "url": "/wincom/static/js/2.c229abbe.chunk.js.LICENSE.txt"
+    "url": "/wincom/static/js/2.e8532dc4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c326267b7a71baecd49b",
-    "url": "/wincom/static/js/main.1b253c36.chunk.js"
+    "revision": "8eb6fab90ec3f732d540",
+    "url": "/wincom/static/js/main.cb8fb0f7.chunk.js"
   },
   {
     "revision": "6d81dce4baab94fe95e6",
