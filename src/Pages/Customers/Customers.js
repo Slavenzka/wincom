@@ -37,7 +37,7 @@ const Customers = () => {
     console.log(data)
     console.log(fetchingStatus)
 
-    if (data && isLoaded) {
+    if (data && filteredData && isLoaded) {
       return (
         <>
           <Filters
