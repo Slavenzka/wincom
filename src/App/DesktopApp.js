@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import css from './DesktopApp.module.scss'
 import Routes, { LOGIN, REGISTER } from 'Pages/Routes'
@@ -6,19 +6,18 @@ import SiteGrid from 'components/SiteGrid/SiteGrid'
 import Sidebar from 'components/Sidebar/Sidebar'
 import Header from 'components/Header/Header'
 import Login from 'Pages/Login/Login'
-import { Route, Redirect, useHistory } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import useAuthCheck from 'hooks/useAuthCheck'
 import { useSelector } from 'react-redux'
 import { withRequestHandler } from 'hoc/withRequestHandler'
 import axiosWincom from 'axiosWincom'
 
 const DesktopApp = () => {
-  const history = useHistory()
   const isAuthorized = useAuthCheck()
   const isModalOpen = !!useSelector(store => store.ui.modal.content)
   console.log(`isAuthorized: ${isAuthorized}`)
 
-  return true
+  return isAuthorized
     ? (
       <SiteGrid
         className={classnames({
