@@ -9,6 +9,14 @@
   color: $color;
 }
 
+@mixin h3 ($weight: 900, $color: $colorFontDarkest) {
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 2.2rem;
+  font-weight: $weight;
+  line-height: 2.6rem;
+  color: $color;
+}
+
 @mixin fontBanner ($weight: 600, $color: $colorFontDarkest) {
   font-family: "Open Sans", Arial, sans-serif;
   font-size: 1.6rem;

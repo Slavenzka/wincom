@@ -6,7 +6,6 @@ import Table from 'components/Table/Table'
 import { CAR_PARK_COLUMNS, CAR_PARK_DATA } from 'utils/data'
 import { CAR_DETAILS } from 'Pages/Routes'
 import { NO_ROUTING_TAGS } from 'utils/const'
-import useFilterData from 'hooks/useFilterData'
 import Filters from 'components/Filters/Filters'
 import { filterCarPark } from 'Pages/Home/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
@@ -20,7 +19,6 @@ const Home = ({history}) => {
     }
   }
 
-  useFilterData(CAR_PARK_DATA, filterCarPark)
   const filteredData = useActualPageData()
 
   return (
@@ -37,14 +35,18 @@ const Home = ({history}) => {
       >
         <Filters
           filter={filterCarPark}
+          defaultData={CAR_PARK_DATA}
+          filteredData={filteredData}
         />
-        {filteredData && <Table
-          className={css.table}
-          columns={CAR_PARK_COLUMNS}
-          columnsClass={css.columns}
-          data={filteredData}
-          handleClickRow={handleClickRow}
-        />}
+        {filteredData &&
+          <Table
+            className={css.table}
+            columns={CAR_PARK_COLUMNS}
+            columnsClass={css.columns}
+            data={filteredData}
+            handleClickRow={handleClickRow}
+          />
+        }
       </ContentHeader>
     </>
   )

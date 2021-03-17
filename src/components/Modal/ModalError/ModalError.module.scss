@@ -1,0 +1,27 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  width: 38rem;
+}
+
+.title {
+  @include h3;
+
+  margin: 0 0 3.6rem 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.descriptor {
+  @include fontInput(500, $colorFontDarkest);
+
+  margin: 0 0 5rem 0;
+  line-height: 2.1rem;
+  text-align: center;
+}

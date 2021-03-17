@@ -122,11 +122,12 @@ export const applyFiltration = ({rawData, filter = {}}) => {
 
     const dateFilter = date && activeDate?.from
       ? rawData.filter(item => {
-        if (typeof item[date.fieldName] === 'object' && item[date.fieldName].from && item[date.fieldName].to) {
+        const itemField = item[date.fieldName]
 
-          return (item[date.fieldName].from >= activeDate.from.getTime() && item[date.fieldName].to <= activeDate.to.getTime()) ||
-            (item[date.fieldName].from >= activeDate.from.getTime()) ||
-            (item[date.fieldName].from <= activeDate.to.getTime())
+        if (typeof itemField === 'object' && itemField?.from && itemField?.to) {
+
+          return ((itemField.from >= activeDate.from.getTime() && itemField.to <= activeDate.to.getTime()) ||
+            (itemField.from >= activeDate.from.getTime() && itemField.from <= activeDate.to.getTime()))
         }
 
         return activeDate?.to

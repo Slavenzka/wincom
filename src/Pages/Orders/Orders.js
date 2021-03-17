@@ -6,7 +6,6 @@ import { ORDERS_COLUMNS, ORDERS_DATA } from 'utils/data'
 import { ORDER_DETAILS } from 'Pages/Routes'
 import { NO_ROUTING_TAGS, TABLE_ROW_HEIGHT_MEDIUM } from 'utils/const'
 import DateRangePicker from 'components/DateRangePicker/DateRangePicker'
-import useFilterData from 'hooks/useFilterData'
 import Filters from 'components/Filters/Filters'
 import { filterOrders } from 'Pages/Orders/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
@@ -20,7 +19,6 @@ const Orders = ({history}) => {
     }
   }
 
-  useFilterData(ORDERS_DATA, filterOrders)
   const filteredData = useActualPageData()
 
   return (
@@ -30,16 +28,20 @@ const Orders = ({history}) => {
         controls={ <DateRangePicker /> }
       >
         <Filters
+          defaultData={ORDERS_DATA}
+          filteredData={filteredData}
           filter={filterOrders}
         />
-        {filteredData && <Table
-          className={css.table}
-          columns={ORDERS_COLUMNS}
-          columnsClass={css.columns}
-          data={filteredData}
-          rowSize={TABLE_ROW_HEIGHT_MEDIUM}
-          handleClickRow={handleClickRow}
-        />}
+        {filteredData &&
+          <Table
+            className={css.table}
+            columns={ORDERS_COLUMNS}
+            columnsClass={css.columns}
+            data={filteredData}
+            rowSize={TABLE_ROW_HEIGHT_MEDIUM}
+            handleClickRow={handleClickRow}
+          />
+        }
       </ContentHeader>
     </>
   )

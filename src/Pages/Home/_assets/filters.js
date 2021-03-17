@@ -6,6 +6,7 @@ export const filterCarPark = {
       label: 'Car ID',
       field: 'id',
       type: DetailedFilterTypes.LIST,
+      inputPlaceholder: `Search by car id`
     },
     {
       label: 'Published',
@@ -15,7 +16,8 @@ export const filterCarPark = {
     {
       label: 'Car Number',
       field: 'carNumber.key',
-      type: DetailedFilterTypes.INPUT,
+      type: DetailedFilterTypes.LIST,
+      inputPlaceholder: `Search by number`
     },
     {
       label: 'Type',
@@ -26,6 +28,7 @@ export const filterCarPark = {
       label: 'Free places',
       field: 'freePlaces',
       type: DetailedFilterTypes.LIST,
+      inputPlaceholder: `Search by free places`
     },
   ]
 }

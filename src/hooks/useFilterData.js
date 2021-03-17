@@ -21,7 +21,7 @@ const useFilterData = (rawData, filter = {}) => {
       rawData: rawData,
       filter
     }))
-  }, [activeSecondary, activePrimary, activeDate, detailedFilter])
+  }, [activeSecondary, activePrimary, activeDate, detailedFilter, dispatch, filter, rawData])
 }
 
 export default useFilterData

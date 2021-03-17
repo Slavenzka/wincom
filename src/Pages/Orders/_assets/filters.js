@@ -9,6 +9,7 @@ export const filterOrders = {
       label: 'Payment',
       field: 'payment.value',
       type: DetailedFilterTypes.RANGE,
+      currencySymbol: `&euro;`
     },
     {
       label: 'Status',

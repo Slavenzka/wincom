@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import css from './Drivers.module.scss'
 import ContentHeader from 'components/ContentHeader/ContentHeader'
 import Button from 'components/Button/Button'
 import Table from 'components/Table/Table'
 import { DRIVERS_COLUMNS, DRIVERS_DATA } from 'utils/data'
 import { CARS_INFO } from 'Pages/Routes'
-import useFilterData from 'hooks/useFilterData'
 import { filterDrivers } from 'Pages/Drivers/_assets/filters'
 import Filters from 'components/Filters/Filters'
 import useActualPageData from 'hooks/useActualPageData'
@@ -18,8 +17,8 @@ const Drivers = () => {
       link: `${CARS_INFO}/${item.id}`
     }
   }))
+  const data = useMemo(() => adaptDriversData(DRIVERS_DATA), [])
 
-  useFilterData(adaptDriversData(DRIVERS_DATA), filterDrivers)
   const filteredData = useActualPageData()
 
   return (
@@ -35,13 +34,17 @@ const Drivers = () => {
     >
       <Filters
         filter={filterDrivers}
+        defaultData={data}
+        filteredData={filteredData}
       />
-      {filteredData && <Table
-        className={css.table}
-        columns={DRIVERS_COLUMNS}
-        columnsClass={css.columns}
-        data={filteredData}
-      />}
+      {filteredData &&
+        <Table
+          className={css.table}
+          columns={DRIVERS_COLUMNS}
+          columnsClass={css.columns}
+          data={filteredData}
+        />
+      }
     </ContentHeader>
     )
 }

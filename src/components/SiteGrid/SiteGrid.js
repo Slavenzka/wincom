@@ -3,11 +3,11 @@ import css from './SiteGrid.module.scss'
 import classnames from 'classnames'
 import useToggleSidebar from 'hooks/useToggleSidebar'
 
-const SiteGrid = ({children}) => {
+const SiteGrid = ({children, className}) => {
   const {isSidebarCollapsed, isUncollapsed, handleClickCollapseButton} = useToggleSidebar()
 
   return (
-    <div className={classnames(css.wrapper, {
+    <div className={classnames(css.wrapper, className, {
       [css.wrapperCollapsed]: isSidebarCollapsed,
       [css.wrapperUncollapsed]: isUncollapsed,
     })}>

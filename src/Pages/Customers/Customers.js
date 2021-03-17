@@ -8,10 +8,8 @@ import { TABLE_ROW_HEIGHT_MEDIUM } from 'utils/const'
 import Filters from 'components/Filters/Filters'
 import { filterCustomers } from 'Pages/Customers/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
-import useFilterData from 'hooks/useFilterData'
 
 const Customers = () => {
-  useFilterData(CUSTOMERS_DATA, filterCustomers)
   const filteredData = useActualPageData()
 
   return (
@@ -27,6 +25,8 @@ const Customers = () => {
     >
       <Filters
         filter={filterCustomers}
+        defaultData={CUSTOMERS_DATA}
+        filteredData={filteredData}
       />
       {filteredData && <Table
         className={css.table}

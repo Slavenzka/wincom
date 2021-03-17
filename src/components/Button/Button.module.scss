@@ -5,6 +5,7 @@
   @include resetButton;
   @include fontButton;
 
+  position: relative;
   padding-right: 5rem;
   padding-left: 5rem;
   width: fit-content;
@@ -33,4 +34,17 @@
 .buttonSmall {
   min-height: 3rem;
   border-radius: 2rem;
+}
+
+.buttonDisabled {
+  pointer-events: none;
+}
+
+.icon {
+  --spinner-size: 2rem;
+  position: absolute;
+  top: calc(50% - var(--spinner-size) / 2);
+  right: 1.5rem;
+  width: var(--spinner-size);
+  fill: $colorFontDarkest;
 }

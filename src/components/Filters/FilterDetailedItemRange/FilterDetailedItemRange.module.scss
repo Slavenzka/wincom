@@ -1,0 +1,53 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  @include fontInfo(500);
+}
+
+.controls {
+  position: relative;
+  margin-top: 0.7rem;
+  padding: 0 1rem;
+  height: 2rem;
+}
+
+.gauge {
+  height: 1rem;
+  background-color: $colorBorderTable;
+  border-radius: 5rem;
+}
+
+.gaugeSelectedRange {
+  position: absolute;
+  top: 0;
+  height: 1rem;
+  background-color: $colorBgHighlight;
+}
+
+.thumb {
+  position: absolute;
+  top: -0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: $colorBgLightest;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.28);
+  z-index: 2;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.4);
+  }
+}

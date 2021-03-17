@@ -7,11 +7,13 @@ const Input = ({
   label,
   name,
   placeholder = 'Enter your value',
+  isDisabled,
+  register = () => {},
+  children,
+  isDetailedFilerStyle,
+  isAuthStyle,
   isCash,
   isError,
-  isDisabled,
-  register,
-  children,
   ...props
 }) => {
   return (
@@ -31,7 +33,9 @@ const Input = ({
         className={classnames(css.input, {
           [css.inputError]: isError,
           [css.inputDisabled]: isDisabled,
-          [css.inputCash]: isCash
+          [css.inputCash]: isCash,
+          [css.inputDetailed]: isDetailedFilerStyle,
+          [css.inputAuth]: isAuthStyle,
         })}
         id={name}
         name={name}

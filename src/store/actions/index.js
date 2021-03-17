@@ -17,3 +17,7 @@ export {
   setDetailedFilteredValues,
   applyFiltration
 } from './filtration'
+
+export {
+  setAuthStatus
+} from './auth'

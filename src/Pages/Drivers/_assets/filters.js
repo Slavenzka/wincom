@@ -5,17 +5,17 @@ export const filterDrivers = {
     {
       label: 'Name',
       field: 'name',
-      type: DetailedFilterTypes.INPUT,
+      type: DetailedFilterTypes.LIST,
     },
     {
       label: 'Cars',
-      field: 'cars',
+      field: 'cars.value',
       type: DetailedFilterTypes.RANGE,
     },
     {
       label: 'Rides',
       field: 'services',
-      type: DetailedFilterTypes.INPUT,
+      type: DetailedFilterTypes.LIST,
     },
   ]
 }

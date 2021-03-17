@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import Home from 'Pages/Home/Home'
 import CarDetails from 'Pages/CarDetails/CarDetails'
 import Orders from 'Pages/Orders/Orders'
@@ -9,6 +9,8 @@ import PaymentSettings from 'Pages/PaymentSettings/PaymentSettings'
 import Drivers from 'Pages/Drivers/Drivers'
 import DriverParkDetails from 'Pages/DriverParkDetails/DriverParkDetails'
 
+export const REGISTER = '/register'
+export const LOGIN = '/login'
 export const HOME_PAGE = '/'
 export const CAR_DETAILS = '/car'
 export const ORDERS = '/orders'
@@ -55,6 +57,9 @@ const Routes = () => {
       <Route exact path={PAYMENT_SETTINGS} component={PaymentSettings} />
       <Route exact path={DRIVERS} component={Drivers} />
       <Route exact path={ `${CARS_INFO}/:id` } component={DriverParkDetails} />
+      <Route exact path={LOGIN}>
+        <Redirect to={HOME_PAGE} />
+      </Route>
     </Switch>
   )
 }

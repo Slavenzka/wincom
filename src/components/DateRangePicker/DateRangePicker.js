@@ -99,7 +99,7 @@ const DateRangePicker = () => {
       from: range.selected.from,
       to: range.selected.to
     }))
-  }, [range.selected])
+  }, [range.selected, dispatch])
 
   return (
     <>

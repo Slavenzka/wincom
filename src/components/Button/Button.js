@@ -2,6 +2,7 @@ import React from 'react'
 import css from './Button.module.scss'
 import classnames from 'classnames'
 import { ButtonHeights, ButtonPalettes } from 'utils/const'
+import IconSpinner from 'assets/icons/IconSpinner'
 
 const Button = ({
   className,
@@ -10,11 +11,13 @@ const Button = ({
   children,
   palette = ButtonPalettes.FILLED,
   height = ButtonHeights.REGULAR,
+  isLoading,
 }) => {
   return (
     <button
       onClick={onClick}
       className={classnames(css.button, className, {
+        [css.buttonDisabled]: isLoading,
         [css.buttonFilled]: palette === ButtonPalettes.FILLED,
         [css.buttonBordered]: palette === ButtonPalettes.BORDERED,
         [css.buttonRegular]: height === ButtonHeights.REGULAR,
@@ -23,6 +26,9 @@ const Button = ({
       })}
       type={type}
     >
+      {isLoading &&
+        <IconSpinner className={css.icon} />
+      }
       { children }
     </button>
   )

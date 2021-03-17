@@ -20,7 +20,7 @@ export const filterCustomers = {
     {
       label: 'Name',
       field: 'name',
-      type: DetailedFilterTypes.INPUT,
+      type: DetailedFilterTypes.LIST,
     },
   ]
 }

@@ -1,8 +1,38 @@
 @import "styles/mixins";
+@import "styles/variables";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
 
 .list {
   @include resetList;
 
   display: grid;
+  padding: 2.2rem 2.5rem 2.2rem 3.5rem;
   width: 100%;
+  background-color: $colorBgTabs;
+  border-bottom-right-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
+}
+
+.label {
+  @include fontInput(600, $colorFontDarkest);
+
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 2.5rem 0.7rem 3.5rem;
+  line-height: 2.8rem;
+  text-transform: none;
+  background-color: $colorBgTabs;
+  border-top-right-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+
+  .icon {
+    margin-left: 2rem;
+    width: 1.7rem;
+  }
 }

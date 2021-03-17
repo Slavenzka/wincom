@@ -163,3 +163,11 @@ export const DetailedFilterTypes = {
   INPUT: 'INPUT',
   RANGE: 'RANGE'
 }
+
+export const LocalStorageAuthFields = {
+  TOKEN: 'wincom-auth'
+}
+
+export const ResponseStatuses = {
+  UNAUTHORIZED: 401
+}

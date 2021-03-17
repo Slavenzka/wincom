@@ -13,14 +13,10 @@ body {
   background-color: $colorBgMain;
   overflow-y: scroll;
 
-  .simplebar-placeholder {
-    display: none;
-  }
-
   .simplebar-scrollbar:before {
     position: absolute;
     content: '';
-    background: red;
+    background: $colorBgScrollbar;
     border-radius: 0.7rem;
     left: 0;
     right: 0;
@@ -35,8 +31,16 @@ body {
 
   .simplebar-track.simplebar-vertical {
     top: 0;
-    right: 0;
+    right: -0.5rem;
     width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $colorBgSidebarActive;
   }
 }
 

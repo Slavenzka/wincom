@@ -7,24 +7,26 @@ import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import elasticAdaptive from 'store/reducers/elasticAdaptive'
 import thunk from 'redux-thunk'
-import { BrowserRouter, HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { uiReducer } from 'store/reducers/ui'
 import ViewSwitcher from 'ViewSwitcher/ViewSwitcher'
 import { filterReducer } from 'store/reducers/filtration'
+import { authReducer } from 'store/reducers/auth'
 
 const rootReducer = combineReducers({
   elastic: elasticAdaptive,
   ui: uiReducer,
-  filter: filterReducer
+  auth: authReducer,
+  filter: filterReducer,
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))
 
 const Content = (
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <ViewSwitcher />
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 )
 

@@ -11,13 +11,22 @@
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
   transition-duration: $transitionDuration;
   opacity: 0;
   transition-property: opacity;
   pointer-events: none;
   z-index: -1;
   overflow: hidden auto;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .wrapperOpened {
@@ -28,24 +37,28 @@
 
 .content {
   position: relative;
+  padding: 7rem 0;
+  background-color: $colorBgLightest;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.2rem 0.4rem $colorShadowRegular;
 }
 
 .button {
   @include resetButton;
 
   position: absolute;
-  top: -4.5rem;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
   padding: 1rem;
   width: 3rem;
   height: 3rem;
   font-size: 0;
-  background-color: $colorBgContent;
+  background-color: $colorBgStats;
   border-radius: 50%;
 
   .icon {
     width: 100%;
-    fill: $colorBgSidebarActive;
+    fill: $colorFontLightest;
     transition-duration: $transitionDuration;
   }
 
@@ -53,18 +66,5 @@
     .icon {
       fill: $colorBgDarkest;
     }
-  }
-}
-
-@media (max-width: $adaptiveMax) {
-  .wrapper {
-    position: fixed;
-    padding: 0;
-    height: 100vh;
-  }
-
-  .button {
-    top: 6rem;
-    right: calc(50% - 10rem);
   }
 }
