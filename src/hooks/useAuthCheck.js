@@ -11,8 +11,6 @@ const useAuthCheck = () => {
 
   useEffect(() => {
     const existingToken = localStorage.getItem(LocalStorageAuthFields.TOKEN)
-    console.log(storeAuthStatus)
-    console.log(existingToken)
 
     if (existingToken && storeAuthStatus) {
       setAuthStatus(true)
@@ -23,12 +21,11 @@ const useAuthCheck = () => {
 
     if (existingToken && !storeAuthStatus) {
       setAuthStatus(false)
-      localStorage.removeItem(LocalStorageAuthFields.TOKEN)
       history.push({
         pathname: LOGIN
       })
     }
-  }, [storeAuthStatus])
+  }, [storeAuthStatus, history])
 
   return isAuthorized
 }

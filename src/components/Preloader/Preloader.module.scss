@@ -1,0 +1,13 @@
+@import "styles/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30rem;
+}
+
+.icon {
+  width: 7rem;
+  fill: $colorFontDarkest;
+}

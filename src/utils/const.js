@@ -171,3 +171,8 @@ export const LocalStorageAuthFields = {
 export const ResponseStatuses = {
   UNAUTHORIZED: 401
 }
+
+export const RequestMethods = {
+  POST: 'post',
+  GET: 'get',
+}

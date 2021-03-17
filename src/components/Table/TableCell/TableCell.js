@@ -91,7 +91,6 @@ const TableCell = ({
   if (type === TableCellTypes.DATE_AND_TIME.type) {
     const dateObj = new Date(cellData)
     const {year, month, day, hours, minutes} = getDateComponents(dateObj)
-
     const key = `${day}.${month}.${year}`
     const value = `${hours}:${minutes}`
 
@@ -122,7 +121,7 @@ const TableCell = ({
       <div className={classnames(css.cell, {
         [css.cellHovered]: isHovered && isRowClickable
       })}>
-        { `${year}.${month}.${day}` }
+        { `${day}.${month}.${year}` }
       </div>
     )
   }

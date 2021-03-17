@@ -6,11 +6,11 @@ import Button from 'components/Button/Button'
 import { ButtonHeights, LocalStorageAuthFields, ResponseStatuses } from 'utils/const'
 import axiosWincom from 'axiosWincom'
 import { Link, useHistory } from 'react-router-dom'
-import { REGISTER, LOGIN, HOME_PAGE } from 'Pages/Routes'
+import { REGISTER, LOGIN } from 'Pages/Routes'
 import withModal from 'hoc/withModal'
 import { useDispatch } from 'react-redux'
 import { setAuthStatus, toggleModal } from 'store/actions'
-import ModalError from 'components/Modal/ModalError/ModalError'
+import ModalMessage from 'components/Modal/ModalMessage/ModalMessage'
 
 const Login = ({isRegistration}) => {
   const [isSubmitting, setSubmittingStatus] = useState(false)
@@ -52,24 +52,14 @@ const Login = ({isRegistration}) => {
           dispatch(setAuthStatus(true))
         }
       })
-      .catch(error => {
+      .catch(() => {
         setSubmittingStatus(false)
-        const responseStatus = error?.response?.status
-
-        if (responseStatus && !Number.isNaN(+responseStatus) && +responseStatus === ResponseStatuses.UNAUTHORIZED) {
-          dispatch(toggleModal(
-            <ModalError
-              title={ `Wrong authentication data` }
-              descriptor={ `Please, check your login/password and try to log in again. Otherwise proceed to user registration.` }
-              buttonLabel={ `Go back` }
-              buttonClickHandler={() => dispatch(toggleModal(null))}
-            />
-          ))
-        }
       })
   }
 
   const handleRegister = data => {
+    setSubmittingStatus(true)
+
     axiosWincom.post(`/user/register`, {
         email: data[EMAIL.name],
         password: data[PASSWORD.name],
@@ -77,15 +67,35 @@ const Login = ({isRegistration}) => {
       }
     )
       .then(response => {
-        if (response && response?.email === data[EMAIL.name]) {
-          history.push({
-            pathname: LOGIN
-          })
+        setSubmittingStatus(false)
+
+        if (response && response?.data?.email === data[EMAIL.name]) {
+          dispatch(toggleModal((
+            <ModalMessage
+              title={ `New user was successfully registered` }
+              descriptor={ `You can use associated email and password to log into the system.` }
+              buttonLabel={ `Go to login page` }
+              buttonClickHandler={() => {
+                dispatch(toggleModal(null))
+                history.push({
+                  pathname: LOGIN
+                })
+              }}
+            />
+          )))
         }
       })
       .catch(error => {
-        console.log(2)
-        dispatch(toggleModal(<div style={{ color: 'black' }}>Something went wrong</div>))
+        setSubmittingStatus(false)
+
+        const errorMessage = error?.response?.data?.message
+        dispatch(toggleModal((
+          <ModalMessage
+            title={ `Failed to register a new user` }
+            descriptor={ `An error occurred during the process of user registration. Please, try again later or contact your database administrator to investigate the issue.` }
+            error={errorMessage}
+          />
+        )))
       })
   }
 

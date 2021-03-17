@@ -1,17 +1,18 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 // a hook to get data from redux store after it was reset in useFilterData hook
 const useActualPageData = () => {
-  const isMounted = useRef(false)
+  const [isMounted, setMountedStatus] = useState(false)
   const filteredData = useSelector(store => store.filter.filteredData)
 
-
   useEffect(() => {
-    isMounted.current = true
-  })
+    if (filteredData && !isMounted) {
+      setMountedStatus(true)
+    }
+  }, [filteredData, isMounted])
 
-  return isMounted.current ? filteredData : null
+  return isMounted ? filteredData : null
 }
 
 export default useActualPageData

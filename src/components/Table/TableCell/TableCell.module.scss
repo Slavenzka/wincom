@@ -9,6 +9,9 @@
   text-transform: none;
   transition-duration: $transitionDuration;
   transition-property: text-decoration;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cellHovered {

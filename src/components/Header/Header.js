@@ -20,8 +20,10 @@ const Header = ({
       className={classnames(css.wrapper, className)}
       style={{...style}}
     >
-      <Container>
-        Header
+      <Container className={css.container}>
+        <span>
+          Header
+        </span>
         <button
           onClick={handleClickLogout}
           className={css.button}

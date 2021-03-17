@@ -36,7 +36,7 @@ export const SIDEBAR_LIST = [
     url: CUSTOMERS,
   },
   {
-    label: 'Drivers',
+    label: 'Carriers',
     url: DRIVERS,
   },
   {
@@ -49,6 +49,9 @@ export const SIDEBAR_LIST = [
 const Routes = () => {
   return (
     <Switch>
+      <Route exact path={LOGIN}>
+        <Redirect to={HOME_PAGE} />
+      </Route>
       <Route exact path={HOME_PAGE} component={Home} />
       <Route exact path={`${CAR_DETAILS}/:id`} component={CarDetails} />
       <Route exact path={ORDERS} component={Orders} />
@@ -57,9 +60,6 @@ const Routes = () => {
       <Route exact path={PAYMENT_SETTINGS} component={PaymentSettings} />
       <Route exact path={DRIVERS} component={Drivers} />
       <Route exact path={ `${CARS_INFO}/:id` } component={DriverParkDetails} />
-      <Route exact path={LOGIN}>
-        <Redirect to={HOME_PAGE} />
-      </Route>
     </Switch>
   )
 }
