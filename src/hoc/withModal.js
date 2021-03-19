@@ -12,7 +12,7 @@ const withModal = WrappedComponent => {
     const modal = useSelector(state => state.ui.modal)
     const dispatch = useDispatch()
     const { content, options = {} } = modal
-    const { isCloseBtnRequired = true } = options
+    const { isCloseBtnRequired = true, isContentOnly = false, isLoading = false } = options
 
     const handleEscPress = useCallback(evt => {
       if (evt.key === 'Escape') {
@@ -48,7 +48,12 @@ const withModal = WrappedComponent => {
           })}
           ref={modalRef}
         >
-          <div className={css.content}>
+          <div
+            className={classnames(css.content, {
+              [css.contentOnly]: isContentOnly,
+              [css.contentLoading]: isLoading,
+            })}
+          >
             {isCloseBtnRequired &&
               <button
                 className={css.button}

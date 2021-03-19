@@ -38,7 +38,7 @@ const TableRow = ({
       })}
       ref={setRowRef}
     >
-      { renderCells() }
+      { rowRef && renderCells() }
     </div>
   )
 }

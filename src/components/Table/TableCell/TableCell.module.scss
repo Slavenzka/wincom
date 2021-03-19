@@ -12,6 +12,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  & > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .cellHovered {
@@ -22,6 +28,11 @@
   padding-left: 25%;
 }
 
+.cellOrders {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .cellThin {
   font-weight: 300;
 }
@@ -30,7 +41,6 @@
   position: relative;
   display: block;
   color: inherit;
-  width: fit-content;
 }
 
 .linkHovered {

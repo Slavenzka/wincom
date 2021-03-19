@@ -31,3 +31,12 @@
   min-height: calc(100vh - #{$headerMinHeight});
   z-index: 3;
 }
+
+.sidebarCollapsed {
+  width: 8rem;
+
+  ul {
+    padding-right: 0.6rem;
+    padding-left: 0.6rem;
+  }
+}

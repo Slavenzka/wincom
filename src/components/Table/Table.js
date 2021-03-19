@@ -21,6 +21,7 @@ const Table = ({
   const wrapperRef = useRef(null)
   const headingsRef = useRef(null)
   const listRef = useRef(null)
+  const isHeightCalculated = useRef(false)
 
   const rowHeight = (rowSize * fontSize) / 10
   const limitHeight = 5 * rowSize / 10 * fontSize
@@ -34,8 +35,15 @@ const Table = ({
   })
 
   useEffect(() => {
-    setTableHeight()
-  }, [data, rowHeight, data.length, limitHeight, setTableHeight])
+    if (!isHeightCalculated.current) {
+      setTableHeight()
+      isHeightCalculated.current = true
+    }
+
+    return () => {
+      isHeightCalculated.current = false
+    }
+  }, [data, rowHeight, data.length, limitHeight, setTableHeight, fontSize])
 
   // Uncomment when filter is operational
   // useEffect(() => {
@@ -51,7 +59,7 @@ const Table = ({
   const renderTable = () => {
     return (
       <>
-        {data.length > 0 && (
+        {isHeightCalculated.current && data.length > 0 && (
           <List
             height={tableHeight + 20 || 0}
             ref={listRef}
@@ -94,9 +102,16 @@ const Table = ({
         columnsClass={columnsClass}
         setRef={headingsRef}
       />
-      <div className={css.table}>
-        { renderTable() }
-      </div>
+      {Array.isArray(data) && data.length > 0 &&
+        <div className={css.table}>
+          {renderTable()}
+        </div>
+      }
+      {Array.isArray(data) && data.length === 0 &&
+        <p className={css.empty}>
+          No data available.
+        </p>
+      }
     </div>
   )
 }

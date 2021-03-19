@@ -133,3 +133,28 @@ export const getObjPropertyViaString = (object, string) => {
 }
 
 export const checkIfNonEmptyArray = value => value && Array.isArray(value) && value.length > 0
+export const checkIfNumber = value => value !== null && !Number.isNaN(value)
+
+export const getDetailedItemLabel = ({value, values}) => {
+  if (checkIfNonEmptyArray(values)) {
+    return `${values.length} selected`
+  }
+
+  if (value && value.hasOwnProperty('from') && value.hasOwnProperty('to')) {
+    const isFromExists = checkIfNumber(value?.from)
+    const isToExists = checkIfNumber(value?.to)
+
+    if (isFromExists && !isToExists) {
+      return `From ${value.from}`
+    }
+
+    if (!isFromExists && isToExists) {
+      return `To ${value.to}`
+    }
+
+    if (isFromExists && isToExists) {
+      return `From ${value.from} to ${value.to}`
+    }
+  }
+
+}

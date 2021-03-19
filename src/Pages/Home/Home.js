@@ -3,12 +3,15 @@ import css from './Home.module.scss'
 import ContentHeader from 'components/ContentHeader/ContentHeader'
 import Button from 'components/Button/Button'
 import Table from 'components/Table/Table'
-import { CAR_PARK_COLUMNS, CAR_PARK_DATA } from 'utils/data'
+import { CAR_PARK_COLUMNS } from 'utils/data'
 import { CAR_DETAILS } from 'Pages/Routes'
 import { NO_ROUTING_TAGS } from 'utils/const'
 import Filters from 'components/Filters/Filters'
 import { filterCarPark } from 'Pages/Home/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
+import useDataFetch from 'hooks/useDataFetch'
+import { carParkAdapter } from 'utils/adapters'
+import ContentProvider from 'components/ContentProvider/ContentProvider'
 
 const Home = ({history}) => {
   const handleClickRow = (node, id) => {
@@ -19,6 +22,12 @@ const Home = ({history}) => {
     }
   }
 
+  const {data, fetchingStatus} = useDataFetch({
+    url: `/api/admin/transport`,
+    options: {
+      adapter: carParkAdapter
+    }
+  })
   const filteredData = useActualPageData()
 
   return (
@@ -33,12 +42,18 @@ const Home = ({history}) => {
           </Button>
         )}
       >
-        <Filters
-          filter={filterCarPark}
-          defaultData={CAR_PARK_DATA}
-          filteredData={filteredData}
-        />
-        {filteredData &&
+        <ContentProvider
+          isDataFetched={!!data}
+          isDataFiltered={!!filteredData}
+          fetchingStatus={fetchingStatus}
+          filters={(
+            <Filters
+              filter={filterCarPark}
+              defaultData={data}
+              filteredData={filteredData}
+            />
+          )}
+        >
           <Table
             className={css.table}
             columns={CAR_PARK_COLUMNS}
@@ -46,7 +61,7 @@ const Home = ({history}) => {
             data={filteredData}
             handleClickRow={handleClickRow}
           />
-        }
+        </ContentProvider>
       </ContentHeader>
     </>
   )

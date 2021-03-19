@@ -17,10 +17,12 @@ const useFilterData = (rawData, filter = {}) => {
   })
 
   useEffect(() => {
-    dispatch(applyFiltration({
-      rawData: rawData,
-      filter
-    }))
+    if (activePrimary || activeSecondary || detailedFilter) {
+      dispatch(applyFiltration({
+        rawData: rawData,
+        filter
+      }))
+    }
   }, [activeSecondary, activePrimary, activeDate, detailedFilter, dispatch, filter, rawData])
 }
 

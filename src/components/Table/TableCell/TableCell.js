@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { toggleModal } from 'store/actions'
 import { HOME_PAGE } from 'Pages/Routes'
+import ModalFullImage from 'components/Modal/ModalFullImage/ModalFullImage'
 
 const TableCell = ({
   cellData,
@@ -172,9 +173,9 @@ const TableCell = ({
 
   if (type === TableCellTypes.ORDERS_ACTIVE.type) {
     return (
-      <div className={classnames(css.cell, css.cellCentered, {
+      <div className={classnames(css.cell, css.cellCentered, css.cellOrders, {
         [css.cellHovered]: isHovered,
-        [css.linkHovered]: isHovered
+        [css.linkHovered]: isHovered,
       })}>
         <Link className={css.link} to={'#'}>
           <span className={css.linkContent}>
@@ -227,19 +228,42 @@ const TableCell = ({
   }
 
   if (type === TableCellTypes.PREVIEW.type) {
-    const handleClickPreview = () => dispatch(toggleModal((
-      <img className={css.full} src={cellData} alt={ `Driving license of ${rowData.name}` } />
-    )))
+    // const handleClickPreview = () => dispatch(toggleModal((
+    //   <img className={css.full} src={cellData} alt={ `Driving license of ${rowData.name}` } />
+    // )))
+
+    const handleClickPreview = () => {
+      if (cellData.hasOwnProperty(`fullImageUrl`)) {
+        dispatch(toggleModal((
+          <ModalFullImage
+            url={cellData.fullImageUrl}
+          />
+        ), {
+          isContentOnly: true,
+          isLoading: true
+        }))
+      }
+    }
+
+    const previewString = cellData.hasOwnProperty('image')
+      ? cellData.image
+      : null
 
     return (
       <div className={css.cell}>
-        <button
-          className={css.previewTrigger}
-          onClick={handleClickPreview}
-          type='button'
-        >
-          <img className={css.preview} src={cellData} alt={ `Driving license of ${rowData.name}` } />
-        </button>
+        {previewString &&
+          <button
+            className={css.previewTrigger}
+            onClick={handleClickPreview}
+            type='button'
+          >
+            <img
+              className={css.preview}
+              src={`data:image/jpg;base64, ${previewString}`}
+              alt={`Driving license of ${rowData.name}`}
+            />
+          </button>
+        }
       </div>
     )
   }

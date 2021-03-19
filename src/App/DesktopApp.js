@@ -6,18 +6,18 @@ import SiteGrid from 'components/SiteGrid/SiteGrid'
 import Sidebar from 'components/Sidebar/Sidebar'
 import Header from 'components/Header/Header'
 import Login from 'Pages/Login/Login'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, withRouter } from 'react-router-dom'
 import useAuthCheck from 'hooks/useAuthCheck'
 import { useSelector } from 'react-redux'
 import { withRequestHandler } from 'hoc/withRequestHandler'
 import axiosWincom from 'axiosWincom'
 
-const DesktopApp = () => {
-  const isAuthorized = useAuthCheck()
+const DesktopApp = ({history}) => {
+  const isAuthorized = useAuthCheck(history)
   const isModalOpen = !!useSelector(store => store.ui.modal.content)
   console.log(`isAuthorized: ${isAuthorized}`)
 
-  return isAuthorized
+  const renderContent = () => isAuthorized
     ? (
       <SiteGrid
         className={classnames({
@@ -33,6 +33,7 @@ const DesktopApp = () => {
             </div>
             <Sidebar
               className={css.sidebar}
+              classNameCollapsed={css.sidebarCollapsed}
               handleClickCollapse={handleClickCollapse}
             />
             <main className={css.main}>
@@ -51,7 +52,7 @@ const DesktopApp = () => {
         })}
       >
         <Route exact path={REGISTER} render={() => <Login isRegistration />} />
-        <Route exact path={LOGIN} render={() => <Login />} />
+        <Route exact path={LOGIN} component={Login} />
         <Redirect
           to={{
             pathname: LOGIN
@@ -59,6 +60,8 @@ const DesktopApp = () => {
         />
       </div>
     )
+
+  return renderContent()
 }
 
-export default withRequestHandler(DesktopApp, axiosWincom)
+export default withRouter(withRequestHandler(DesktopApp, axiosWincom))

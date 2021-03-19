@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from 'Pages/Home/Home'
 import CarDetails from 'Pages/CarDetails/CarDetails'
 import Orders from 'Pages/Orders/Orders'
@@ -49,9 +49,6 @@ export const SIDEBAR_LIST = [
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path={LOGIN}>
-        <Redirect to={HOME_PAGE} />
-      </Route>
       <Route exact path={HOME_PAGE} component={Home} />
       <Route exact path={`${CAR_DETAILS}/:id`} component={CarDetails} />
       <Route exact path={ORDERS} component={Orders} />

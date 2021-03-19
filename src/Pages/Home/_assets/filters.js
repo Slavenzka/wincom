@@ -27,7 +27,7 @@ export const filterCarPark = {
     {
       label: 'Free places',
       field: 'freePlaces',
-      type: DetailedFilterTypes.LIST,
+      type: DetailedFilterTypes.RANGE,
       inputPlaceholder: `Search by free places`
     },
   ]

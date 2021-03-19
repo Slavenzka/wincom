@@ -20,7 +20,9 @@ const FilterDetailedItemCheck = ({
         {isChecked &&
           <IconCheck className={css.icon} />
         }
-        { label }
+        <span>
+          { label }
+        </span>
       </label>
       <input
         className={ `visuallyHidden` }

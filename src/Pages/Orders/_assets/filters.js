@@ -34,7 +34,7 @@ export const filterOrders = {
     {
       label: 'Customer name',
       field: 'clientName',
-      type: DetailedFilterTypes.INPUT
+      type: DetailedFilterTypes.LIST
     },
   ]
 }

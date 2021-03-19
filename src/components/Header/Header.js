@@ -4,15 +4,23 @@ import classnames from 'classnames'
 import Container from 'components/Container/Container'
 import { useDispatch } from 'react-redux'
 import { setAuthStatus } from 'store/actions'
+import { useHistory, withRouter } from 'react-router-dom'
+import { LOGIN } from 'Pages/Routes'
+import { LocalStorageAuthFields } from 'utils/const'
 
 const Header = ({
   className,
   style = {},
 }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const handleClickLogout = () => {
     dispatch(setAuthStatus(false))
+    localStorage.removeItem(LocalStorageAuthFields.TOKEN)
+    history.push({
+      pathname: LOGIN
+    })
   }
 
   return (
@@ -36,4 +44,4 @@ const Header = ({
   )
 }
 
-export default Header
+export default withRouter(Header)

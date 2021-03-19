@@ -5,15 +5,12 @@
   position: fixed;
   left: 0;
   top: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   padding: 0;
   width: 100vw;
   height: 100vh;
-  transition-duration: $transitionDuration;
-  opacity: 0;
-  transition-property: opacity;
   pointer-events: none;
   z-index: -1;
   overflow: hidden auto;
@@ -30,7 +27,7 @@
 }
 
 .wrapperOpened {
-  opacity: 1;
+  display: flex;
   pointer-events: all;
   z-index: 5;
 }
@@ -41,6 +38,24 @@
   background-color: $colorBgLightest;
   border-radius: 0.8rem;
   box-shadow: 0 0.2rem 0.4rem $colorShadowRegular;
+}
+
+.contentOnly {
+  padding: 0;
+  background-color: transparent;
+
+  .button {
+    top: -3rem;
+    right: -4rem;
+  }
+}
+
+.contentLoading {
+  box-shadow: none;
+
+  .button {
+    display: none;
+  }
 }
 
 .button {

@@ -3,10 +3,10 @@ import css from './Login.module.scss'
 import { useForm } from 'react-hook-form'
 import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
-import { ButtonHeights, LocalStorageAuthFields, ResponseStatuses } from 'utils/const'
+import { ButtonHeights, LocalStorageAuthFields } from 'utils/const'
 import axiosWincom from 'axiosWincom'
 import { Link, useHistory } from 'react-router-dom'
-import { REGISTER, LOGIN } from 'Pages/Routes'
+import { REGISTER, LOGIN, HOME_PAGE } from 'Pages/Routes'
 import withModal from 'hoc/withModal'
 import { useDispatch } from 'react-redux'
 import { setAuthStatus, toggleModal } from 'store/actions'
@@ -50,6 +50,9 @@ const Login = ({isRegistration}) => {
         if (token) {
           localStorage.setItem(LocalStorageAuthFields.TOKEN, response?.headers?.authorization.split(' ')[1])
           dispatch(setAuthStatus(true))
+          history.push({
+            pathname: HOME_PAGE
+          })
         }
       })
       .catch(() => {

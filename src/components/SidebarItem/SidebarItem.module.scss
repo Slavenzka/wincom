@@ -10,7 +10,7 @@
   align-items: center;
   padding: 1.7rem 3rem 1.7rem $paddingGlobal;
   transition-duration: $transitionDuration;
-  transition-property: opacity, background-color;
+  transition-property: opacity, background-color, padding;
 
   &:hover {
     background-color: $colorBgSidebarActive;
@@ -22,11 +22,18 @@
   }
 }
 
+.icon {
+  display: block;
+}
+
 .iconDummy {
+  display: block;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: $colorFontIcon;
+  background-color: $colorFontLightest;
+  transition-duration: $transitionDuration;
+  opacity: 0.2;
 }
 
 .label {
@@ -34,6 +41,7 @@
 
   margin-left: 1.2rem;
   opacity: 0.6;
+  transition-duration: $transitionDuration;
 }
 
 .counter {
@@ -41,4 +49,28 @@
 
   margin-left: auto;
   opacity: 0.6;
+}
+
+.wrapperCollapsed {
+  .link {
+    padding-right: 2rem;
+    padding-left: 2rem;
+    transition-duration: $transitionDuration;
+
+    &:hover {
+      background-color: transparent;
+
+      .label {
+        opacity: 0;
+      }
+
+      .iconDummy {
+        opacity: 1;
+      }
+    }
+  }
+
+  .label {
+    opacity: 0;
+  }
 }

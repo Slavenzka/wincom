@@ -29,12 +29,7 @@ const FilterDetailed = ({
         Search by
         <IconSearch className={css.icon} />
       </span>
-      <ul
-        className={classnames(css.list, className)}
-        style={{
-          gridTemplateColumns: `repeat(${detailedList.length}, 1fr)`
-        }}
-      >
+      <ul className={classnames(css.list, className)}>
         { renderFilterItems() }
       </ul>
     </div>

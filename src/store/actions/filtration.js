@@ -73,7 +73,7 @@ export const resetFilters = ({primaryList, secondaryList, detailedList}) => {
       ? secondaryList.find(item => item.isDefault)
       : null
 
-    const defaultDetailed = detailedList.map(item => {
+    const defaultDetailed = detailedList ? detailedList.map(item => {
       switch (item.type) {
         case DetailedFilterTypes.INPUT:
           return {
@@ -94,14 +94,15 @@ export const resetFilters = ({primaryList, secondaryList, detailedList}) => {
             values: []
           }
       }
-    })
+    }) : null
 
     dispatch({
       type: RESET_FILTERS,
       payload: {
         activePrimary: defaultPrimary,
         activeSecondary: defaultSecondary,
-        detailedFilter: defaultDetailed
+        detailedFilter: defaultDetailed,
+        filteredData: null,
       }
     })
   }

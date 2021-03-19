@@ -1,31 +1,27 @@
 import { useEffect, useState } from 'react'
 import { LocalStorageAuthFields } from 'utils/const'
-import { useHistory } from 'react-router-dom'
-import { HOME_PAGE, LOGIN } from 'Pages/Routes'
+import { LOGIN } from 'Pages/Routes'
 import { useSelector } from 'react-redux'
 
-const useAuthCheck = () => {
-  const [isAuthorized, setAuthStatus] = useState(false)
+const useAuthCheck = (history) => {
   const storeAuthStatus = useSelector(store => store.auth.isAuthorized)
-  const history = useHistory()
+  const existingToken = localStorage.getItem(LocalStorageAuthFields.TOKEN)
+  const [isAuthorized, setAuthStatus] = useState(!!existingToken)
 
   useEffect(() => {
-    const existingToken = localStorage.getItem(LocalStorageAuthFields.TOKEN)
-
-    if (existingToken && storeAuthStatus) {
+    if (existingToken) {
       setAuthStatus(true)
-      history.push({
-        pathname: HOME_PAGE
-      })
     }
+  }, [existingToken])
 
-    if (existingToken && !storeAuthStatus) {
+  useEffect(() => {
+    if (!existingToken && !storeAuthStatus && isAuthorized) {
       setAuthStatus(false)
       history.push({
         pathname: LOGIN
       })
     }
-  }, [storeAuthStatus, history])
+  }, [history, existingToken, storeAuthStatus, isAuthorized])
 
   return isAuthorized
 }

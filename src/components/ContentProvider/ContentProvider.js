@@ -1,26 +1,29 @@
 import React from 'react'
-import css from './ContentProvider.module.scss'
-import classnames from 'classnames'
 import Preloader from 'components/Preloader/Preloader'
 
 const ContentProvider = ({
-  className,
-  data,
+  isDataFetched,
+  isDataFiltered,
   fetchingStatus = {},
-  children
+  children,
+  filters,
 }) => {
-  const {isLoading, isLoaded, isError} = fetchingStatus
+  const {isLoading} = fetchingStatus
 
-  if (!data && !isLoading && !isLoaded && !isError) {
-    return null
-  }
-
-  if (!data && isLoading) {
+  if (!isDataFetched && isLoading) {
     return <Preloader />
   }
 
+  if (isDataFetched && !isLoading) {
+    return (
+      <>
+        { filters }
+        { isDataFiltered && children }
+      </>
+    )
+  }
 
-
+  return null
 }
 
 export default ContentProvider

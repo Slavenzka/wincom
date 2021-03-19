@@ -11,7 +11,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: $colorBgMain;
-  overflow-y: scroll;
 
   .simplebar-scrollbar:before {
     position: absolute;
@@ -27,6 +26,15 @@ body {
   .simplebar-scrollbar.simplebar-visible:before {
     opacity: 1;
     transition: opacity 0s linear
+  }
+
+  .simplebar-track.simplebar-horizontal {
+    bottom: 0;
+
+    .simplebar-scrollbar:before {
+     height: 0.5rem;
+    }
+
   }
 
   .simplebar-track.simplebar-vertical {

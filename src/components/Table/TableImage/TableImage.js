@@ -10,6 +10,7 @@ const TableImage = ({
   altLabel = 'Vehicle image',
   isHovered,
 }) => {
+  console.log(url)
   return (
     <div
       className={classnames(css.wrapper, {
@@ -24,7 +25,7 @@ const TableImage = ({
       }
       <img
         className={classnames(css.image, className)}
-        src={url}
+        src={`data:image/jpg;base64, ${url}`}
         alt={altLabel}
       />
     </div>

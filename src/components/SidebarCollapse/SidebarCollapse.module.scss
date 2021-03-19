@@ -24,6 +24,7 @@
   padding: 0 $paddingGlobal;
   min-height: 8rem;
   width: 100%;
+  transition-duration: $transitionDuration;
 
   &:hover {
     .icon {
@@ -41,4 +42,24 @@
   width: 2rem;
   transform: rotate(180deg);
   transition-duration: $transitionDuration;
+}
+
+.label {
+  transition-duration: $transitionDuration;
+}
+
+.buttonCollapsed {
+  padding: 0;
+  justify-content: center;
+
+  .icon {
+    transform: rotate(0);
+  }
+
+  .label {
+    position: absolute;
+    opacity: 0;
+    left: 10rem;
+    //transform: translateX(6.5rem);
+  }
 }

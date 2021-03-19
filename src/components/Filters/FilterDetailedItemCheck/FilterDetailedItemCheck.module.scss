@@ -8,15 +8,16 @@
 .label {
   @include fontInfo(500, $colorFontDarkest);
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  grid-gap: 0.8rem;
   align-items: center;
   cursor: pointer;
   transition-duration: $transitionDuration;
 
   &::before {
     content: "";
-    display: inline-block;
-    margin-right: 0.8rem;
+    display: block;
     width: 1.6rem;
     height: 1.6rem;
     background-color: $colorBorderTable;
@@ -35,7 +36,7 @@
 
   .icon {
     position: absolute;
-    top: 0.4rem;
+    top: calc(50% - 1.2rem / 2);
     left: 0.2rem;
     width: 1.2rem;
     fill: $colorFontLightest;

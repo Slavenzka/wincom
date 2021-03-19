@@ -5,6 +5,7 @@ export {
 
 export {
   toggleModal,
+  toggleModalLoadingState,
   toggleSidebarCollapse,
 } from './ui'
 

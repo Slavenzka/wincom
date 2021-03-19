@@ -24,8 +24,9 @@
 .wrapper {
   display: grid;
   grid-template-rows: #{$headerMinHeight} auto;
-  animation-name: expandMenu;
-  animation-fill-mode: both;
+  grid-template-columns: 32.5rem 1fr;
+  animation-fill-mode: forwards;
+  animation-duration: $transitionDuration;
   min-height: 100vh;
 }
 

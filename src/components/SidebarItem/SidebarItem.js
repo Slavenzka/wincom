@@ -8,19 +8,24 @@ const SidebarItem = ({
   url,
   counter,
   tag = 'li',
-  icon
+  icon,
+  isCollapsed,
 }) => {
   const TagName = tag
 
   return (
     <TagName
-      className={classnames(css.wrapper)}
+      className={classnames(css.wrapper, {
+        [css.wrapperCollapsed]: isCollapsed
+      })}
     >
       <Link
         className={css.link}
         to={url}
       >
-        { icon || <span className={css.iconDummy} /> }
+        <span className={css.icon}>
+          { icon || <span className={css.iconDummy} /> }
+        </span>
         <span className={css.label}>
           { label }
         </span>

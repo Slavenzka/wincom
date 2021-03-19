@@ -37,6 +37,15 @@
   }
 }
 
+.triggerDisabled {
+  pointer-events: none;
+  opacity: 0.7;
+
+  &::before {
+    display: none;
+  }
+}
+
 .sublistWrapper {
   position: absolute;
   top: 100%;
@@ -69,7 +78,7 @@
 
   .content {
     padding-top: 1.2rem;
-    padding-bottom: 1.3rem;
+    //padding-bottom: 1.3rem;
   }
 }
 
@@ -79,6 +88,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-bottom: 1.3rem;
 }
 
 .subitem {

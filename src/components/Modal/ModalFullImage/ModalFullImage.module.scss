@@ -1,0 +1,12 @@
+@import "styles/variables";
+
+.preloader {
+  width: 30rem;
+}
+
+.image {
+  display: block;
+  max-width: 80vw;
+  max-height: 90vh;
+  object-fit: cover;
+}

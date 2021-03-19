@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import css from './FilterDetailedItem.module.scss'
 import classnames from 'classnames'
-import { checkIfNonEmptyArray, getObjPropertyViaString } from 'utils'
+import { checkIfNonEmptyArray, getDetailedItemLabel, getObjPropertyViaString } from 'utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDetailedFilteredValues } from 'store/actions'
 import { DetailedFilterTypes } from 'utils/const'
@@ -13,34 +13,24 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import FilterDetailedItemRange
   from 'components/Filters/FilterDetailedItemRange/FilterDetailedItemRange'
+import { getDataOptions } from 'utils/filter'
 
 const DETAILED_FILTER_MAX_QTY_WITHOUT_MANUAL_INPUT = 4
+const MIN_DETAILED_FILTER_OPTIONS_QTY = 1
 
 const getLimitValues = (data, fieldName) => {
-  return data.reduce((total, item) => {
+  const counter = {}
+
+  data.forEach(item => {
     const itemValue = getObjPropertyViaString(item, fieldName)
 
-    if (total.min === 0 && itemValue > 0) {
-      total.min = itemValue
-    }
-
-    if (total.min !== 0 && itemValue < total.min) {
-      total.min = itemValue
-    }
-
-    if (total.max === Infinity) {
-      total.max = itemValue
-    }
-
-    if (total.max !== Infinity && itemValue > total.max) {
-      total.max = itemValue
-    }
-
-    return total
-  }, {
-    min: 0,
-    max: Infinity
+    counter[itemValue] = counter.hasOwnProperty(itemValue) ? counter[itemValue] + 1 : 1
   })
+
+  return {
+    min: Math.min.apply(null, Object.keys(counter)),
+    max: Math.max.apply(null, Object.keys(counter)),
+  }
 }
 
 const FilterDetailedItem = ({
@@ -61,6 +51,13 @@ const FilterDetailedItem = ({
 
   const isListType = type === DetailedFilterTypes.LIST
   const isRangeType = type === DetailedFilterTypes.RANGE
+
+  const list = getDataOptions(secondaryFilteredData, field)
+  const isFilterDisabled = list.length <= MIN_DETAILED_FILTER_OPTIONS_QTY
+
+  const listManualFiltered = `${manualInput}`.length === 0
+    ? list
+    : list.filter(item => item.toUpperCase().indexOf(manualInput.toUpperCase()) >= 0)
 
   // move closing logic to separate hook useCloseModal
   const handleClickOutside = useCallback(evt => {
@@ -97,16 +94,6 @@ const FilterDetailedItem = ({
     observer.forEach(fn => fn())
   }
 
-  const getDataOptions = field => {
-    const list = secondaryFilteredData.reduce((total, item) => {
-      const fieldValue = getObjPropertyViaString(item, field)
-      total.push(fieldValue)
-      return total
-    }, [])
-
-    return [...new Set(list)]
-  }
-
   const handleUpdateFilter = useCallback((field, type, value) => {
     dispatch(setDetailedFilteredValues({
       field,
@@ -139,9 +126,9 @@ const FilterDetailedItem = ({
         return (
           <FilterDetailedItemRange
             minValue={min}
-            actualMin={value?.from || min}
+            actualMin={value.from || min}
             maxValue={max}
-            actualMax={value?.to || max}
+            actualMax={value.to || max}
             currencySymbol={currencySymbol}
             onChange={handleUpdateRangeValue}
           />
@@ -171,12 +158,6 @@ const FilterDetailedItem = ({
   }
 
   const renderOptionsList = (field, type) => {
-    const list = getDataOptions(field)
-
-    const listManualFiltered = `${manualInput}`.length === 0
-      ? list
-      : list.filter(item => item.toUpperCase().indexOf(manualInput.toUpperCase()) >= 0)
-
     const items = listManualFiltered.map((item, index) => {
     // special flag to render only one input or range
     const isRenderRequired = isOpen && (type === DetailedFilterTypes.LIST || index === 0)
@@ -190,9 +171,7 @@ const FilterDetailedItem = ({
         : null
     })
 
-    const itemLabel = checkIfNonEmptyArray(values)
-      ? `${values.length} selected`
-      : ``
+    const itemLabel = getDetailedItemLabel({value, values})
 
     return (
       <div
@@ -260,13 +239,14 @@ const FilterDetailedItem = ({
           handleClickTrigger()
         }}
         className={classnames(css.trigger, {
+          [css.triggerDisabled]: isFilterDisabled,
           [css.triggerOpen]: isOpen
         })}
         type='button'
       >
         { label }
       </button>
-      { renderOptionsList(field, type) }
+      { !isFilterDisabled && renderOptionsList(field, type) }
     </div>
   )
 }

@@ -16,12 +16,15 @@ const Filters = ({
   const activeDetailed = useSelector(store => store.filter.detailedFilter)
   const dispatch = useDispatch()
 
+
   const handleClickPrimary = evt => dispatch(setPrimaryFilterValue(evt))
   const handleClickSecondary = evt => dispatch(setSecondaryFilterValue(evt))
 
   const {primary, secondary, detailed} = filter
 
   useFilterData(defaultData, filter)
+
+  if (!filteredData) return null
 
   return filteredData
     ? (

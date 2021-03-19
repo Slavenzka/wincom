@@ -1,23 +1,19 @@
 import React from 'react'
 
 const IconSpinner = ({ className }) => (
-  <svg className={className} viewBox="0 0 128 128">
+  <svg xmlns='http://www.w3.org/2000/svg' className={className} viewBox='0 0 128 128'>
     <g>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='1'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.2' transform='rotate(30 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.2' transform='rotate(60 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.2' transform='rotate(90 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.2' transform='rotate(120 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.3' transform='rotate(150 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.4' transform='rotate(180 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.5' transform='rotate(210 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.6' transform='rotate(240 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.7' transform='rotate(270 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.8' transform='rotate(300 64 64)'/>
-      <path d='M59.6 0h8v40h-8V0z' fillOpacity='0.9' transform='rotate(330 64 64)'/>
-      <animateTransform attributeName='transform' type='rotate' values='0 64 64;30 64 64;60 64 64;90 64 64;120 64 64;150 64 64;180 64 64;210 64 64;240 64 64;270 64 64;300 64 64;330 64 64' calcMode='discrete' dur='1080ms' repeatCount='indefinite' />
+      <circle cx='16' cy='64' r='16' />
+      <circle cx='16' cy='64' r='14.344' transform='rotate(45 64 64)'/>
+      <circle cx='16' cy='64' r='12.531' transform='rotate(90 64 64)'/>
+      <circle cx='16' cy='64' r='10.75' transform='rotate(135 64 64)'/>
+      <circle cx='16' cy='64' r='10.063' transform='rotate(180 64 64)'/>
+      <circle cx='16' cy='64' r='8.063' transform='rotate(225 64 64)'/>
+      <circle cx='16' cy='64' r='6.438' transform='rotate(270 64 64)'/>
+      <circle cx='16' cy='64' r='5.375' transform='rotate(315 64 64)'/>
+      <animateTransform attributeName='transform' type='rotate' values='0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64' calcMode='discrete' dur='720ms' repeatCount='indefinite' />
     </g>
-</svg>
+  </svg>
 )
 
 export default IconSpinner

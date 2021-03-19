@@ -6,6 +6,8 @@
   flex-direction: column;
   padding-top: $headerMinHeight;
   background-color: $colorBgSidebar;
+  transition-duration: $transitionDuration;
+  overflow: hidden;
 }
 
 .list {
@@ -13,6 +15,9 @@
 
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: max-content;
+  transition-delay: 0.1s;
 }
 
 .button {

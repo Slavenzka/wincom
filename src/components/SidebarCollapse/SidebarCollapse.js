@@ -3,19 +3,21 @@ import css from './SidebarCollapse.module.scss'
 import classnames from 'classnames'
 import Button from 'components/Button/Button'
 import IconArrowSidebar from 'assets/icons/IconArrowSidebar'
-import { useSelector } from 'react-redux'
 
-const SidebarCollapse = ({onClick, className}) => {
-  const isSidebarCollapsed = useSelector(store => store.ui.isSidebarCollapsed)
-  const label = isSidebarCollapsed ? '' : 'Close'
+const SidebarCollapse = ({onClick, className, isCollapsed}) => {
+  const label = 'Collapse'
 
   return (
     <Button
-      className={classnames(css.button, className)}
+      className={classnames(css.button, className, {
+        [css.buttonCollapsed]: isCollapsed,
+      })}
       onClick={onClick}
     >
       <IconArrowSidebar className={css.icon} />
-      { label }
+      <span className={css.label}>
+        { label }
+      </span>
     </Button>
   )
 }

@@ -12,6 +12,13 @@ const useFilterDefaults = ({primaryList = [], secondaryList = [], detailedList =
       isMounted.current = true
     }
   }, [dispatch, primaryList, secondaryList, detailedList])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetFilters({primaryList: null, secondaryList: null, detailedList: null}))
+      isMounted.current = false
+    }
+  }, [])
 }
 
 export default useFilterDefaults

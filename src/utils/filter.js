@@ -5,7 +5,10 @@ export const isDetailedFilterEmpty = (filter) => filter
   .reduce((total, item) => {
     const {value, values} = item
 
-    if (checkIfNonEmptyArray(values) || value?.from || value?.to || (typeof value !== 'object' && value)) {
+    const isFromExisting = value && value.hasOwnProperty('from') && value.from !== null && !Number.isNaN(+value.from)
+    const isToExisting = value && value.hasOwnProperty('to') && value.to !== null && !Number.isNaN(+value.to)
+
+    if (checkIfNonEmptyArray(values) || isFromExisting || isToExisting || (typeof value !== 'object' && value)) {
       total.push(item)
     }
 
@@ -20,20 +23,23 @@ const checkItemFiltrationStatus = (dataItem, filter) => {
 
     switch (type) {
       case DetailedFilterTypes.RANGE:
-        if (value && ((value?.from && !Number.isNaN(+value?.from)) || (value?.to && !Number.isNaN(+value?.to)))) {
-          if (value?.from && value?.to && +value?.from === +value?.to && +value?.from !== +dataItemValue) {
+        const isFromExisting = value.hasOwnProperty('from') && value.from !== null && !Number.isNaN(+value.from)
+        const isToExisting = value.hasOwnProperty('to') && value.to !== null && !Number.isNaN(+value.to)
+
+        if (value && (isFromExisting || isToExisting)) {
+          if (isFromExisting && isToExisting && +value.from === +value.to && +value.from !== +dataItemValue) {
             total = false
           }
 
-          if (value?.from && value?.to && +value?.from !== +value?.to && (+value?.from > +dataItemValue || +value?.to < +dataItemValue)) {
+          if (isFromExisting && isToExisting && +value.from !== +value.to && (+value.from > +dataItemValue || +value.to < +dataItemValue)) {
             total = false
           }
 
-          if (value?.from && !value?.to && +value?.from > +dataItemValue) {
+          if (isFromExisting && !isToExisting && +value.from > +dataItemValue) {
             total = false
           }
 
-          if (!value?.from && value?.to && +value?.to < +dataItemValue) {
+          if (!isFromExisting && isToExisting && +value.to < +dataItemValue) {
             total = false
           }
         }
@@ -55,4 +61,14 @@ const checkItemFiltrationStatus = (dataItem, filter) => {
 
 export const getDetailedFilteredData = (raw, filter) => {
   return raw.filter(item => checkItemFiltrationStatus(item, filter))
+}
+
+export const getDataOptions = (secondaryFilteredData, field) => {
+  const list = secondaryFilteredData.reduce((total, item) => {
+    const fieldValue = getObjPropertyViaString(item, field)
+    total.push(fieldValue)
+    return total
+  }, [])
+
+  return [...new Set(list)]
 }
