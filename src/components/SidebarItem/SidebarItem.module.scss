@@ -2,7 +2,19 @@
 @import "styles/mixins";
 
 .wrapper {
-  border-bottom: 1px solid $colorBorderSidebar;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $colorBorderSidebar;
+    transition-duration: $transitionDuration;
+  }
+  //border-bottom: 1px solid $colorBorderSidebar;
 }
 
 .link {
@@ -15,6 +27,10 @@
   &:hover {
     background-color: $colorBgSidebarActive;
 
+    .icon {
+      opacity: 1;
+    }
+
     .label {
       font-weight: 900;
       opacity: 1;
@@ -24,6 +40,8 @@
 
 .icon {
   display: block;
+  transition-duration: $transitionDuration;
+  opacity: 0.2;
 }
 
 .iconDummy {
@@ -32,8 +50,6 @@
   height: 2.5rem;
   border-radius: 50%;
   background-color: $colorFontLightest;
-  transition-duration: $transitionDuration;
-  opacity: 0.2;
 }
 
 .label {
@@ -52,6 +68,10 @@
 }
 
 .wrapperCollapsed {
+  &::before {
+    width: 6.8rem;
+  }
+
   .link {
     padding-right: 2rem;
     padding-left: 2rem;

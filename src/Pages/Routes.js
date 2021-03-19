@@ -8,6 +8,12 @@ import Customers from 'Pages/Customers/Customers'
 import PaymentSettings from 'Pages/PaymentSettings/PaymentSettings'
 import Drivers from 'Pages/Drivers/Drivers'
 import DriverParkDetails from 'Pages/DriverParkDetails/DriverParkDetails'
+import IconTrust from 'assets/icons/IconTrust'
+import IconTruck from 'assets/icons/IconTruck'
+import IconOrders from 'assets/icons/IconOrders'
+import IconCustomers from 'assets/icons/IconCustomers'
+import IconDrivers from 'assets/icons/IconDrivers'
+import IconPayments from 'assets/icons/IconPayments'
 
 export const REGISTER = '/register'
 export const LOGIN = '/login'
@@ -24,24 +30,29 @@ export const SIDEBAR_LIST = [
   {
     label: 'Car park',
     url: '/',
-    counter: 111
+    counter: 111,
+    icon: <IconTruck className={ `iconSidebar` } />
   },
   {
     label: 'Orders',
     url: ORDERS,
     counter: 6,
+    icon: <IconOrders className={ `iconSidebar` } />
   },
   {
     label: 'Customers',
     url: CUSTOMERS,
+    icon: <IconCustomers className={ `iconSidebar` } />
   },
   {
     label: 'Carriers',
     url: DRIVERS,
+    icon: <IconDrivers className={ `iconSidebar` } />
   },
   {
     label: 'Payment settings',
     url: PAYMENT_SETTINGS,
+    icon: <IconPayments className={ `iconSidebar` } />
   },
 ]
 
