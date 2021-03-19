@@ -11,14 +11,20 @@
 .list {
   @include resetList;
 
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  display: flex;
+  align-items: center;
   padding: 2.2rem 2.5rem 2.2rem 3.5rem;
   width: 100%;
   background-color: $colorBgTabs;
   border-top-right-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
   border-bottom-left-radius: 0.8rem;
+}
+
+.item {
+  &:not(:first-child) {
+    margin-left: 7rem;
+  }
 }
 
 .label {

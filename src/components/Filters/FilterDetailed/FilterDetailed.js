@@ -10,9 +10,10 @@ const FilterDetailed = ({
 }) => {
   if (!detailedList || !Array.isArray(detailedList) || detailedList.length === 0) return null
 
+  const MAX_DETAILED_FILTER_ITEMS_QTY = 6
   const filterObserver = []
 
-  const renderFilterItems = () => detailedList.map((item, index) => {
+  const renderFilterItems = () => detailedList.slice(0, MAX_DETAILED_FILTER_ITEMS_QTY).map((item, index) => {
     return (
       <li className={css.item} key={index}>
         <FilterDetailedItem
