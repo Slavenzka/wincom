@@ -3,28 +3,40 @@ import css from './CarDetails.module.scss'
 import ContentHeader from 'components/ContentHeader/ContentHeader'
 import { HOME_PAGE } from 'Pages/Routes'
 import DetailsForm from 'components/DetailsForm/DetailsForm'
-import { CAR_PARK_DATA } from 'utils/data'
 import FormInfo from 'components/FormInfo/FormInfo'
 import { SERVICE_TYPES_OPTIONS } from 'utils/const'
 import ImageInput from 'components/ImageInput/ImageInput'
+import useDataFetch from 'hooks/useDataFetch'
+import ContentProvider from 'components/ContentProvider/ContentProvider'
+import { carParkAdapter } from 'utils/adapters'
+import ButtonFullImage from 'components/ButtonFullImage/ButtonFullImage'
+import { useDispatch } from 'react-redux'
+import { toggleModal } from 'store/actions'
+import ModalFullImage from 'components/Modal/ModalFullImage/ModalFullImage'
 
 const CarDetails = ({match}) => {
   const carID = match?.params?.id
-  const data = CAR_PARK_DATA.find(item => item.id === carID)
+  const dispatch = useDispatch()
 
-  const {status, freePlaces, payment} = data
+  const {data, fetchingStatus} = useDataFetch({
+    url: `/api/admin/transport/${carID}`,
+    options: {
+      adapter: carParkAdapter
+    }
+  })
+
   const carInfo = [
     {
       key: 'Status',
-      value: status,
+      value: data?.status || '',
     },
     {
       key: 'Free places',
-      value: freePlaces,
+      value: data?.freePlaces || '',
     },
     {
       key: 'Payment',
-      value: payment,
+      value: data?.payment || '',
     },
   ]
 
@@ -42,7 +54,7 @@ const CarDetails = ({match}) => {
       type: 'select',
       label: 'Type',
       name: `car-details-type`,
-      defaultValue: SERVICE_TYPES_OPTIONS.find(item => item.value.toUpperCase() === data?.type.toUpperCase()),
+      defaultValue: data?.type ? SERVICE_TYPES_OPTIONS.find(item => item.value.toUpperCase() === data.type.toUpperCase()) : '',
       options: SERVICE_TYPES_OPTIONS,
       validation: {
         required: true,
@@ -89,31 +101,56 @@ const CarDetails = ({match}) => {
     )
   }
 
+  const handleClickPreview = () => {
+    dispatch(toggleModal((
+      <ModalFullImage
+        url={ `/api/admin/transport/${carID}/searchFullPhoto/${data.imgType}` }
+      />
+    ), {
+      isContentOnly: true,
+    }))
+  }
+
   return (
     <ContentHeader
+      className={css.wrapper}
       title='Car details'
       backlink={HOME_PAGE}
     >
-      <DetailsForm
-        data={data}
-        inputsList={formItems(data)}
-        infoBlock={(
-          <FormInfo
-            list={carInfo}
-            auxBlock={renderShowOrdersButton()}
-          />
-        )}
+      <ContentProvider
+        fetchingStatus={fetchingStatus}
+        isDataFetched={!!data}
+        isDataFiltered
       >
-        {register => (
-          <ImageInput
-            className={css.image}
-            register={register}
-            images={data?.img}
-            label='Select photo to upload'
-            name='car-details-photo'
-          />
-        )}
-      </DetailsForm>
+        <DetailsForm
+          data={data}
+          inputsList={formItems(data)}
+          infoBlock={(
+            <FormInfo
+              list={carInfo}
+              auxBlock={renderShowOrdersButton()}
+            />
+          )}
+        >
+          {register => (
+            <>
+              <ButtonFullImage
+                image={data.img}
+                onClick={handleClickPreview}
+                className={css.image}
+                altLabel={ `${data.carNumber.value} - ${data.carNumber.key}` }
+              />
+              <ImageInput
+                className={css.inputImage}
+                register={register}
+                images={data?.img}
+                label='Select photo to upload'
+                name='car-details-photo'
+              />
+            </>
+          )}
+        </DetailsForm>
+      </ContentProvider>
     </ContentHeader>
   )
 }

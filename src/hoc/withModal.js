@@ -20,6 +20,12 @@ const withModal = WrappedComponent => {
       }
     }, [dispatch])
 
+    const handleClickOutside = useCallback(evt => {
+      if (modalRef.current && evt.target === modalRef.current) {
+        dispatch(toggleModal(null))
+      }
+    }, [dispatch])
+
     const handleCloseModal = () => dispatch(toggleModal(null))
 
     useEffect(() => {
@@ -34,11 +40,13 @@ const withModal = WrappedComponent => {
 
     useEffect(() => {
       document.addEventListener('keydown', handleEscPress)
+      document.addEventListener('click', handleClickOutside)
 
       return () => {
         document.removeEventListener('keydown', handleEscPress)
+        document.removeEventListener('click', handleClickOutside)
       }
-    }, [handleEscPress])
+    }, [handleEscPress, handleClickOutside])
 
     return (
       <>

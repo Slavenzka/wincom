@@ -18,7 +18,7 @@ const useFilterDefaults = ({primaryList = [], secondaryList = [], detailedList =
       dispatch(resetFilters({primaryList: null, secondaryList: null, detailedList: null}))
       isMounted.current = false
     }
-  }, [])
+  }, [dispatch])
 }
 
 export default useFilterDefaults

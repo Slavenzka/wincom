@@ -1,0 +1,74 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.list {
+  @include resetList;
+
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 1rem;
+  padding: 1.5rem 1.8rem;
+  width: 24.6rem;
+  z-index: 2;
+  background-color: $colorBgLightest;
+  box-shadow: 0 0.2rem 0.4rem $colorShadowRegular;
+}
+
+.buttonVisibility {
+  @include resetButton;
+  @include fontButton(600, $colorFontLightest);
+
+  position: relative;
+  padding-right: 2rem;
+  height: 5rem;
+  text-transform: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 0.7rem / 2);
+    right: 0;
+    border-bottom: 0.7rem solid $colorFontLightest;
+    border-right: 0.6rem solid transparent;
+    border-left: 0.6rem solid transparent;
+    transition-duration: $transitionDuration;
+  }
+}
+
+.buttonVisibilityOpen {
+  &::before {
+    transform: rotate(180deg);
+  }
+}
+
+.buttonSelect {
+  @include resetButton;
+  @include fontLegend(500, $colorFontItemPassive);
+
+  line-height: 1.4rem;
+  transition-duration: $transitionDuration;
+
+  &:hover {
+    color: $colorFontDarkest;
+  }
+}
+
+.buttonSelectActive {
+  position: relative;
+  color: $colorFontLightest;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.4rem;
+    left: -1.2rem;
+    width: calc(100% + 1.2rem * 2);
+    height: calc(100% + 0.5rem * 2);
+    background-color: $colorBgHighlight;
+    border-radius: 1.2rem;
+    z-index: -1;
+  }
+}

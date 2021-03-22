@@ -1,6 +1,7 @@
 import React from 'react'
 import css from './FormInfo.module.scss'
 import classnames from 'classnames'
+import { checkIfNumber } from 'utils'
 
 const FormInfo = ({
   className,
@@ -10,19 +11,22 @@ const FormInfo = ({
 }) => {
   if (!list || !Array.isArray(list) || list.length === 0) return null
 
-  const renderItems = () => list.map(({key, value}, index) => (
-    <div
-      className={css.item}
-      key={index}
-    >
-      <dt className={css.key}>
-        { `${key}:` }
-      </dt>
-      <dd className={css.value}>
-        { value }
-      </dd>
-    </div>
-  ))
+  const renderItems = () => list.map(({key, value}, index) => !!value || checkIfNumber(value)
+    ? (
+      <div
+        className={css.item}
+        key={index}
+      >
+        <dt className={css.key}>
+          { `${key}:` }
+        </dt>
+        <dd className={css.value}>
+          { value }
+        </dd>
+      </div>
+    )
+    : null
+  )
 
   return (
     <div className={classnames(css.wrapper, className)}>

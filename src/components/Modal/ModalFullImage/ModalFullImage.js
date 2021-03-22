@@ -18,7 +18,7 @@ const ModalFullImage = ({
     if (!isLoading && (isLoaded || isError)) {
       dispatch(toggleModalLoadingState(false))
     }
-  }, [isLoading])
+  }, [isLoading, isLoaded, isError, dispatch])
 
   if (!data && !isLoading) return null
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 import { useDispatch } from 'react-redux'
-import SelectDropdown from 'components/SelectDropdown/SelectDropdown'
+import useYearMonthSelector from 'hooks/useYearMonthSelector'
 
 const Datepicker = ({
   className,
@@ -107,7 +107,6 @@ const Datepicker = ({
         }))
         handleCloseCalendar()
       }
-      // dispatch(setCalendarData(day, day, null))
     } else if (isSelectingFirstDay(from, to, day)) {
       updateCalendarState(prevState => ({
         ...prevState,
@@ -115,7 +114,6 @@ const Datepicker = ({
         to: null,
         enteredTo: null
       }))
-      // dispatch(setCalendarData(day, null, null))
     } else {
       updateCalendarState(prevState => ({
         ...prevState,
@@ -123,7 +121,6 @@ const Datepicker = ({
         to: day,
         enteredTo: day
       }))
-      // dispatch(setCalendarData(from, day, day))
     }
   }
 
@@ -139,7 +136,6 @@ const Datepicker = ({
   }
 
   const handleResetClick = useCallback(() => {
-    // dispatch(resetCalendarFilter(date, date, null))
     updateCalendarState({
         from: defaultDate,
         to: null,
@@ -160,86 +156,11 @@ const Datepicker = ({
     !isCalendarAlwaysOpen && setCalendarOpen(state => !state)
   }
 
-  const YearMonthSelector = ({ date, onChange }) => {
-    const fromMonth = new Date(2021, calendarState?.from ? calendarState.from.getMonth() : new Date().getMonth())
-    const toMonth = new Date(2021 + 10, 11)
-
-    const monthOptions = localization.months.map(item => ({
-      label: item,
-      value: item
-    }))
-
-    const years = [];
-    for (let i = fromMonth.getFullYear() - 1; i <= toMonth.getFullYear(); i += 1) {
-      years.push(i);
-    }
-
-    const yearOptions = years.map(item => ({
-      label: item,
-      value: item
-    }))
-
-    const handleChange = function handleChange(evt) {
-      const updatedObject = {
-        year: {
-          label: date.getFullYear(),
-          value: date.getFullYear()
-        },
-        month: {
-          label: localization.months[date.getMonth()],
-          value: localization.months[date.getMonth()],
-        },
-        ...evt
-      }
-      const { year, month } = updatedObject
-      onChange(new Date(year.value, localization.months.findIndex(item => item === month.value)));
-    }
-
-    return (
-      <div className={'DayPicker-Caption'}>
-        <div className={css.selectWrapper}>
-          <SelectDropdown
-            className={classnames(css.select, css.selectMonth)}
-            onChange={evt => handleChange({
-              month: evt
-            })}
-            value={{
-              label: localization.months[date.getMonth()],
-              value: localization.months[date.getMonth()],
-            }}
-            options={monthOptions}
-            dropdownComponent={<span className={css.arrow} />}
-          />
-          <SelectDropdown
-            className={classnames(css.select, css.selectYear)}
-            onChange={evt => handleChange({
-              year: evt
-            })}
-            value={{
-              label: date.getFullYear(),
-              value: date.getFullYear()
-            }}
-            options={yearOptions}
-            dropdownComponent={<span className={css.arrow} />}
-          />
-        </div>
-      </div>
-    )
-  }
-
-  const handleYearMonthChange = month => {
-    updateCalendarState(prevState => {
-      const selectedYear = month.getFullYear()
-      const selectedMonth = month.getMonth()
-
-      return {
-        ...prevState,
-        from: new Date(selectedYear, selectedMonth, calendarState?.from ? calendarState.from.getDate() : new Date().getDate()),
-        to: new Date(selectedYear, selectedMonth, calendarState?.to ? calendarState.to.getDate() : new Date().getDate()),
-        month,
-      }
-    })
-  }
+  const yearMonthSelector = useYearMonthSelector({
+    localization,
+    calendarState,
+    updateCalendarState,
+  })
 
   useEffect(() => {
     if (isSingleDaySelection && !calendarState.from) {
@@ -250,8 +171,6 @@ const Datepicker = ({
         to: date,
         enteredTo: null
       }))
-      // dispatch(setCalendarData(date, date, null))
-      // dispatch(applyFiltration())
     }
 
     if (isSingleDaySelection && isSelectedOnDayClick && calendarState.from) {
@@ -262,12 +181,6 @@ const Datepicker = ({
   useEffect(() => {
     handleResetClick()
   }, [externalResetRef, handleResetClick])
-
-  useEffect(() => {
-    if (defaultDate) {
-      // dispatch(setCalendarData(defaultDate, defaultDate, null))
-    }
-  }, [defaultDate, dispatch])
 
   const handleClickOutside = useCallback(evt => {
     if (calendarWrapperRef.current === evt.target) {
@@ -319,13 +232,7 @@ const Datepicker = ({
             locale={localization.locale}
             month={calendarState.month}
             firstDayOfWeek={0}
-            captionElement={({ date, localeUtils }) => (
-              <YearMonthSelector
-                date={date}
-                localeUtils={localeUtils}
-                onChange={handleYearMonthChange}
-              />
-            )}
+            captionElement={({ date }) => yearMonthSelector(date) }
             navbarElement={() => null}
           />
           {!isSelectedOnDayClick &&
@@ -333,8 +240,6 @@ const Datepicker = ({
               <button
                 className={classnames(css.btnControl, css.btnControlApply)}
                 onClick={() => {
-                  // dispatch(setCalendarData(from, to, enteredTo))
-                  // dispatch(applyFiltration())
                   handleClickApply()
                   onDateSelect(calendarState)
                   handleCloseCalendar()

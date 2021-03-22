@@ -133,7 +133,7 @@ export const getObjPropertyViaString = (object, string) => {
 }
 
 export const checkIfNonEmptyArray = value => value && Array.isArray(value) && value.length > 0
-export const checkIfNumber = value => value !== null && !Number.isNaN(value)
+export const checkIfNumber = value => value !== null && value !== undefined && value !== '' && !Number.isNaN(+value)
 
 export const getDetailedItemLabel = ({value, values}) => {
   if (checkIfNonEmptyArray(values)) {

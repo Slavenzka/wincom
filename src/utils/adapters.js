@@ -1,5 +1,5 @@
 export const carParkAdapter = data => {
-  return data.map(({
+  const adaptDataItem = ({
     id,
     licencePlate,
     model,
@@ -10,22 +10,25 @@ export const carParkAdapter = data => {
     carPlaces,
     freeCarPlaces,
     vehicleThumbnail,
-  }) => {
-    return {
-      id,
-      img: vehicleThumbnail.image,
-      isPublished: approved,
-      owner: towTruckOwner,
-      carNumber: {
-        key: licencePlate,
-        value: model,
-      },
-      type: carriageType,
-      places: carPlaces,
-      status,
-      freePlaces: freeCarPlaces,
-    }
+  }) => ({
+    id,
+    img: vehicleThumbnail.image,
+    imgType: vehicleThumbnail.photoType,
+    isPublished: approved,
+    owner: towTruckOwner,
+    carNumber: {
+      key: licencePlate,
+      value: model,
+    },
+    type: carriageType,
+    places: carPlaces,
+    status,
+    freePlaces: freeCarPlaces,
   })
+
+  return Array.isArray(data)
+    ? data.map(adaptDataItem)
+    : adaptDataItem(data)
 }
 
 export const customersAdapter = data => {
@@ -77,4 +80,49 @@ export const carriersAdapter = data => {
       },
     }
   })
+}
+
+export const ordersAdapter = data => {
+  const adaptOrderItem = ({
+    id,
+    deliveryFromDate,
+    deliveryToDate,
+    trustedClient,
+    currency,
+    amount,
+    status,
+    paymentStatus,
+  }) => ({
+    id,
+    date: {
+      from: new Date(deliveryFromDate).getTime(),
+      to: new Date(deliveryToDate).getTime(),
+    },
+    isTrusted: trustedClient,
+    payment: {
+      currency,
+      value: amount,
+    },
+    orderStatus: {
+      key: 'loaded',
+      value: 'waiting for bill'
+    },
+    transportDetails: {
+      key: 'WINCOM',
+      value: 'Comfort'
+    },
+    places: {
+      loaded: 1,
+    },
+    carNumber: {
+      key: 'HU788uu',
+      value: 'Audi'
+    },
+    clientName: 'Old McFarth',
+    info: 'Additional info block'
+  })
+
+  return Array.isArray(data)
+    ? data.map(adaptOrderItem)
+    : adaptOrderItem(data)
 }
