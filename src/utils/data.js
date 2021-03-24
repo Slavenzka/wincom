@@ -245,15 +245,19 @@ export const CAR_PARK_COLUMNS = [
 
 export const ORDERS_COLUMNS = [
   {
-    label: 'Date',
-    value: 'date'
+    label: 'Route',
+    value: 'route'
   },
   {
-    label: 'Trusted Client',
-    value: 'isTrusted'
+    label: 'Order Date',
+    value: 'dateTime'
   },
   {
-    label: 'Payment',
+    label: 'Delivery Date',
+    value: 'dateRange'
+  },
+  {
+    label: 'Price',
     value: 'payment'
   },
   {
@@ -269,12 +273,8 @@ export const ORDERS_COLUMNS = [
     value: 'places'
   },
   {
-    label: 'Car Number',
-    value: 'carNumber'
-  },
-  {
-    label: 'Client Name',
-    value: 'clientName'
+    label: 'Payment',
+    value: 'paymentStatus'
   },
 ]
 

@@ -3,6 +3,7 @@ import css from './TableRow.module.scss'
 import classnames from 'classnames'
 import TableCell from 'components/Table/TableCell/TableCell'
 import useMouseOver from 'hooks/useMouseOver'
+import { PaymentStatuses } from 'utils/const'
 
 const TableRow = ({
   className,
@@ -17,6 +18,8 @@ const TableRow = ({
   const isHovered = useMouseOver({
     node: rowRef
   })
+
+  const isRowHighlightedWarning = rowData?.paymentStatus === PaymentStatuses.OVERDUE
 
   const renderCells = () => rowTemplate.map(({value}, index) => (
     <React.Fragment key={`${value} - ${index}`}>
@@ -34,7 +37,8 @@ const TableRow = ({
     <div
       className={classnames(css.wrapper, columnsClass, className, {
        [css.wrapperOdd]: isOdd,
-       [css.wrapperHoverable]: isHovered && props?.isRowClickable
+       [css.wrapperHoverable]: isHovered && props?.isRowClickable,
+       [css.wrapperWarning]: isRowHighlightedWarning
       })}
       ref={setRowRef}
     >

@@ -123,7 +123,7 @@ export const validatePhone = () => ({
   }
 })
 
-export const getObjPropertyViaString = (object, string) => {
+export const getObjPropertyViaString = (object = {}, string) => {
   const stringArray = string.split('.')
 
   return stringArray.reduce((total, item) => {

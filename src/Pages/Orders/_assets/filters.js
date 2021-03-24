@@ -6,14 +6,19 @@ export const filterOrders = {
   },
   detailed: [
     {
-      label: 'Payment',
+      label: 'Route',
+      field: 'route',
+      type: DetailedFilterTypes.LIST
+    },
+    {
+      label: 'Price',
       field: 'payment.value',
       type: DetailedFilterTypes.RANGE,
       currencySymbol: `&euro;`
     },
     {
       label: 'Status',
-      field: 'orderStatus.key',
+      field: 'orderStatus',
       type: DetailedFilterTypes.LIST,
     },
     {
@@ -27,14 +32,9 @@ export const filterOrders = {
       type: DetailedFilterTypes.RANGE,
     },
     {
-      label: 'Car Number',
-      field: 'carNumber.key',
+      label: 'Payment',
+      field: 'paymentStatus',
       type: DetailedFilterTypes.LIST,
-    },
-    {
-      label: 'Customer name',
-      field: 'clientName',
-      type: DetailedFilterTypes.LIST
     },
   ]
 }

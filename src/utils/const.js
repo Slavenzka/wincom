@@ -53,6 +53,10 @@ export const TableCellTypes = {
     values: ['date'],
     type: 'date'
   },
+  DATE_RANGE: {
+    values: ['dateRange'],
+    type: 'dateRange'
+  },
   PRICE: {
     values: ['payment'],
     type: 'funds'
@@ -60,6 +64,10 @@ export const TableCellTypes = {
   DELIVERY_STATUS: {
     values: ['orderStatus'],
     type: 'deliveryStatus'
+  },
+  PAYMENT_STATUS: {
+    values: ['paymentStatus'],
+    type: 'paymentStatus'
   },
   CLIENT_STATUS: {
     values: ['isTrusted'],
@@ -88,6 +96,10 @@ export const TableCellTypes = {
   LINK: {
     values: ['cars'],
     type: 'link'
+  },
+  ROUTE: {
+    values: ['route'],
+    type: 'route'
   }
 }
 
@@ -137,14 +149,17 @@ export const OrderStatuses = {
   STARTED: {
     values: [`loaded`],
     class: `warning`
+  },
+  DEFAULT: {
+    values: ['new'],
+    class: 'default'
   }
 }
 
 export const PaymentStatuses = {
-  WAITING_FOR_BILL: {
-    values: ['waiting for bill'],
-    color: 'rgb(236, 140, 29)'
-  }
+  UNPAID: 'UNPAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
 }
 
 export const CarOrderTypes = [

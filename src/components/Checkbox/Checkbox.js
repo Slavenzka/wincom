@@ -6,7 +6,7 @@ const Checkbox = ({
   className,
   name,
   checked,
-  register = () => {},
+  label,
   ...props
 }) => {
   const itemID = `checkbox - ${name}`
@@ -15,16 +15,17 @@ const Checkbox = ({
     <span className={classnames(css.wrapper, className)}>
       <label
         className={classnames(css.label, {
-          [css.labelChecked]: checked
+          [css.labelChecked]: checked,
+          [css.labelContent]: !!label
         })}
         htmlFor={itemID}
       >
+        { label }
         <input
           className={'visuallyHidden'}
           type='checkbox'
           id={itemID}
           checked={checked}
-          ref={register}
           {...props}
         />
       </label>

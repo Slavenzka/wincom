@@ -37,26 +37,19 @@ const Orders = ({history}) => {
         title='Orders'
         controls={ <DateRangePicker /> }
       >
-        <ContentProvider
-          isDataFetched={!!data}
-          isDataFiltered={!!filteredData}
+        <Filters
+          defaultData={data}
+          filter={filterOrders}
+        />
+        <Table
           fetchingStatus={fetchingStatus}
-          filters={(
-            <Filters
-              defaultData={ORDERS_DATA}
-              filter={filterOrders}
-            />
-          )}
-        >
-          <Table
-            className={css.table}
-            columns={ORDERS_COLUMNS}
-            columnsClass={css.columns}
-            filteredData={filteredData}
-            rowSize={TABLE_ROW_HEIGHT_MEDIUM}
-            handleClickRow={handleClickRow}
-          />
-        </ContentProvider>
+          className={css.table}
+          columns={ORDERS_COLUMNS}
+          columnsClass={css.columns}
+          filteredData={filteredData}
+          rowSize={TABLE_ROW_HEIGHT_MEDIUM}
+          handleClickRow={handleClickRow}
+        />
       </ContentHeader>
     </>
   )

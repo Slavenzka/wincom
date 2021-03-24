@@ -98,14 +98,14 @@ export const ordersAdapter = data => {
   }) => ({
     id,
     dateRange: {
-      from: new Date(deliveryFromDate).getTime(),
-      to: new Date(deliveryToDate).getTime(),
+      from: deliveryFromDate ? new Date(deliveryFromDate).getTime() : null,
+      to: deliveryToDate ? new Date(deliveryToDate).getTime() : null,
     },
     route: {
-      from,
-      to,
+      from: from || 'mockStart',
+      to: to || 'mockDestination',
     },
-    orderDate: createdAt,
+    dateTime: createdAt ? new Date(createdAt).getTime() : null,
     payment: {
       currency,
       value: amount,

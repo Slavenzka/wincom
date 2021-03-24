@@ -4,6 +4,12 @@
 .wrapper {
   position: relative;
 
+  &:hover {
+    .iconCalendar {
+      fill: $colorBgDarkest;
+    }
+  }
+
   .label {
     @include fontLabel(500, $colorFontDarkest);
 

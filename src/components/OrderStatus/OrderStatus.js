@@ -7,7 +7,7 @@ import { getStatus } from 'utils'
 const OrderStatus = ({
   label,
 }) => {
-  const statusClass = OrderStatuses[getStatus(label)].class
+  const statusClass = OrderStatuses[getStatus(label)]?.class
 
   return (
     <span className={classnames(css.status, css[statusClass])}>

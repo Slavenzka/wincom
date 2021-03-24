@@ -34,25 +34,29 @@ const TogglePublish = ({
           ? `Do you really want to publish this car on App?`
           : `Do you really want to hide this car on App?`
         }
+        buttonLabel={  `Yes` }
         buttonClickHandler={handleConfirmUpdatePublish}
         isCancelRequired={true}
         cancelClickHandler={handleCancelUpdatePublish}
       />
-    )))
+    ), {
+      callbackOnClose: handleCancelUpdatePublish
+    }))
   }, [])
 
   return (
     <span className={classnames(css.legend, css.legendCheckbox)}>
-      { label }
       <Controller
         control={control}
         name={name}
         render={({value, name, onChange}) => (
           <Checkbox
+            label={label}
             className={css.checkbox}
             checked={value}
             name={name}
             onChange={evt => {
+              console.log(111111111111)
               onChange(evt.target.checked)
               handleTogglePublish(evt.target.checked)
             }}

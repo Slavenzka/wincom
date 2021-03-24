@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './TableCell.module.scss'
 import classnames from 'classnames'
-import { TableCellTypes } from 'utils/const'
+import { PaymentStatuses, TableCellTypes } from 'utils/const'
 import TableImage from 'components/Table/TableImage/TableImage'
 import IconTrust from 'assets/icons/IconTrust'
 import { getCurrencySymbol, getDateComponents } from 'utils'
@@ -12,6 +12,10 @@ import { toggleModal } from 'store/actions'
 import { HOME_PAGE } from 'Pages/Routes'
 import ModalFullImage from 'components/Modal/ModalFullImage/ModalFullImage'
 import IconConfirm from 'assets/icons/IconConfirm'
+import IconArrowRoute from 'assets/icons/IconArrowRoute'
+import IconUnpaid from 'assets/icons/IconUnpaid'
+import IconPaid from 'assets/icons/IconPaid'
+import IconPaymentPending from 'assets/icons/IconPaymentPending'
 
 const TableCell = ({
   cellData,
@@ -124,6 +128,27 @@ const TableCell = ({
     )
   }
 
+  if (type === TableCellTypes.DATE_RANGE.type) {
+    const {from, to} = cellData
+    const {year: yearFrom, month: monthFrom, day: dayFrom} = getDateComponents(new Date(from))
+    const {year: yearTo, month: monthTo, day: dayTo} = getDateComponents(new Date(to))
+
+    return (
+      <div
+        className={classnames(css.cell, css.cellDateRange, {
+          [css.cellHovered]: isHovered
+        })}
+      >
+        <span className={css.dateRangeItem}>
+          { `${dayFrom}.${monthFrom}.${yearFrom}` }
+        </span>
+        <span className={css.dateRangeItem}>
+          { `${dayTo}.${monthTo}.${yearTo}` }
+        </span>
+      </div>
+    )
+  }
+
   if (type === TableCellTypes.CLIENT_STATUS.type) {
     return (
       <div className={classnames(css.cell, css.cellCentered, {
@@ -147,10 +172,15 @@ const TableCell = ({
   }
 
   if (type === TableCellTypes.DELIVERY_STATUS.type) {
-    const {key, value} = cellData
+    const {value} = cellData
+    const label = typeof cellData === 'object'
+      ? cellData.hasOwnProperty('key')
+        ? cellData.key
+        : 'default'
+      : cellData
 
     const status = (
-      <OrderStatus label={key} />
+      <OrderStatus label={label} />
     )
 
     return renderKeyValue(status, value)
@@ -278,6 +308,50 @@ const TableCell = ({
         >
           { cellData?.value || 'link'}
         </Link>
+      </div>
+    )
+  }
+
+  if (type === TableCellTypes.ROUTE.type) {
+    const {from, to} = cellData
+
+    return (
+      <div
+        className={classnames(css.cell, css.cellRoute, {
+          [css.cellHovered]: isHovered
+        })}
+      >
+        <span className={css.routeItem}>
+          { from }
+        </span>
+        <IconArrowRoute className={css.iconRoute} />
+        <span className={css.routeItem}>
+          { to }
+        </span>
+      </div>
+    )
+  }
+
+  if (type === TableCellTypes.PAYMENT_STATUS.type) {
+    const getPaymentStatusIcon = status => {
+      if (status === PaymentStatuses.OVERDUE) {
+        return <IconUnpaid className={classnames(css.iconPayment, css.iconPaymentOverdue)} />
+      }
+
+      if (status === PaymentStatuses.PAID) {
+        return <IconPaid className={classnames(css.iconPayment, css.iconPaymentPaid)} />
+      }
+
+      if (status === PaymentStatuses.UNPAID) {
+        return <IconPaymentPending className={classnames(css.iconPayment, css.iconPaymentPending)} />
+      }
+
+      return null
+    }
+
+    return (
+      <div className={classnames(css.cell, css.cellCentered)}>
+        { getPaymentStatusIcon(cellData) }
       </div>
     )
   }

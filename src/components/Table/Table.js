@@ -96,12 +96,10 @@ const Table = ({
             )}
           </List>
           )}
-      {/*{data.length === 0 && <NoData message={noDataMessage} />}*/}
       </>
     )
   }
 
-  console.log(isError)
   return (
     <div className={classnames(css.wrapper, className)} ref={wrapperRef}>
       <TableHeadings
@@ -112,12 +110,12 @@ const Table = ({
       {isLoading &&
         <Preloader />
       }
-      {!isLoading && isLoaded && Array.isArray(data) && data.length > 0 &&
+      {!isLoading && isLoaded && Array.isArray(filteredData) && filteredData.length > 0 &&
         <div className={css.table}>
           {renderTable()}
         </div>
       }
-      {(isError || (isLoaded && Array.isArray(data) && data.length === 0)) &&
+      {(isError || (isLoaded && Array.isArray(filteredData) && filteredData.length === 0)) &&
         <NoDataMessage />
       }
     </div>

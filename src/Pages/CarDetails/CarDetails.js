@@ -104,7 +104,7 @@ const CarDetails = ({match}) => {
   const handleClickPreview = () => {
     dispatch(toggleModal((
       <ModalFullImage
-        url={ `/api/admin/transport/${carID}/searchFullPhoto/${data.imgType}` }
+        url={ `/api/manager/transport/${carID}/searchFullPhoto/${data.imgType}` }
       />
     ), {
       isContentOnly: true,

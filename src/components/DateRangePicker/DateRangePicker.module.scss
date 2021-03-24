@@ -27,6 +27,13 @@
     margin-left: 0.5rem;
     width: 1.5rem;
     fill: $colorFontHighlight;
+    transition-duration: $transitionDuration;
+  }
+
+  &:hover {
+    .icon {
+      fill: $colorFontHighlightDark;
+    }
   }
 }
 
