@@ -37,7 +37,9 @@
   border-color: $colorFontWarning;
 }
 
-.inputDisabled {
+.inputDisabled,
+.inputDisabled:hover,
+.inputDisabled:focus {
   background-color: $colorBgStats;
   border-color: $colorBgStats;
   pointer-events: none;

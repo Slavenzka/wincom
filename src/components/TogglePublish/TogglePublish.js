@@ -8,6 +8,7 @@ import Checkbox from 'components/Checkbox/Checkbox'
 import { useDispatch } from 'react-redux'
 
 const TogglePublish = ({
+  className,
   label,
   name,
   control,
@@ -45,7 +46,7 @@ const TogglePublish = ({
   }, [])
 
   return (
-    <span className={classnames(css.legend, css.legendCheckbox)}>
+    <span className={classnames(css.legend, css.legendCheckbox, className)}>
       <Controller
         control={control}
         name={name}

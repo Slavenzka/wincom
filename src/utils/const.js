@@ -151,7 +151,7 @@ export const OrderStatuses = {
     class: `warning`
   },
   DEFAULT: {
-    values: ['new'],
+    values: ['new', 'pending to deliver', 'pending to load'],
     class: 'default'
   }
 }

@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.publish {
+  margin-left: auto;
+}
+
 .legend {
   @include fontButton;
 

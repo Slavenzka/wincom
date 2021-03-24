@@ -22,7 +22,7 @@ export const carParkAdapter = data => {
     },
     type: carriageType,
     places: carPlaces,
-    status,
+    status: status.split('_').join(' '),
     freePlaces: freeCarPlaces,
   })
 

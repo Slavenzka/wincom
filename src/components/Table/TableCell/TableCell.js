@@ -136,7 +136,7 @@ const TableCell = ({
     return (
       <div
         className={classnames(css.cell, css.cellDateRange, {
-          [css.cellHovered]: isHovered
+          [css.cellHovered]: isHovered && isRowClickable
         })}
       >
         <span className={css.dateRangeItem}>
@@ -318,7 +318,7 @@ const TableCell = ({
     return (
       <div
         className={classnames(css.cell, css.cellRoute, {
-          [css.cellHovered]: isHovered
+          [css.cellHovered]: isHovered && isRowClickable
         })}
       >
         <span className={css.routeItem}>

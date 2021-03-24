@@ -45,11 +45,12 @@ const DetailsForm = ({
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <div className={css.intro}>
-        <span className={css.legend}>
-          { `ID #${id}` }
-        </span>
+        {/*<span className={css.legend}>*/}
+        {/*  { `ID #${id}` }*/}
+        {/*</span>*/}
         {isPublishedSwitchRequired &&
           <TogglePublish
+            className={css.publish}
             label={ `Published (on App)` }
             name={ `${id}-isPublished` }
             control={control}
@@ -69,7 +70,7 @@ const DetailsForm = ({
           { children(register) }
         </div>
       </div>
-      {isWithControls &&
+      {isWithControls && !isDataPublished &&
         <TableControls
           handleClickCancel={() => {}}
           handleClickOk={() => {}}
