@@ -110,7 +110,7 @@ export const ordersAdapter = data => {
       currency,
       value: amount,
     },
-    orderStatus: status,
+    orderStatus: status.split('_').join(' '),
     transportDetails: {
       key: companyName,
       value: carriageType

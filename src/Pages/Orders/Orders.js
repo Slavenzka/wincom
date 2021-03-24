@@ -48,7 +48,7 @@ const Orders = ({history}) => {
           columnsClass={css.columns}
           filteredData={filteredData}
           rowSize={TABLE_ROW_HEIGHT_MEDIUM}
-          handleClickRow={handleClickRow}
+          // handleClickRow={handleClickRow}
         />
       </ContentHeader>
     </>
