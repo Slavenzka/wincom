@@ -60,7 +60,6 @@
 .cellDateRange {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 
   .dateRangeItem {
@@ -73,7 +72,7 @@
         content: "";
         position: absolute;
         top: -0.5rem;
-        left: calc(50% - 2rem / 2);
+        left: 2.5rem;
         width: 2rem;
         height: 1px;
         background-color: $colorFontDarkest;
