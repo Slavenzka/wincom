@@ -33,7 +33,6 @@ export const carParkAdapter = data => {
 
 export const customersAdapter = data => {
   return data.map(({
-    id,
     registerDate,
     trusted,
     totalOrdersAmount,
@@ -43,7 +42,6 @@ export const customersAdapter = data => {
     customerName,
   }) => {
     return {
-      customerID: id,
       date: new Date(registerDate).getTime(),
       isTrusted: trusted,
       ordersTotal: totalOrdersAmount,
@@ -69,7 +67,6 @@ export const carriersAdapter = data => {
       id,
       name,
       contacts: {
-        email: 'test@test.test',
         phone: phone
       },
       cars: '0',
@@ -85,41 +82,44 @@ export const carriersAdapter = data => {
 export const ordersAdapter = data => {
   const adaptOrderItem = ({
     id,
+    from,
+    to,
+    createdAt,
     deliveryFromDate,
     deliveryToDate,
-    trustedClient,
     currency,
     amount,
     status,
+    carriageType,
+    companyName,
     paymentStatus,
+    capacity,
+    loaded
   }) => ({
     id,
-    date: {
+    dateRange: {
       from: new Date(deliveryFromDate).getTime(),
       to: new Date(deliveryToDate).getTime(),
     },
-    isTrusted: trustedClient,
+    route: {
+      from,
+      to,
+    },
+    orderDate: createdAt,
     payment: {
       currency,
       value: amount,
     },
-    orderStatus: {
-      key: 'loaded',
-      value: 'waiting for bill'
-    },
+    orderStatus: status,
     transportDetails: {
-      key: 'WINCOM',
-      value: 'Comfort'
+      key: companyName,
+      value: carriageType
     },
     places: {
-      loaded: 1,
+      loaded,
+      total: capacity,
     },
-    carNumber: {
-      key: 'HU788uu',
-      value: 'Audi'
-    },
-    clientName: 'Old McFarth',
-    info: 'Additional info block'
+    paymentStatus
   })
 
   return Array.isArray(data)

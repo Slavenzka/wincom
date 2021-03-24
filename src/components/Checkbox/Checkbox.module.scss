@@ -32,6 +32,10 @@
     transition-duration: $transitionDuration;
     transform: translateX(0);
   }
+
+  &:hover::before {
+    background-color: $colorBgSidebar;
+  }
 }
 
 .labelChecked {

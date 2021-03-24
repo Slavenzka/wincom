@@ -27,7 +27,7 @@ const DriverParkDetails = ({match}) => {
     },
   ])
 
-  const formItems = data => ({
+  const getFormItems = data => ({
     owner: {
       type: 'input',
       label: 'Car',
@@ -41,7 +41,7 @@ const DriverParkDetails = ({match}) => {
       type: 'select',
       label: 'Type',
       name: `car-details-type`,
-      defaultValue: SERVICE_TYPES_OPTIONS.find(item => item.value.toUpperCase() === data?.type.toUpperCase()),
+      defaultValue: SERVICE_TYPES_OPTIONS.find(item => data?.type ? item.value.toUpperCase() === data.type.toUpperCase() : false),
       options: SERVICE_TYPES_OPTIONS,
       validation: {
         required: true,
@@ -93,8 +93,8 @@ const DriverParkDetails = ({match}) => {
   const renderCards = () => data.map((item, index) => (
     <div className={css.card} key={index}>
       <DetailsForm
-        data={item}
-        inputsList={formItems(item)}
+        rawData={item}
+        getFormItems={getFormItems}
         submitForm={submitForm}
         infoBlock={(
           <FormInfo

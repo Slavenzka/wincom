@@ -218,14 +218,6 @@ export const CAR_PARK_COLUMNS = [
     value: 'img',
   },
   {
-    label: 'Car ID',
-    value: 'id',
-  },
-  {
-    label: 'Published',
-    value: 'isPublished',
-  },
-  {
     label: 'Car Number',
     value: 'carNumber',
   },
@@ -245,14 +237,13 @@ export const CAR_PARK_COLUMNS = [
     label: 'Free places',
     value: 'freePlaces',
   },
+  {
+    label: 'Published',
+    value: 'isPublished',
+  },
 ]
 
 export const ORDERS_COLUMNS = [
-  {
-    label: 'Order ID',
-    value: 'id',
-    type: ''
-  },
   {
     label: 'Date',
     value: 'date'
@@ -385,16 +376,8 @@ export const CUSTOMERS_DATA = [
 
 export const CUSTOMERS_COLUMNS = [
   {
-    label: 'ID',
-    value: 'customerID'
-  },
-  {
     label: 'Date',
     value: 'date'
-  },
-  {
-    label: 'Trusted Client',
-    value: 'isTrusted'
   },
   {
     label: 'Orders',
@@ -405,16 +388,16 @@ export const CUSTOMERS_COLUMNS = [
     value: 'ordersActive'
   },
   {
-    label: 'Email',
-    value: 'email'
-  },
-  {
     label: 'Phone',
     value: 'phone'
   },
   {
     label: 'Name',
     value: 'name'
+  },
+  {
+    label: 'Trusted Client',
+    value: 'isTrusted'
   },
 ]
 
@@ -458,10 +441,6 @@ export const DRIVERS_DATA = [
 ]
 
 export const DRIVERS_COLUMNS = [
-  {
-    label: 'ID',
-    value: 'id'
-  },
   {
     label: 'Name',
     value: 'name'

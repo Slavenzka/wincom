@@ -9,21 +9,7 @@
 .legend {
   @include fontButton;
 
-  display: flex;
-  align-items: center;
   text-transform: none;
-
-  &:not(:first-child) {
-    margin-left: auto;
-  }
-
-  &.legendCheckbox {
-    padding-right: 3rem;
-  }
-
-  .checkbox {
-    margin-left: 2rem;
-  }
 }
 
 .wrapper {

@@ -1,7 +1,6 @@
 import React from 'react'
 import css from './Home.module.scss'
 import ContentHeader from 'components/ContentHeader/ContentHeader'
-import Button from 'components/Button/Button'
 import Table from 'components/Table/Table'
 import { CAR_PARK_COLUMNS } from 'utils/data'
 import { CAR_DETAILS } from 'Pages/Routes'
@@ -11,7 +10,6 @@ import { filterCarPark } from 'Pages/Home/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
 import useDataFetch from 'hooks/useDataFetch'
 import { carParkAdapter } from 'utils/adapters'
-import ContentProvider from 'components/ContentProvider/ContentProvider'
 
 const Home = ({history}) => {
   const handleClickRow = (node, id) => {
@@ -23,7 +21,7 @@ const Home = ({history}) => {
   }
 
   const {data, fetchingStatus} = useDataFetch({
-    url: `/api/admin/transport`,
+    url: `/api/manager/transport`,
     options: {
       adapter: carParkAdapter
     }
@@ -34,34 +32,19 @@ const Home = ({history}) => {
     <>
       <ContentHeader
         title={ `Car park` }
-        controls={(
-          <Button
-            onClick={() => {}}
-          >
-            + Add car
-          </Button>
-        )}
       >
-        <ContentProvider
-          isDataFetched={!!data}
-          isDataFiltered={!!filteredData}
+        <Filters
+          filter={filterCarPark}
+          defaultData={data}
+        />
+        <Table
           fetchingStatus={fetchingStatus}
-          filters={(
-            <Filters
-              filter={filterCarPark}
-              defaultData={data}
-              filteredData={filteredData}
-            />
-          )}
-        >
-          <Table
-            className={css.table}
-            columns={CAR_PARK_COLUMNS}
-            columnsClass={css.columns}
-            data={filteredData}
-            handleClickRow={handleClickRow}
-          />
-        </ContentProvider>
+          className={css.table}
+          columns={CAR_PARK_COLUMNS}
+          columnsClass={css.columns}
+          filteredData={filteredData}
+          handleClickRow={handleClickRow}
+        />
       </ContentHeader>
     </>
   )

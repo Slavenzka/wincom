@@ -3,8 +3,6 @@ import css from './TableCell.module.scss'
 import classnames from 'classnames'
 import { TableCellTypes } from 'utils/const'
 import TableImage from 'components/Table/TableImage/TableImage'
-import Checkbox from 'components/Checkbox/Checkbox'
-import { useForm, Controller } from 'react-hook-form'
 import IconTrust from 'assets/icons/IconTrust'
 import { getCurrencySymbol, getDateComponents } from 'utils'
 import OrderStatus from 'components/OrderStatus/OrderStatus'
@@ -13,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { toggleModal } from 'store/actions'
 import { HOME_PAGE } from 'Pages/Routes'
 import ModalFullImage from 'components/Modal/ModalFullImage/ModalFullImage'
+import IconConfirm from 'assets/icons/IconConfirm'
 
 const TableCell = ({
   cellData,
@@ -22,7 +21,6 @@ const TableCell = ({
   isRowClickable,
 }) => {
   const dispatch = useDispatch()
-  const {control} = useForm()
 
   const getCellType = dataKey => Object.keys(TableCellTypes).reduce((total, item) => {
     if (!total && TableCellTypes[item].values.findIndex(el => el.toUpperCase() === dataKey.toUpperCase()) >= 0) {
@@ -78,14 +76,13 @@ const TableCell = ({
 
   if (type === TableCellTypes.STATUS.type) {
     return (
-      <form>
-        <Controller
-          as={Checkbox}
-          name={rowData?.id}
-          control={control}
-          defaultValue={cellData}
+      <div className={css.cell}>
+        <IconConfirm
+          className={classnames(css.iconNonConfirm, {
+            [css.iconConfirm]: !!cellData
+          })}
         />
-      </form>
+      </div>
     )
   }
 

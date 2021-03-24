@@ -8,8 +8,7 @@ import useFilterData from 'hooks/useFilterData'
 
 const Filters = ({
   filter = {},
-  defaultData = [],
-  filteredData,
+  defaultData,
 }) => {
   const activePrimary = useSelector(store => store.filter.activePrimary)
   const activeSecondary = useSelector(store => store.filter.activeSecondary)
@@ -24,36 +23,32 @@ const Filters = ({
 
   useFilterData(defaultData, filter)
 
-  if (!filteredData) return null
-
-  return filteredData
-    ? (
-      <div className={css.wrapper}>
-        {primary &&
-          <Tabs
-            className={css.filter}
-            list={primary.list}
-            activeTab={activePrimary}
-            handleClickTab={handleClickPrimary}
-            isPrimary
-          />
-        }
-        {secondary?.list &&
-          <Tabs
-            className={css.filter}
-            list={secondary.list}
-            activeTab={activeSecondary}
-            handleClickTab={handleClickSecondary}
-          />
-        }
-        {detailed &&
-          <FilterDetailed
-            detailedList={activeDetailed}
-          />
-        }
-      </div>
-    )
-    : null
+  return (
+    <div className={css.wrapper}>
+      {primary &&
+        <Tabs
+          className={css.filter}
+          list={primary.list}
+          activeTab={activePrimary}
+          handleClickTab={handleClickPrimary}
+          isPrimary
+        />
+      }
+      {secondary?.list &&
+        <Tabs
+          className={css.filter}
+          list={secondary.list}
+          activeTab={activeSecondary}
+          handleClickTab={handleClickSecondary}
+        />
+      }
+      {detailed &&
+        <FilterDetailed
+          detailedList={activeDetailed}
+        />
+      }
+    </div>
+  )
 }
 
 export default React.memo(Filters)

@@ -46,13 +46,13 @@ const FilterDetailedItem = ({
   const contentRef = useRef(null)
   const [manualInput, setManualInput] = useState('')
   const [isOpen, setOpenStatus] = useState(false)
-  const secondaryFilteredData = useSelector(store => store.filter.secondaryFilteredData) || []
+  const secondaryFilteredData = useSelector(store => store.filter.secondaryFilteredData)
   const dispatch = useDispatch()
 
   const isListType = type === DetailedFilterTypes.LIST
   const isRangeType = type === DetailedFilterTypes.RANGE
 
-  const list = getDataOptions(secondaryFilteredData, field)
+  const list = secondaryFilteredData ? getDataOptions(secondaryFilteredData, field) : []
   const isFilterDisabled = list.length <= MIN_DETAILED_FILTER_OPTIONS_QTY
 
   const listManualFiltered = `${manualInput}`.length === 0

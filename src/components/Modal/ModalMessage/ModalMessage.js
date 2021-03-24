@@ -1,8 +1,10 @@
 import React from 'react'
 import css from './ModalMessage.module.scss'
+import classnames from 'classnames'
 import Button from 'components/Button/Button'
 import { useDispatch } from 'react-redux'
 import { toggleModal } from 'store/actions'
+import { ButtonPalettes } from 'utils/const'
 
 const ModalMessage = ({
   title,
@@ -10,6 +12,9 @@ const ModalMessage = ({
   error,
   buttonLabel = 'Go back',
   buttonClickHandler,
+  isCancelRequired = false,
+  cancelLabel = `Cancel`,
+  cancelClickHandler,
 }) => {
   const dispatch = useDispatch()
 
@@ -20,7 +25,9 @@ const ModalMessage = ({
   const handleClickButton = buttonClickHandler || defaultClickHandler
 
   return (
-    <div className={css.wrapper}>
+    <div className={classnames(css.wrapper, {
+      [css.wrapperLarge]: isCancelRequired
+    })}>
       {title &&
         <h3 className={css.title}>
           { title }
@@ -34,13 +41,32 @@ const ModalMessage = ({
       {error &&
         <p className={css.error} dangerouslySetInnerHTML={{ __html: error }} />
       }
-      <Button
-        className={css.button}
-        onClick={handleClickButton}
-        type={ `button` }
+      <div
+        className={classnames({
+          [css.controls]: isCancelRequired
+        })}
       >
-        { buttonLabel }
-      </Button>
+        {isCancelRequired &&
+          <Button
+            className={css.button}
+            onClick={() => {
+              cancelClickHandler && cancelClickHandler()
+              defaultClickHandler()
+            }}
+            palette={ButtonPalettes.BORDERED}
+            type={ `button` }
+          >
+            { cancelLabel }
+          </Button>
+        }
+        <Button
+          className={css.button}
+          onClick={handleClickButton}
+          type={ `button` }
+        >
+          { buttonLabel }
+        </Button>
+      </div>
     </div>
   )
 }

@@ -10,21 +10,37 @@
   padding-left: 5rem;
   width: fit-content;
   transition-duration: $transitionDuration;
-
-  &:hover,
-  &:active {
-    box-shadow: 0 0 0.5rem $colorFontHighlight;
-  }
 }
 
 .buttonFilled {
   background-color: $colorBgHighlight;
   border: 1px solid $colorBgHighlight;
+
+  &:hover {
+    color: $colorFontLightest;
+    background-color: $colorBgDarkest;
+    border-color: $colorBgDarkest;
+  }
+
+  &.buttonDisabled {
+    color: $colorFontItemPassive;
+    background-color: $colorBgTabs;
+    border-color: $colorBgTabs;
+  }
 }
 
 .buttonBordered {
   background-color: transparent;
   border: 1px solid $colorBgHighlight;
+
+  &:hover {
+    border-color: $colorBgDarkest;
+  }
+
+  &.buttonDisabled {
+    color: $colorFontItemPassive;
+    border-color: $colorBgSidebar;
+  }
 }
 
 .buttonRegular {
@@ -42,8 +58,13 @@
   border-radius: 2rem;
 }
 
+.buttonLoading {
+  pointer-events: none;
+}
+
 .buttonDisabled {
   pointer-events: none;
+  cursor: inherit;
 }
 
 .icon {

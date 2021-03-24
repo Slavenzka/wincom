@@ -19,7 +19,7 @@ const CarDetails = ({match}) => {
   const dispatch = useDispatch()
 
   const {data, fetchingStatus} = useDataFetch({
-    url: `/api/admin/transport/${carID}`,
+    url: `/api/manager/transport/${carID}`,
     options: {
       adapter: carParkAdapter
     }
@@ -40,7 +40,7 @@ const CarDetails = ({match}) => {
     },
   ]
 
-  const formItems = data => ({
+  const getFormItems = data => ({
     owner: {
       type: 'input',
       label: 'Car',
@@ -120,11 +120,10 @@ const CarDetails = ({match}) => {
       <ContentProvider
         fetchingStatus={fetchingStatus}
         isDataFetched={!!data}
-        isDataFiltered
       >
         <DetailsForm
-          data={data}
-          inputsList={formItems(data)}
+          rawData={data}
+          getFormItems={getFormItems}
           infoBlock={(
             <FormInfo
               list={carInfo}
@@ -135,10 +134,10 @@ const CarDetails = ({match}) => {
           {register => (
             <>
               <ButtonFullImage
-                image={data.img}
+                image={data?.img}
                 onClick={handleClickPreview}
                 className={css.image}
-                altLabel={ `${data.carNumber.value} - ${data.carNumber.key}` }
+                altLabel={ `${data?.carNumber?.value} - ${data?.carNumber?.key}` }
               />
               <ImageInput
                 className={css.inputImage}

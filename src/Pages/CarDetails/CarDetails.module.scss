@@ -4,7 +4,13 @@
 .wrapper {
   .button {
     @include resetButton;
-    @include fontLabel(600, $colorFontHighlight);
+    @include fontLabel(600, $colorFontDarkest);
+
+    transition-duration: $transitionDuration;
+
+    &:hover {
+      color: $colorFontHighlight;
+    }
   }
 
   .image {

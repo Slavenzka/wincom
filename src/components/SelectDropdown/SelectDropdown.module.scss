@@ -28,8 +28,9 @@
         cursor: pointer;
         background-color: $colorFontLightest;
 
-        &:hover {
-          border-color: $colorFontHighlight;
+        &:hover,
+        &--menu-is-open {
+          border-color: $colorBorderDatepickerDark;
         }
       }
 
@@ -68,13 +69,20 @@
         display: none;
       }
 
+      &__indicators {
+        display: flex;
+        justify-content: center;
+        width: 4.6rem;
+      }
+
       &__dropdown-indicator {
-        padding: 0.8rem 2rem 0.8rem 2rem;
+        padding: 0;
 
         svg {
           width: 2rem;
           height: 2rem;
-          fill: $colorFontHighlight;
+          fill: $colorFontDarkest;
+          transition-duration: $transitionDuration;
         }
       }
 
@@ -94,23 +102,18 @@
       &__menu {
         margin-top: 0;
         border-radius: 0;
-        border-right: 1px solid $colorBorderInputPassive;
-        border-bottom: 1px solid $colorBorderInputPassive;
-        border-left: 1px solid $colorBorderInputPassive;
+        border-right: 1px solid $colorBorderDatepickerDark;
+        border-bottom: 1px solid $colorBorderDatepickerDark;
+        border-left: 1px solid $colorBorderDatepickerDark;
         box-shadow: none;
       }
 
       &__option {
         @include fontInfo(600);
 
-        &:not(:first-child) {
-          border-top: 0.1rem solid $colorBorderInputPassive;
-        }
-
         &:hover,
         &--is-focused {
-          color: $colorFontLightest;
-          background-color: $colorFontHighlightLight;
+          background-color: $colorShadowRegular;
         }
 
         &--is-selected {
@@ -156,6 +159,23 @@
       &__clear-indicator {
         opacity: 0;
         pointer-events: none;
+      }
+    }
+  }
+}
+
+.selectDisabled {
+  pointer-events: none;
+
+  :global {
+    .select {
+      &__control {
+        background-color: $colorBgStats;
+        border: 1px solid $colorBgStats;
+      }
+
+      &__dropdown-indicator {
+        display: none;
       }
     }
   }

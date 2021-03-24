@@ -1,19 +1,21 @@
-import React from 'react'
+import React  from 'react'
 import css from './DetailsForm.module.scss'
-import classnames from 'classnames'
-import { useForm, Controller } from 'react-hook-form'
-import Checkbox from 'components/Checkbox/Checkbox'
+import { useForm } from 'react-hook-form'
 import TableControls from 'components/TableControls/TableControls'
 import useRenderFormItems from 'hooks/useRenderFormItems'
+import TogglePublish from 'components/TogglePublish/TogglePublish'
+import NoDataMessage from 'components/NoDataMessage/NoDataMessage'
 
 const DetailsForm = ({
-  data,
-  inputsList = {},
+  rawData,
+  getFormItems,
   submitForm,
   infoBlock,
   isWithControls = true,
   children,
 }) => {
+  const data = rawData || {}
+  const inputsList = getFormItems(data)
   const list = Object.values(inputsList)
   const defaultFormData = list.reduce((total, {name, defaultValue}) => {
     total[name] = defaultValue
@@ -22,17 +24,23 @@ const DetailsForm = ({
   const {id, isPublished} = data
   const isPublishedSwitchRequired = data.hasOwnProperty('isPublished')
 
-  const {register, control, handleSubmit} = useForm({
+  const {register, control, handleSubmit, watch, setValue} = useForm({
     defaultValues: {...defaultFormData}
   })
+  const isDataPublished = watch(`${id}-isPublished`, isPublished)
 
   const formItems = useRenderFormItems({
     list,
     control,
-    register
+    register,
+    isDisabled: isDataPublished
   })
 
-  if (list.length === 0) return null
+  if (Object.keys(data).length === 0 || list.length === 0) {
+    return (
+      <NoDataMessage />
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
@@ -41,16 +49,13 @@ const DetailsForm = ({
           { `ID #${id}` }
         </span>
         {isPublishedSwitchRequired &&
-          <span className={classnames(css.legend, css.legendCheckbox)}>
-            Published (on App)
-            <Controller
-              as={Checkbox}
-              control={control}
-              name={`${id}-isPublished`}
-              defaultValue={isPublished}
-              className={css.checkbox}
-            />
-          </span>
+          <TogglePublish
+            label={ `Published (on App)` }
+            name={ `${id}-isPublished` }
+            control={control}
+            setValue={setValue}
+            isPublished={isDataPublished}
+          />
         }
       </div>
       <div className={css.wrapper}>

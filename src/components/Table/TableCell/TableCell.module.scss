@@ -21,7 +21,7 @@
 }
 
 .cellHovered {
-  font-weight: 600;
+  font-weight: 900;
 }
 
 .cellCentered {
@@ -77,6 +77,28 @@
 .iconTrust {
   width: $iconTrustWidth;
   fill: $colorFontHighlightLight;
+}
+
+.iconNonConfirm {
+  margin-left: 1.5rem;
+  width: 2.4rem;
+  fill: $colorBgTabs;
+
+  :global {
+    #icon-confirm-check {
+      display: none;
+    }
+  }
+}
+
+.iconConfirm {
+  fill: $colorFontHighlightLight;
+
+  :global {
+    #icon-confirm-check {
+      display: inline;
+    }
+  }
 }
 
 .contacts {

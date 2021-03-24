@@ -18,6 +18,7 @@ const SelectDropdown = ({
   isError,
   isRequired,
   isLoading,
+  isDisabled,
   placeholder = 'Select',
   dropdownComponent,
   noOptionsLabel = 'No options',
@@ -48,10 +49,10 @@ const SelectDropdown = ({
   const colourStyles = {
     control: (styles, { selectProps, isFocused }) => ({
       ...styles,
-      borderColor: selectProps.menuIsOpen || isFocused ? '#c1f0d6' : '#e9e9e9',
+      borderColor: selectProps.menuIsOpen || isFocused ? 'rgb(121, 121, 121)' : 'rgb(195, 195, 195)',
       borderRadius: '0.2rem',
-      borderBottomRightRadius: selectProps.menuIsOpen ? 0 : '0.2rem',
-      borderBottomLeftRadius: selectProps.menuIsOpen ? 0 : '0.2rem',
+      // borderBottomRightRadius: selectProps.menuIsOpen ? 0 : '0.2rem',
+      // borderBottomLeftRadius: selectProps.menuIsOpen ? 0 : '0.2rem',
       backgroundColor: 'transparent',
       boxShadow: 'none',
     }),
@@ -85,6 +86,7 @@ const SelectDropdown = ({
         className={classnames(css.select, classNameSelect, {
           [css.selectError]: isError,
           [css.selectLoading]: isLoading,
+          [css.selectDisabled]: isDisabled,
         })}
         classNamePrefix='select'
         components={{

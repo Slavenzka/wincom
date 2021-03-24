@@ -3,22 +3,26 @@ import Preloader from 'components/Preloader/Preloader'
 
 const ContentProvider = ({
   isDataFetched,
-  isDataFiltered,
   fetchingStatus = {},
   children,
   filters,
 }) => {
-  const {isLoading} = fetchingStatus
+  const {isLoading, isError} = fetchingStatus
 
   if (!isDataFetched && isLoading) {
-    return <Preloader />
-  }
-
-  if (isDataFetched && !isLoading) {
     return (
       <>
         { filters }
-        { isDataFiltered && children }
+        <Preloader />
+      </>
+    )
+  }
+
+  if ((isDataFetched || isError) && !isLoading) {
+    return (
+      <>
+        { filters }
+        { children }
       </>
     )
   }

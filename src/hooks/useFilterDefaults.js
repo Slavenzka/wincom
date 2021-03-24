@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetFilters } from 'store/actions'
 
-const useFilterDefaults = ({primaryList = [], secondaryList = [], detailedList = []}) => {
+const useFilterDefaults = ({primaryList, secondaryList, detailedList}) => {
   const isMounted = useRef(false)
   const dispatch = useDispatch()
 

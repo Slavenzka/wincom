@@ -9,6 +9,9 @@ import DateRangePicker from 'components/DateRangePicker/DateRangePicker'
 import Filters from 'components/Filters/Filters'
 import { filterOrders } from 'Pages/Orders/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
+import useDataFetch from 'hooks/useDataFetch'
+import { ordersAdapter } from 'utils/adapters'
+import ContentProvider from 'components/ContentProvider/ContentProvider'
 
 const Orders = ({history}) => {
   const handleClickRow = (node, id) => {
@@ -19,6 +22,13 @@ const Orders = ({history}) => {
     }
   }
 
+  const {data, fetchingStatus} = useDataFetch({
+    url: `/api/manager/order`,
+    options: {
+      adapter: ordersAdapter
+    }
+  })
+
   const filteredData = useActualPageData()
 
   return (
@@ -27,21 +37,26 @@ const Orders = ({history}) => {
         title='Orders'
         controls={ <DateRangePicker /> }
       >
-        <Filters
-          defaultData={ORDERS_DATA}
-          filteredData={filteredData}
-          filter={filterOrders}
-        />
-        {filteredData &&
+        <ContentProvider
+          isDataFetched={!!data}
+          isDataFiltered={!!filteredData}
+          fetchingStatus={fetchingStatus}
+          filters={(
+            <Filters
+              defaultData={ORDERS_DATA}
+              filter={filterOrders}
+            />
+          )}
+        >
           <Table
             className={css.table}
             columns={ORDERS_COLUMNS}
             columnsClass={css.columns}
-            data={filteredData}
+            filteredData={filteredData}
             rowSize={TABLE_ROW_HEIGHT_MEDIUM}
             handleClickRow={handleClickRow}
           />
-        }
+        </ContentProvider>
       </ContentHeader>
     </>
   )

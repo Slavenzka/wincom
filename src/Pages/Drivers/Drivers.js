@@ -22,7 +22,7 @@ const Drivers = () => {
   }))
 
   const {data, fetchingStatus} = useDataFetch({
-    url: `/api/admin/carrier`,
+    url: `/api/manager/carrier`,
     options: {
       adapter: carriersAdapter
     }
@@ -39,7 +39,7 @@ const Drivers = () => {
 
   return (
     <ContentHeader
-      title={ `Drivers` }
+      title={ `Carriers` }
       controls={(
         <Button
           onClick={() => {}}
@@ -48,25 +48,17 @@ const Drivers = () => {
         </Button>
       )}
     >
-      <ContentProvider
-        isDataFetched={!!processedData}
-        isDataFiltered={!!filteredData}
+      <Filters
+        filter={filterDrivers}
+        defaultData={processedData}
+      />
+      <Table
         fetchingStatus={fetchingStatus}
-        filters={(
-          <Filters
-            filter={filterDrivers}
-            defaultData={processedData}
-            filteredData={filteredData}
-          />
-        )}
-      >
-        <Table
-          className={css.table}
-          columns={DRIVERS_COLUMNS}
-          columnsClass={css.columns}
-          data={filteredData}
-        />
-      </ContentProvider>
+        className={css.table}
+        columns={DRIVERS_COLUMNS}
+        columnsClass={css.columns}
+        filteredData={filteredData}
+      />
     </ContentHeader>
     )
 }

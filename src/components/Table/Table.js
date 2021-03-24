@@ -7,15 +7,19 @@ import { TABLE_ROW_HEIGHT } from 'utils/const'
 import useTableHeight from 'hooks/useTableHeight'
 import { FixedSizeList as List } from 'react-window'
 import TableRow from 'components/Table/TableRow/TableRow'
+import NoDataMessage from 'components/NoDataMessage/NoDataMessage'
+import Preloader from 'components/Preloader/Preloader'
 
 const Table = ({
+  fetchingStatus = {},
   className,
   columns,
   columnsClass,
-  data,
+  filteredData,
   handleClickRow,
   rowSize = TABLE_ROW_HEIGHT
 }) => {
+  const data = filteredData || []
   const fontSize = useSelector(store => store.elastic.curFontSize)
 
   const wrapperRef = useRef(null)
@@ -25,6 +29,7 @@ const Table = ({
 
   const rowHeight = (rowSize * fontSize) / 10
   const limitHeight = 5 * rowSize / 10 * fontSize
+  const {isLoading, isLoaded, isError} = fetchingStatus
 
   const [tableHeight, setTableHeight] = useTableHeight({
     headingsRef,
@@ -45,7 +50,8 @@ const Table = ({
     }
   }, [data, rowHeight, data.length, limitHeight, setTableHeight, fontSize])
 
-  // Uncomment when filter is operational
+  // Uncomment when primary or secondary filter is operational to restore list position when
+  // filter is changed. Not required if no primary / secondary filter is set
   // useEffect(() => {
   //   const list = listRef.current
   //
@@ -91,10 +97,11 @@ const Table = ({
           </List>
           )}
       {/*{data.length === 0 && <NoData message={noDataMessage} />}*/}
-    </>
-  )
+      </>
+    )
   }
 
+  console.log(isError)
   return (
     <div className={classnames(css.wrapper, className)} ref={wrapperRef}>
       <TableHeadings
@@ -102,15 +109,16 @@ const Table = ({
         columnsClass={columnsClass}
         setRef={headingsRef}
       />
-      {Array.isArray(data) && data.length > 0 &&
+      {isLoading &&
+        <Preloader />
+      }
+      {!isLoading && isLoaded && Array.isArray(data) && data.length > 0 &&
         <div className={css.table}>
           {renderTable()}
         </div>
       }
-      {Array.isArray(data) && data.length === 0 &&
-        <p className={css.empty}>
-          No data available.
-        </p>
+      {(isError || (isLoaded && Array.isArray(data) && data.length === 0)) &&
+        <NoDataMessage />
       }
     </div>
   )

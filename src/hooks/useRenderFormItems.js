@@ -6,32 +6,50 @@ import Datepicker from 'components/Datepicker/Datepicker'
 import { getDateComponents } from 'utils'
 import IconCalendar from 'assets/icons/IconCalendar'
 
-const useRenderFormItems = ({list, register, control}) => {
-  const renderFormItems = () => list.map(({type, validation, ...item}, index) => {
+const useRenderFormItems = ({list, register, control, isDisabled}) => {
+  const renderFormItems = () => list.map(({type, validation, name, defaultValue, ...item}, index) => {
     switch (type) {
       case 'select':
         return (
           <Controller
-            as={SelectDropdown}
+            render={({name, value, onChange}) => (
+              <SelectDropdown
+                name={name}
+                value={value}
+                onChange={onChange}
+                isDisabled={isDisabled}
+                {...item}
+              />
+            )}
             control={control}
             rules={{
               ...validation
             }}
+            name={name}
+            defaultValue={defaultValue}
             key={index}
-            {...item}
           />
         )
       case 'inputCash':
         return (
           <Controller
-            as={Input}
+            render={({value, name, onChange}) => (
+              <Input
+                value={value}
+                name={name}
+                onChange={onChange}
+                isCash
+                isDisabled={isDisabled}
+                {...item}
+              />
+            )}
             control={control}
             rules={{
               ...validation
             }}
             key={index}
-            isCash
-            {...item}
+            name={name}
+            defaultValue={defaultValue}
           />
         )
       case 'datepicker':
@@ -54,7 +72,7 @@ const useRenderFormItems = ({list, register, control}) => {
                   register={register({
                     ...validation
                   })}
-                  name={item.name}
+                  name={name}
                   value={dateToRender}
                   onClick={onClick}
                   label={item.label}
@@ -69,13 +87,22 @@ const useRenderFormItems = ({list, register, control}) => {
       default:
         return (
           <Controller
-            as={Input}
+            render={({name, value, onChange}) => (
+              <Input
+                name={name}
+                value={value}
+                onChange={onChange}
+                isDisabled={isDisabled}
+                {...item}
+              />
+            )}
             control={control}
             rules={{
               ...validation
             }}
+            name={name}
+            defaultValue={defaultValue}
             key={index}
-            {...item}
           />
         )
     }

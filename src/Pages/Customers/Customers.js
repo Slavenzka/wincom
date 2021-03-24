@@ -14,7 +14,7 @@ import ContentProvider from 'components/ContentProvider/ContentProvider'
 
 const Customers = () => {
   const {data, fetchingStatus} = useDataFetch({
-    url: `/api/admin/customerInfo`,
+    url: `/api/manager/customerInfo`,
     options: {
       adapter: customersAdapter
     }
@@ -32,26 +32,18 @@ const Customers = () => {
         </Button>
       )}
     >
-      <ContentProvider
-        isDataFetched={!!data}
-        isDataFiltered={!!filteredData}
+      <Filters
+        filter={filterCustomers}
+        defaultData={data}
+      />
+      <Table
         fetchingStatus={fetchingStatus}
-        filters={(
-          <Filters
-            filter={filterCustomers}
-            defaultData={data}
-            filteredData={filteredData}
-          />
-        )}
-      >
-        <Table
-          className={css.table}
-          columns={CUSTOMERS_COLUMNS}
-          columnsClass={css.columns}
-          data={filteredData}
-          rowSize={TABLE_ROW_HEIGHT_MEDIUM}
-        />
-      </ContentProvider>
+        className={css.table}
+        columns={CUSTOMERS_COLUMNS}
+        columnsClass={css.columns}
+        filteredData={filteredData}
+        rowSize={TABLE_ROW_HEIGHT_MEDIUM}
+      />
     </ContentHeader>
     )
 }

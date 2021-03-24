@@ -28,6 +28,7 @@
 
   &:hover {
     .icon {
+      fill: white;
       animation-name: arrowPoint;
       animation-fill-mode: both;
       animation-duration: 1s;

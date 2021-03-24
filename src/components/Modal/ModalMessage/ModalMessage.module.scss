@@ -10,6 +10,10 @@
   width: 38rem;
 }
 
+.wrapperLarge {
+  width: 43rem;
+}
+
 .title {
   @include h3;
 
@@ -30,4 +34,10 @@
   @include fontInput(600, $colorFontDarkest);
   margin: 0 0 5rem 0;
   line-height: 2.1rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
 }

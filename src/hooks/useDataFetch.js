@@ -63,7 +63,7 @@ const useDataFetch = ({
               isLoaded: false,
               isError: true,
             })
-            setData([])
+            setData(null)
 
             if (!isUnauthorized) {
               const errorMessage = error?.response?.data?.message

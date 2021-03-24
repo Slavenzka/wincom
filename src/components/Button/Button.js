@@ -12,17 +12,19 @@ const Button = ({
   palette = ButtonPalettes.FILLED,
   height = ButtonHeights.REGULAR,
   isLoading,
+  isDisabled
 }) => {
   return (
     <button
       onClick={onClick}
       className={classnames(css.button, className, {
-        [css.buttonDisabled]: isLoading,
         [css.buttonFilled]: palette === ButtonPalettes.FILLED,
         [css.buttonBordered]: palette === ButtonPalettes.BORDERED,
         [css.buttonRegular]: height === ButtonHeights.REGULAR,
         [css.buttonLarge]: height === ButtonHeights.LARGE,
         [css.buttonSmall]: height === ButtonHeights.SMALL,
+        [css.buttonLoading]: isLoading,
+        [css.buttonDisabled]: isDisabled,
       })}
       type={type}
     >

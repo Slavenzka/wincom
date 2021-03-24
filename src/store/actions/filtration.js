@@ -102,6 +102,7 @@ export const resetFilters = ({primaryList, secondaryList, detailedList}) => {
         activePrimary: defaultPrimary,
         activeSecondary: defaultSecondary,
         detailedFilter: defaultDetailed,
+        secondaryFilteredData: null,
         filteredData: null,
       }
     })
