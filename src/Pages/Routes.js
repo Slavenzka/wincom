@@ -29,13 +29,11 @@ export const SIDEBAR_LIST = [
   {
     label: 'Car park',
     url: '/',
-    counter: 111,
     icon: <IconTruck className={ `iconSidebar` } />
   },
   {
     label: 'Orders',
     url: ORDERS,
-    counter: 6,
     icon: <IconOrders className={ `iconSidebar` } />
   },
   {

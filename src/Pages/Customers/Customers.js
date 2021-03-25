@@ -10,7 +10,7 @@ import { filterCustomers } from 'Pages/Customers/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
 import { customersAdapter } from 'utils/adapters'
 import useDataFetch from 'hooks/useDataFetch'
-import ContentProvider from 'components/ContentProvider/ContentProvider'
+import useCreateCustomer from 'hooks/Customers/useCreateCustomer'
 
 const Customers = () => {
   const {data, fetchingStatus} = useDataFetch({
@@ -20,13 +20,14 @@ const Customers = () => {
     }
   })
   const filteredData = useActualPageData()
+  const handleClickCreate = useCreateCustomer()
 
   return (
     <ContentHeader
       title={ `Customers` }
       controls={(
         <Button
-          onClick={() => {}}
+          onClick={handleClickCreate}
         >
           + Add customer
         </Button>

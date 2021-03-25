@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react'
 import css from './FilterDetailedItemRange.module.scss'
 import classnames from 'classnames'
 import { useSelector } from 'react-redux'
+import useDebounce from 'hooks/useDebounce'
 
 const FilterDetailedItemRange = ({
   className,
@@ -32,6 +33,8 @@ const FilterDetailedItemRange = ({
   const gaugeSelectedRef = useRef(null)
   const thumbMinRef = useRef(null)
   const thumbMaxRef = useRef(null)
+  const rangeMinDebounced = useDebounce(range.min.value)
+  const rangeMaxDebounced = useDebounce(range.max.value)
 
   const handleDragThumbMin = useCallback((evt) => {
     evt.preventDefault()
@@ -167,12 +170,12 @@ const FilterDetailedItemRange = ({
   }, [range.gaugeWidthRem, actualMax, maxValue])
 
   useEffect(() => {
-    onChange(+range.min.value, `from`)
-  }, [range.min.value, onChange])
+    onChange(+rangeMinDebounced, `from`)
+  }, [rangeMinDebounced, onChange])
 
   useEffect(() => {
-    onChange(+range.max.value, `to`)
-  }, [range.max.value, onChange])
+    onChange(+rangeMaxDebounced, `to`)
+  }, [rangeMaxDebounced, onChange])
 
   return (
     <div className={classnames(css.wrapper, className)}>

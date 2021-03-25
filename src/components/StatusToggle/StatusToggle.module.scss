@@ -1,0 +1,34 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.label {
+  @include fontSidebar(500, $colorFontDarkest, none);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition-duration: $transitionDuration;
+  cursor: pointer;
+
+  &:hover {
+    color: $colorFontHighlight;
+  }
+
+  span {
+    margin-left: 0.8rem;
+  }
+}
+
+.icon {
+  width: 2rem;
+  fill: $colorBgTabs
+}
+
+.iconTrust {
+  fill: $colorFontHighlightLight;
+}
+
+.input {
+  top: 0;
+  left: 0;
+}

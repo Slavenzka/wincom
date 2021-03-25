@@ -61,6 +61,10 @@ export const TableCellTypes = {
     values: ['payment'],
     type: 'funds'
   },
+  ORDER_STATUS: {
+    values: ['orderStatus'],
+    type: 'orderStatus',
+  },
   DELIVERY_STATUS: {
     values: ['orderStatus'],
     type: 'deliveryStatus'

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import useRenderFormItems from 'hooks/useRenderFormItems'
 import Button from 'components/Button/Button'
 import { ButtonHeights, ButtonPalettes } from 'utils/const'
+import FormControls from 'components/FormControls/FormControls'
 
 const SettingForm = ({
   className,
@@ -26,21 +27,11 @@ const SettingForm = ({
         </h3>
         <div className={css.wrapper}>
           { formItems }
-          <Button
-            className={css.button}
-            palette={ButtonPalettes.BORDERED}
-            height={ButtonHeights.LARGE}
-            onClick={() => {}}
-          >
-            Cancel
-          </Button>
-          <Button
-            className={css.button}
-            height={ButtonHeights.LARGE}
-            onClick={() => {}}
-          >
-            Save
-          </Button>
+          <FormControls
+            className={css.controls}
+            cancelButtonHandler={() => {}}
+            submitButtonHandler={() => {}}
+          />
         </div>
       </form>
     </div>

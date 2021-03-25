@@ -9,14 +9,17 @@
   text-transform: none;
   transition-duration: $transitionDuration;
   transition-property: text-decoration;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 
-  & > * {
+  &:not(.cellOrderStatus) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    & > * {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
@@ -35,18 +38,18 @@
 
 .cellRoute {
   display: flex;
+  flex-wrap: wrap;
 
   .iconRoute {
     align-self: center;
-    margin-left: 0.4rem;
+    margin-left: 0.7rem;
     width: 1.6rem;
     fill: $colorFontDarkest;
   }
 
   .routeItem {
     &:not(:first-child) {
-      align-self: flex-end;
-      margin-left: 0.7rem;
+      width: 100%;
     }
   }
 }

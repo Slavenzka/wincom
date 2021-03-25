@@ -10,7 +10,7 @@ import Filters from 'components/Filters/Filters'
 import useActualPageData from 'hooks/useActualPageData'
 import useDataFetch from 'hooks/useDataFetch'
 import { carriersAdapter } from 'utils/adapters'
-import ContentProvider from 'components/ContentProvider/ContentProvider'
+import useCreateDriver from 'hooks/Drivers/useCreateDriver'
 
 const Drivers = () => {
   const adaptDriversData = data => data.map(({cars, ...item}) => ({
@@ -35,6 +35,10 @@ const Drivers = () => {
 
     return null
   }, [data])
+
+  const handleClickCreate = useCreateDriver()
+
+
   const filteredData = useActualPageData()
 
   return (
@@ -42,9 +46,9 @@ const Drivers = () => {
       title={ `Carriers` }
       controls={(
         <Button
-          onClick={() => {}}
+          onClick={handleClickCreate}
         >
-          + Add driver
+          + Add carrier
         </Button>
       )}
     >
@@ -60,7 +64,7 @@ const Drivers = () => {
         filteredData={filteredData}
       />
     </ContentHeader>
-    )
+  )
 }
 
 export default Drivers

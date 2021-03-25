@@ -6,8 +6,8 @@ import Datepicker from 'components/Datepicker/Datepicker'
 import { getDateComponents } from 'utils'
 import IconCalendar from 'assets/icons/IconCalendar'
 
-const useRenderFormItems = ({list, register, control, isDisabled}) => {
-  const renderFormItems = () => list.map(({type, validation, name, defaultValue, ...item}, index) => {
+const useRenderFormItems = ({list, register, control, isDisabled, errors = {}}) => {
+  const renderFormItems = () => list.map(({type, validation, name, defaultValue = '', isModal, ...item}, index) => {
     switch (type) {
       case 'select':
         return (
@@ -93,6 +93,8 @@ const useRenderFormItems = ({list, register, control, isDisabled}) => {
                 value={value}
                 onChange={onChange}
                 isDisabled={isDisabled}
+                isError={errors[name]}
+                isModalStyle={isModal}
                 {...item}
               />
             )}

@@ -8,10 +8,10 @@ const Input = ({
   name,
   placeholder = 'Enter your value',
   isDisabled,
-  register = () => {},
   children,
   isDetailedFilerStyle,
   isAuthStyle,
+  isModalStyle,
   isCash,
   isError,
   ...props
@@ -36,12 +36,12 @@ const Input = ({
           [css.inputCash]: isCash,
           [css.inputDetailed]: isDetailedFilerStyle,
           [css.inputAuth]: isAuthStyle,
+          [css.inputModal]: isModalStyle,
         })}
         id={name}
         name={name}
         placeholder={placeholder}
         type='text'
-        ref={register}
         {...props}
       />
     </div>

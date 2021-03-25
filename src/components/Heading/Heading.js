@@ -7,9 +7,11 @@ import PropTypes from 'prop-types'
 const Heading = ({
   label,
   className,
-  type = HeadingTypes.H2
+  type = HeadingTypes.H2,
+  tagName,
+  children
 }) => {
-  const TagName = type
+  const TagName = type || tagName
 
   return (
     <TagName
@@ -18,7 +20,7 @@ const Heading = ({
         [css.h3]: type === HeadingTypes.H3,
       })}
     >
-      { label }
+      { label || children }
     </TagName>
   )
 }

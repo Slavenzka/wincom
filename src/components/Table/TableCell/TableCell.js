@@ -356,6 +356,17 @@ const TableCell = ({
     )
   }
 
+  if (type === TableCellTypes.ORDER_STATUS.type) {
+    return (
+      <div
+        className={classnames(css.cell, css.cellOrderStatus, {
+          [css.cellHovered]: isHovered && isRowClickable
+        })}
+        dangerouslySetInnerHTML={{ __html: cellData }}
+      />
+    )
+  }
+
   const getCellData = data => {
     if (`${cellData}`.toUpperCase() === 'NONE') {
       return '-'

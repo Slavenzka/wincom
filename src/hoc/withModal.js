@@ -14,22 +14,22 @@ const withModal = WrappedComponent => {
     const { content, options = {} } = modal
     const { isCloseBtnRequired = true, isContentOnly = false, isLoading = false, callbackOnClose } = options
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
       dispatch(toggleModal(null))
       callbackOnClose && callbackOnClose()
-    }
+    }, [dispatch, callbackOnClose])
 
     const handleEscPress = useCallback(evt => {
       if (evt.key === 'Escape') {
         handleCloseModal()
       }
-    }, [dispatch])
+    }, [handleCloseModal])
 
     const handleClickOutside = useCallback(evt => {
       if (modalRef.current && evt.target === modalRef.current) {
         handleCloseModal()
       }
-    }, [dispatch, options])
+    }, [handleCloseModal])
 
     useEffect(() => {
       if (!!content && modalRef.current) {
