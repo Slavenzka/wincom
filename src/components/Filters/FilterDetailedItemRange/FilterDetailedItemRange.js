@@ -3,29 +3,47 @@ import css from './FilterDetailedItemRange.module.scss'
 import classnames from 'classnames'
 import { useSelector } from 'react-redux'
 import useDebounce from 'hooks/useDebounce'
+import { getObjPropertyViaString } from 'utils'
+
+const getLimitValues = (data, fieldName) => {
+  const counter = {}
+
+  data.forEach(item => {
+    const itemValue = getObjPropertyViaString(item, fieldName)
+
+    counter[itemValue] = counter.hasOwnProperty(itemValue) ? counter[itemValue] + 1 : 1
+  })
+
+  return {
+    minValue: Math.min.apply(null, Object.keys(counter)) || 0,
+    maxValue: Math.max.apply(null, Object.keys(counter)) || 10000,
+  }
+}
 
 const FilterDetailedItemRange = ({
   className,
-  minValue = '0',
   actualMin,
-  maxValue = '10000',
   actualMax,
   currencySymbol = '',
   onChange,
+  field,
 }) => {
+  const data = useSelector(store => store.filter.secondaryFilteredData)
+  const {minValue, maxValue} = getLimitValues(data, field)
   const [range, setRange] = useState({
     min: {
       x: 0,
-      value: actualMin,
+      value: actualMin || minValue,
     },
     max: {
       x: 0,
-      value: actualMax,
+      value: actualMax || maxValue,
     },
     gaugeWidthRem: null
   })
   const [fontSize, setFontSize] = useState(null)
   const fontSizeRedux = useSelector(store => store.elastic.curFontSize)
+
 
   const isSetMinValue = useRef(false)
   const isSetMaxValue = useRef(false)

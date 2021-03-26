@@ -180,7 +180,10 @@ export const CarOrderTypes = [
 export const DetailedFilterTypes = {
   LIST: 'LIST',
   INPUT: 'INPUT',
-  RANGE: 'RANGE'
+  RANGE: 'RANGE',
+  ROUTE: 'ROUTE',
+  ROUTE_FROM: 'ROUTE_FROM',
+  ROUTE_TO: 'ROUTE_TO',
 }
 
 export const LocalStorageAuthFields = {
@@ -195,3 +198,5 @@ export const RequestMethods = {
   POST: 'post',
   GET: 'get',
 }
+
+export const DETAILED_FILTER_MAX_QTY_WITHOUT_MANUAL_INPUT = 4

@@ -40,8 +40,9 @@ export const setDetailedFilteredValues = ({field, type, values}) => {
   return (dispatch, getState) => {
     const detailedFilter = JSON.parse(JSON.stringify(getState().filter.detailedFilter))
     const indexToModify = detailedFilter.findIndex(item => item.field === field)
+    const isListType = type === DetailedFilterTypes.LIST || type === DetailedFilterTypes.ROUTE_FROM || type === DetailedFilterTypes.ROUTE_TO
 
-    if (type === DetailedFilterTypes.LIST) {
+    if (isListType) {
       const existingValues = detailedFilter[indexToModify].values
       const existingIndex = existingValues.findIndex(item => item === values)
 

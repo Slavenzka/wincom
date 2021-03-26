@@ -1,0 +1,26 @@
+@import "styles/mixins";
+
+.sublist {
+  @include resetList;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 1.3rem;
+}
+
+.subitem {
+  width: 100%;
+
+  &:not(:first-child) {
+    margin-top: 1.2rem;
+  }
+}
+
+.input {
+  margin-bottom: 1.2rem;
+}
+
+.messageNoOptions {
+  text-align: center;
+}

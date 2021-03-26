@@ -63,10 +63,27 @@ export const getDetailedFilteredData = (raw, filter) => {
   return raw.filter(item => checkItemFiltrationStatus(item, filter))
 }
 
-export const getDataOptions = (secondaryFilteredData, field) => {
-  const list = secondaryFilteredData.reduce((total, item) => {
+export const getDataOptions = ({data, field, routeData: {detailedList, isRouteType, type}}) => {
+  const dataToProcess = isRouteType
+    ? data.filter(item => {
+      const filterTypeToWatch = type === DetailedFilterTypes.ROUTE_FROM
+        ? DetailedFilterTypes.ROUTE_TO
+        : DetailedFilterTypes.ROUTE_FROM
+
+      const filterToWatch = detailedList.find(item => item.type === filterTypeToWatch)
+
+      if (Array.isArray(filterToWatch?.values) && filterToWatch.values.length > 0) {
+        return filterToWatch.values.find(value => value === getObjPropertyViaString(item, filterToWatch.field))
+      }
+
+      return true
+    })
+    : data
+
+  const list = dataToProcess.reduce((total, item) => {
     const fieldValue = getObjPropertyViaString(item, field)
     total.push(fieldValue)
+
     return total
   }, [])
 

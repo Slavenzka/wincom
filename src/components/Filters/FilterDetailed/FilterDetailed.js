@@ -18,6 +18,7 @@ const FilterDetailed = ({
       <li className={css.item} key={index}>
         <FilterDetailedItem
           observer={filterObserver}
+          detailedList={detailedList}
           {...item}
         />
       </li>

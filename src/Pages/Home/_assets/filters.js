@@ -3,12 +3,6 @@ import { DetailedFilterTypes } from 'utils/const'
 export const filterCarPark = {
   detailed: [
     {
-      label: 'Car ID',
-      field: 'id',
-      type: DetailedFilterTypes.LIST,
-      inputPlaceholder: `Search by car id`
-    },
-    {
       label: 'Published',
       field: 'isPublished',
       type: DetailedFilterTypes.LIST,

@@ -6,9 +6,14 @@ export const filterOrders = {
   },
   detailed: [
     {
-      label: 'Route',
-      field: 'route',
-      type: DetailedFilterTypes.LIST
+      label: 'Route From',
+      field: 'route.from',
+      type: DetailedFilterTypes.ROUTE_FROM
+    },
+    {
+      label: 'Route To',
+      field: 'route.to',
+      type: DetailedFilterTypes.ROUTE_TO
     },
     {
       label: 'Price',
@@ -20,6 +25,7 @@ export const filterOrders = {
       label: 'Status',
       field: 'orderStatus',
       type: DetailedFilterTypes.LIST,
+      placeholder: `Enter status name`
     },
     {
       label: 'Car Type',

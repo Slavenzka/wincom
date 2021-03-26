@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import css from './Login.module.scss'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import Input from 'components/Input/Input'
 import Button from 'components/Button/Button'
 import { ButtonHeights, LocalStorageAuthFields } from 'utils/const'
@@ -30,7 +30,7 @@ const Login = ({isRegistration}) => {
   }
 
   const dispatch = useDispatch()
-  const {register, handleSubmit} = useForm()
+  const {control, handleSubmit} = useForm()
   const {EMAIL, PASSWORD} = FormSettings
 
   const handleLogin = data => {
@@ -112,26 +112,43 @@ const Login = ({isRegistration}) => {
       </h2>
       <form onSubmit={handleSubmit(data => isRegistration ? handleRegister(data) : handleLogin(data))}>
         <div className={css.form}>
-          <Input
-            label={ EMAIL.label }
-            register={register({
-              required: true
-            })}
+          <Controller
+            render={({name, value, onChange}) => (
+              <Input
+                name={name}
+                value={value}
+                onChange={onChange}
+                label={ EMAIL.label }
+                placeholder={EMAIL.placeholder}
+                className={css.input}
+                isAuthStyle
+              />
+            )}
             name={ EMAIL.name }
-            placeholder={ EMAIL.placeholder }
-            className={css.input}
-            isAuthStyle
-          />
-          <Input
-            label={ PASSWORD.label }
-            register={register({
+            control={control}
+            rules={{
               required: true
-            })}
+            }}
+            defaultValue={''}
+          />
+          <Controller
+            render={({name, value, onChange}) => (
+              <Input
+                name={name}
+                value={value}
+                onChange={onChange}
+                label={ PASSWORD.label }
+                placeholder={ PASSWORD.placeholder }
+                className={css.input}
+                isAuthStyle
+              />
+            )}
             name={ PASSWORD.name }
-            placeholder={ PASSWORD.placeholder }
-            type={ `password` }
-            className={css.input}
-            isAuthStyle
+            control={control}
+            rules={{
+              required: true
+            }}
+            defaultValue={''}
           />
           <Button
             className={css.button}
