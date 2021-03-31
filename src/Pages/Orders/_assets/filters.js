@@ -2,7 +2,7 @@ import { DetailedFilterTypes } from 'utils/const'
 
 export const filterOrders = {
   date: {
-    fieldName: 'date',
+    fieldName: 'dateTime',
   },
   detailed: [
     {

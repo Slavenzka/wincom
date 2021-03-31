@@ -14,6 +14,7 @@ const Input = ({
   isModalStyle,
   isCash,
   isError,
+  register,
   ...props
 }) => {
   return (
@@ -42,6 +43,7 @@ const Input = ({
         name={name}
         placeholder={placeholder}
         type='text'
+        ref={register ?? null}
         {...props}
       />
     </div>

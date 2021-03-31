@@ -54,3 +54,9 @@
     }
   }
 }
+
+.dropdown {
+  &:not(:first-child) {
+    margin-left: 3rem;
+  }
+}

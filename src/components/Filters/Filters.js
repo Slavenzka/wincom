@@ -44,6 +44,7 @@ const Filters = ({
       }
       {detailed &&
         <FilterDetailed
+          defaultList={filter?.detailed}
           detailedList={activeDetailed}
         />
       }

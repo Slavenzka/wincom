@@ -26,6 +26,18 @@
     -o-transition-timing-function: ease-out;
   }
 
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -0.6rem;
+    left: -1rem;
+    width: calc(100% + 2 * 1rem);
+    height: 0.3rem;
+    background-color: $colorBgSidebar;
+    transition-duration: $transitionDuration;
+    opacity: 0;
+  }
+
   &:hover {
     &::before {
       border-top-color: $colorBgSidebarActive;
@@ -36,6 +48,12 @@
 .triggerOpen {
   &::before {
     transform: rotate(180deg);
+  }
+}
+
+.triggerTouched {
+  &::after {
+    opacity: 1;
   }
 }
 

@@ -25,7 +25,6 @@ export const withRequestHandler = (WrappedComponent, axios) => {
       return response
     }, error => {
       const isUnauthorized = checkUnauthorizedStatus(error)
-      console.log(props.history)
 
       if (isUnauthorized) {
         dispatch(toggleModal(

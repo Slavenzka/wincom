@@ -156,5 +156,14 @@ export const getDetailedItemLabel = ({value, values}) => {
       return `From ${value.from} to ${value.to}`
     }
   }
-
 }
+
+export const checkIfDetailedListTouched = (detailedFilter = []) => {
+  return detailedFilter
+    .filter(({values}) => Array.isArray(values) && values.length > 0)
+    .length > 0
+}
+
+export const getYearOptions = (startYear, qty) => new Array(qty)
+  .fill('')
+  .map((_, index) => startYear + index)

@@ -3,9 +3,11 @@ import css from './DropdownList.module.scss'
 import classnames from 'classnames'
 
 const DropdownList = ({
+  className,
   label,
   list,
-  onChange
+  onChange,
+  isLargerFont
 }) => {
   const [isOpen, setOpenStatus] = useState(false)
 
@@ -18,12 +20,13 @@ const DropdownList = ({
       <li key={index}>
         <button
           className={classnames(css.buttonSelect, {
-            [css.buttonSelectActive]: label.toUpperCase() === item.toUpperCase()
+            [css.buttonSelectActive]: `${label}`.toUpperCase() === `${item}`.toUpperCase(),
+            [css.buttonSelectLarger]: isLargerFont
           })}
           onClick={() => onChange(item)}
           type={ `button` }
         >
-          { item }
+          { item?.value ? item.value : item }
         </button>
       </li>
     )
@@ -50,10 +53,10 @@ const DropdownList = ({
   }, [isOpen])
 
   return (
-    <>
+    <div className={className}>
       <button
         className={classnames(css.buttonVisibility, {
-          [css.buttonVisibilityOpen]: isOpen
+          [css.buttonVisibilityOpen]: isOpen,
         })}
         type={ `button` }
         onClick={() => setOpenStatus(state => !state)}
@@ -66,7 +69,7 @@ const DropdownList = ({
           { renderListItems() }
         </ul>
       }
-    </>
+    </div>
   )
 }
 

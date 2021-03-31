@@ -6,18 +6,21 @@ import Button from 'components/Button/Button'
 import Heading from 'components/Heading/Heading'
 import { HeadingTypes } from 'utils/const'
 import { validatePhone } from 'utils'
+import useDataFetch from 'hooks/useDataFetch'
 
 const ModalCreateItem = ({
   title,
+  inputNamePrefix,
   extraBlock,
-  submitHandler,
+  submitConfig,
   submitLabel = 'Save',
+  submitDataGetter,
 }) => {
   const formData = [
     {
       type: 'input',
       label: 'Name',
-      name: `${title}-name`,
+      name: `${inputNamePrefix}-name`,
       placeholder: 'Enter name',
       validation: {
         required: true
@@ -27,7 +30,7 @@ const ModalCreateItem = ({
     {
       type: 'input',
       label: 'Phone',
-      name: `${title}-phone`,
+      name: `${inputNamePrefix}-phone`,
       placeholder: 'Enter phone number',
       validation: {
         required: true,
@@ -44,6 +47,16 @@ const ModalCreateItem = ({
     errors
   })
 
+  const {fetchData, fetchingStatus} = useDataFetch(submitConfig)
+  const {isLoading} = fetchingStatus
+
+  const submitHandler = data => {
+    if (submitDataGetter) {
+      const dataToSubmit = submitDataGetter(data)
+      fetchData(dataToSubmit)
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className={css.wrapper}>
@@ -56,10 +69,11 @@ const ModalCreateItem = ({
         <div className={css.form}>
           { formItems }
         </div>
-        { extraBlock && extraBlock(control) }
+        { extraBlock && extraBlock(control, errors) }
         <Button
           className={css.button}
           type={ `submit` }
+          isLoading={isLoading}
         >
           { submitLabel }
         </Button>

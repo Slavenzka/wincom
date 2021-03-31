@@ -27,12 +27,12 @@ const FilterDetailedOptions = ({
   currencySymbol,
   placeholder,
   field,
+  handleTouchRange,
 }) => {
   const [manualInput, setManualInput] = useState('')
   const dispatch = useDispatch()
 
   const isInputRequired = isList && data.length > DETAILED_FILTER_MAX_QTY_WITHOUT_MANUAL_INPUT
-  const isScrollbarRequired = isList
 
   const listManualFiltered = getManualFilteredOptions(data, manualInput)
 
@@ -44,12 +44,30 @@ const FilterDetailedOptions = ({
     }))
   }, [dispatch])
 
-  const handleUpdateRangeValue = useCallback((updatedLimit, type) => {
+  const handleUpdateRangeValue = useCallback((updatedLimit, type, data) => {
+    const {defaultMin, defaultMax, activeMin, activeMax} = data
+
+    if (type === 'from' && updatedLimit !== defaultMin) {
+      handleTouchRange(true, field)
+    }
+
+    if (type === 'to' && updatedLimit !== defaultMax) {
+      handleTouchRange(true, field)
+    }
+
+    if (type === 'from' && updatedLimit === defaultMin && +activeMax === defaultMax) {
+      handleTouchRange(false, field)
+    }
+
+    if (type === 'to' && updatedLimit === defaultMax && +activeMin === defaultMin) {
+      handleTouchRange(false, field)
+    }
+
     !Number.isNaN(updatedLimit) && value[type] !== updatedLimit && handleUpdateFilter(field, type, {
       ...value,
       [type]: updatedLimit
     })
-  }, [value, field, handleUpdateFilter])
+  }, [value, field, handleUpdateFilter, handleTouchRange])
 
   const renderOption = ({item, field, type, index}) => {
     switch (type) {
@@ -147,7 +165,7 @@ const FilterDetailedOptions = ({
         />
       }
       { listManualFiltered.length > 0
-        ? renderOptionsList(isScrollbarRequired)
+        ? renderOptionsList(isList)
         : <p className={css.messageNoOptions}>No options matching search query</p>
       }
     </>

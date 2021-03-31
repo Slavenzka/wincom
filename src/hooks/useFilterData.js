@@ -18,7 +18,6 @@ const useFilterData = (rawData, filter = {}) => {
 
   useEffect(() => {
     if (rawData && (activePrimary || activeSecondary || detailedFilter)) {
-      console.log(rawData)
       dispatch(applyFiltration({
         rawData: rawData,
         filter

@@ -9,8 +9,10 @@ const ImageInput = ({
   label = 'Upload a file',
   name,
   onChange,
-  isWithPreview,
   styles,
+  register,
+  isWithPreview,
+  isError,
   ...props
 }) => {
   const [preview, setPreview] = useState(null)
@@ -61,7 +63,8 @@ const ImageInput = ({
   return (
     <div
       className={classnames(css.wrapper, className, {
-        [css.wrapperWithPreview]: isWithPreview
+        [css.wrapperWithPreview]: isWithPreview,
+        [css.wrapperError]: isError,
       })}
       style={{...styles}}
     >
@@ -84,6 +87,7 @@ const ImageInput = ({
           onChange && onChange(evt)
           isWithPreview && readPreviewUrl(evt)
         }}
+        ref={register}
         {...props}
       />
     </div>

@@ -6,7 +6,7 @@ export const carParkAdapter = data => {
     approved,
     towTruckOwner,
     status,
-    carriageType,
+    carType,
     carPlaces,
     freeCarPlaces,
     vehicleThumbnail,
@@ -20,7 +20,7 @@ export const carParkAdapter = data => {
       key: licencePlate,
       value: model,
     },
-    type: carriageType,
+    type: carType,
     places: carPlaces,
     status: status.split('_').join(' '),
     freePlaces: freeCarPlaces,
@@ -73,7 +73,7 @@ export const carriersAdapter = data => {
       services: ['testService'],
       license: {
         ...licenceThumbnail,
-        fullImageUrl: `/api/user/carrier/${id}/searchFullPhoto/LICENCE`
+        fullImageUrl: `/api/carrier/${id}/searchFullPhoto/LICENCE`
       },
     }
   })
@@ -90,7 +90,7 @@ export const ordersAdapter = data => {
     currency,
     amount,
     status,
-    carriageType,
+    orderType,
     companyName,
     paymentStatus,
     capacity,
@@ -113,7 +113,7 @@ export const ordersAdapter = data => {
     orderStatus: status.split('_').join(' '),
     transportDetails: {
       key: companyName,
-      value: carriageType
+      value: orderType
     },
     places: {
       loaded,

@@ -13,14 +13,14 @@ import useDataFetch from 'hooks/useDataFetch'
 import useCreateCustomer from 'hooks/Customers/useCreateCustomer'
 
 const Customers = () => {
-  const {data, fetchingStatus} = useDataFetch({
+  const {data, fetchData, fetchingStatus} = useDataFetch({
     url: `/api/manager/customerInfo`,
     options: {
       adapter: customersAdapter
     }
   })
   const filteredData = useActualPageData()
-  const handleClickCreate = useCreateCustomer()
+  const handleClickCreate = useCreateCustomer({fetchData})
 
   return (
     <ContentHeader

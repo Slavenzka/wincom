@@ -43,7 +43,7 @@ const TogglePublish = ({
     ), {
       callbackOnClose: handleCancelUpdatePublish
     }))
-  }, [])
+  }, [dispatch, isPublished, name, setValue])
 
   return (
     <span className={classnames(css.legend, css.legendCheckbox, className)}>

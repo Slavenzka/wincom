@@ -2,8 +2,6 @@ import React from 'react'
 import css from './SettingForm.module.scss'
 import { useForm } from 'react-hook-form'
 import useRenderFormItems from 'hooks/useRenderFormItems'
-import Button from 'components/Button/Button'
-import { ButtonHeights, ButtonPalettes } from 'utils/const'
 import FormControls from 'components/FormControls/FormControls'
 
 const SettingForm = ({

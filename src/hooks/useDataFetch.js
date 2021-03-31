@@ -20,9 +20,9 @@ const useDataFetch = ({
   const [data, setData] = useState(null)
   const isMounted = useRef(true)
   const dispatch = useDispatch()
-  const {adapter} = options
+  const {adapter, isFetchLater, callbackOnFetch} = options
 
-  const fetchData = useCallback(() => {
+  const fetchData = useCallback((body = requestBody) => {
     const sendRequest = (url, method, requestBody) => {
       switch (method) {
         case RequestMethods.POST:
@@ -39,7 +39,7 @@ const useDataFetch = ({
         isError: false,
       })
 
-      new Promise(resolve => resolve(sendRequest(url, method, requestBody)))
+      new Promise(resolve => resolve(sendRequest(url, method, body)))
         .then(response => {
           if (isMounted.current) {
             setFetchingStatus({
@@ -52,6 +52,7 @@ const useDataFetch = ({
             const adaptedData = adapter ? adapter(rawData) : rawData
             console.log(adaptedData)
             setData(adaptedData)
+            callbackOnFetch && callbackOnFetch(response)
           }
         })
         .catch(error => {
@@ -79,19 +80,20 @@ const useDataFetch = ({
           }
         })
     }
-  }, [adapter, dispatch, url, method, requestBody])
+  }, [adapter, dispatch, url, method, requestBody, callbackOnFetch])
 
 
   useEffect(() => {
-    fetchData()
+    !isFetchLater && fetchData()
 
     return () => {
       isMounted.current = false
     }
-  }, [fetchData])
+  }, [fetchData, isFetchLater])
 
   return {
     data,
+    fetchData,
     fetchingStatus
   }
 }

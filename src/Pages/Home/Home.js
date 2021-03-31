@@ -4,7 +4,7 @@ import ContentHeader from 'components/ContentHeader/ContentHeader'
 import Table from 'components/Table/Table'
 import { CAR_PARK_COLUMNS } from 'utils/data'
 import { CAR_DETAILS } from 'Pages/Routes'
-import { NO_ROUTING_TAGS } from 'utils/const'
+import { NO_ROUTING_TAGS, TABLE_ROW_HEIGHT } from 'utils/const'
 import Filters from 'components/Filters/Filters'
 import { filterCarPark } from 'Pages/Home/_assets/filters'
 import useActualPageData from 'hooks/useActualPageData'
@@ -42,6 +42,7 @@ const Home = ({history}) => {
           className={css.table}
           columns={CAR_PARK_COLUMNS}
           columnsClass={css.columns}
+          rowSize={TABLE_ROW_HEIGHT}
           filteredData={filteredData}
           handleClickRow={handleClickRow}
         />

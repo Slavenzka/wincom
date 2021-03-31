@@ -1,26 +1,25 @@
 import React from 'react'
 import css from 'styles/yearMonthSelector.module.scss'
 import DropdownList from 'components/DropdownList/DropdownList'
+import { getYearOptions } from 'utils'
 
 const useYearMonthSelector = ({
   localization,
   calendarState,
   updateCalendarState,
 }) => {
-  const fromMonth = new Date(2021, calendarState?.from ? calendarState.from.getMonth() : new Date().getMonth())
-  const toMonth = new Date(2021 + 10, 11)
+  const actualYear = new Date().getFullYear()
+  const fromMonth = new Date(actualYear - 9, calendarState?.from ? calendarState.from.getMonth() : new Date().getMonth())
+  const toMonth = new Date(actualYear + 1, 11)
 
   const monthOptions = localization.months
 
-  const years = [];
-  for (let i = fromMonth.getFullYear() - 1; i <= toMonth.getFullYear(); i += 1) {
-    years.push(i);
-  }
+  // const yearOptions = [];
+  // for (let i = fromMonth.getFullYear() - 1; i <= toMonth.getFullYear(); i += 1) {
+  //   years.push(i);
+  // }
 
-  const yearOptions = years.map(item => ({
-    label: item,
-    value: item
-  }))
+  const yearOptions = getYearOptions(fromMonth.getFullYear(), toMonth.getFullYear() - fromMonth.getFullYear() + 1)
 
   const handleYearMonthChange = month => {
     updateCalendarState(prevState => {
@@ -37,6 +36,7 @@ const useYearMonthSelector = ({
   }
 
   const getSelectedMonth = date => localization.months[date.getMonth()]
+  const getSelectedYear = date => date.getFullYear()
 
   const handleChange = function handleChange(date, value) {
     const updatedObject = {
@@ -52,36 +52,22 @@ const useYearMonthSelector = ({
     <div className={'DayPicker-Caption'}>
       <div className={css.selectWrapper}>
         <DropdownList
+          className={css.dropdown}
           label={getSelectedMonth(date)}
           list={monthOptions}
           onChange={month => handleChange(date, {
             month
           })}
         />
-        {/*<SelectDropdown*/}
-        {/*  className={classnames(css.select, css.selectMonth)}*/}
-        {/*  onChange={evt => handleChange(date,{*/}
-        {/*    month: evt*/}
-        {/*  })}*/}
-        {/*  value={{*/}
-        {/*    label: localization.months[date.getMonth()],*/}
-        {/*    value: localization.months[date.getMonth()],*/}
-        {/*  }}*/}
-        {/*  options={monthOptions}*/}
-        {/*  dropdownComponent={<span className={css.arrow} />}*/}
-        {/*/>*/}
-        {/*<SelectDropdown*/}
-        {/*  className={classnames(css.select, css.selectYear)}*/}
-        {/*  onChange={evt => handleChange({*/}
-        {/*    year: evt*/}
-        {/*  })}*/}
-        {/*  value={{*/}
-        {/*    label: date.getFullYear(),*/}
-        {/*    value: date.getFullYear()*/}
-        {/*  }}*/}
-        {/*  options={yearOptions}*/}
-        {/*  dropdownComponent={<span className={css.arrow} />}*/}
-        {/*/>*/}
+        <DropdownList
+          className={css.dropdown}
+          label={getSelectedYear(date)}
+          list={yearOptions}
+          onChange={year => handleChange(date, {
+            year
+          })}
+          isLargerFont
+        />
       </div>
     </div>
   )

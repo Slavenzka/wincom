@@ -61,3 +61,21 @@
     object-fit: cover;
   }
 }
+
+.wrapperError {
+  .label {
+    color: $colorError;
+
+    &:hover {
+      color: $colorError;
+
+      .icon {
+        fill: $colorError;
+      }
+    }
+  }
+
+  .icon {
+    fill: $colorError;
+  }
+}

@@ -65,6 +65,8 @@ export const getDetailedFilteredData = (raw, filter) => {
 
 export const getDataOptions = ({data, field, routeData: {detailedList, isRouteType, type}}) => {
   const dataToProcess = isRouteType
+    // if filter is type Route we collect data about opposite route point filter
+    // (filterTypeToWatch, filterToWatch)
     ? data.filter(item => {
       const filterTypeToWatch = type === DetailedFilterTypes.ROUTE_FROM
         ? DetailedFilterTypes.ROUTE_TO

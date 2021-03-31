@@ -9,7 +9,7 @@ const SiteGrid = ({children, className}) => {
   return (
     <div className={classnames(css.wrapper, className, {
       [css.wrapperCollapsed]: isSidebarCollapsed,
-      [css.wrapperUncollapsed]: isUncollapsed,
+      [css.wrapperUncollapsed]: isUncollapsed || !isSidebarCollapsed,
     })}>
       { children(handleClickCollapseButton) }
     </div>

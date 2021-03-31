@@ -6,6 +6,7 @@
 
   margin: 0;
   padding: 0;
+  max-height: 100%;
   text-transform: none;
   transition-duration: $transitionDuration;
   transition-property: text-decoration;
@@ -172,11 +173,14 @@
 
 .previewTrigger {
   @include resetButton;
+
+  max-height: 100%;
 }
 
 .preview {
-  max-width: 10rem;
-  max-height: 25rem;
+  width: 4rem;
+  height: 6rem;
+  object-fit: contain;
 }
 
 .full {

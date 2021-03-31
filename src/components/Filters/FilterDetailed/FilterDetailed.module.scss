@@ -2,6 +2,7 @@
 @import "styles/variables";
 
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -43,4 +44,23 @@
     margin-left: 2rem;
     width: 1.7rem;
   }
+}
+
+.buttonClear {
+  @include resetButton;
+  @include fontLegend(500, $colorFontItemPassive);
+
+  position: absolute;
+  bottom: 0.7rem;
+  right: $paddingTableHor;
+  display: none;
+  transition-duration: $transitionDuration;
+
+  &:hover {
+    color: $colorFontDarkest;
+  }
+}
+
+.buttonClearVisible {
+  display: block;
 }

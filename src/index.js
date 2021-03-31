@@ -2,25 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css'
 import 'styles/common.scss'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
-import elasticAdaptive from 'store/reducers/elasticAdaptive'
-import thunk from 'redux-thunk'
 import { BrowserRouter } from 'react-router-dom'
-import { uiReducer } from 'store/reducers/ui'
 import ViewSwitcher from 'ViewSwitcher/ViewSwitcher'
-import { filterReducer } from 'store/reducers/filtration'
-import { authReducer } from 'store/reducers/auth'
+import configureStore from 'store/configureStore'
 
-const rootReducer = combineReducers({
-  elastic: elasticAdaptive,
-  ui: uiReducer,
-  auth: authReducer,
-  filter: filterReducer,
-})
-
-const store = createStore(rootReducer,applyMiddleware(thunk))
+const store = configureStore()
 
 const Content = (
   <Provider store={store}>
@@ -30,7 +18,9 @@ const Content = (
   </Provider>
 )
 
-ReactDOM.render(Content, document.getElementById('root'));
+const rootNode = document.getElementById('root')
+
+ReactDOM.render(Content, rootNode);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

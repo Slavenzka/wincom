@@ -18,6 +18,8 @@ const FilterDetailedItem = ({
   observer,
   inputPlaceholder = 'Enter search value',
   detailedList,
+  handleTouchRange,
+  isRangeTouched,
   ...props
 }) => {
   const {field} = props
@@ -29,11 +31,13 @@ const FilterDetailedItem = ({
   const isListType = type === DetailedFilterTypes.LIST || type === DetailedFilterTypes.ROUTE_FROM || type === DetailedFilterTypes.ROUTE_TO
   const isRouteType = type === DetailedFilterTypes.ROUTE_FROM || type === DetailedFilterTypes.ROUTE_TO
   const isRangeType = type === DetailedFilterTypes.RANGE
+  const isItemTouched = (isListType && Array.isArray(values) && values.length > 0) || (isRangeType && isRangeTouched)
 
   const list = secondaryFilteredData
     ? getDataOptions({data: secondaryFilteredData, field, routeData: { detailedList, isRouteType, type }})
     : []
   const isFilterDisabled = !isRouteType && list.length <= MIN_DETAILED_FILTER_OPTIONS_QTY
+
 
   // move closing logic to separate hook useCloseModal
   const handleClickOutside = useCallback(evt => {
@@ -66,7 +70,7 @@ const FilterDetailedItem = ({
    }
   }, [isOpen, handleClickOutside, handleEscPress])
 
-  const handleResetFilter = () => {
+  const handleCloseFilter = () => {
     observer.forEach(fn => fn())
   }
 
@@ -102,6 +106,7 @@ const FilterDetailedItem = ({
             value={value}
             values={values}
             type={type}
+            handleTouchRange={handleTouchRange}
             isOpen={isOpen}
             {...props}
           />
@@ -118,12 +123,13 @@ const FilterDetailedItem = ({
     <div className={css.wrapper}>
       <button
         onClick={() => {
-          handleResetFilter()
+          handleCloseFilter()
           handleClickTrigger()
         }}
         className={classnames(css.trigger, {
           [css.triggerDisabled]: isFilterDisabled,
-          [css.triggerOpen]: isOpen
+          [css.triggerOpen]: isOpen,
+          [css.triggerTouched]: isItemTouched
         })}
         type='button'
       >

@@ -56,10 +56,27 @@ const DateRangePicker = () => {
   }
 
   const renderDateRange = (from, to) => {
-    const { year: yearFrom, month: monthFrom, day: dayFrom } = getDateComponents(new Date(from))
-    const { year: yearTo, month: monthTo, day: dayTo } = getDateComponents(new Date(to))
+    if (!from && !to) return `Select range`
 
-    return `${dayFrom}.${monthFrom}.${yearFrom} - ${dayTo}.${monthTo}.${yearTo}`
+    if (from && !to) {
+      const { year: yearFrom, month: monthFrom, day: dayFrom } = getDateComponents(new Date(from))
+
+      return `From ${dayFrom}.${monthFrom}.${yearFrom}`
+    }
+
+    if (!from && to) {
+      const { year: yearTo, month: monthTo, day: dayTo } = getDateComponents(new Date(to))
+
+      return `To ${dayTo}.${monthTo}.${yearTo}`
+    }
+
+    if (from && to) {
+      const { year: yearFrom, month: monthFrom, day: dayFrom } = getDateComponents(new Date(from))
+      const { year: yearTo, month: monthTo, day: dayTo } = getDateComponents(new Date(to))
+
+      return `${dayFrom}.${monthFrom}.${yearFrom} - ${dayTo}.${monthTo}.${yearTo}`
+    }
+
   }
 
   const handleSelectStartDate = useCallback(data => {
@@ -112,7 +129,7 @@ const DateRangePicker = () => {
           onClick={() => setOpenStatus(!isOpen)}
           type='button'
         >
-          { range.selected.from && range.selected.to ? renderDateRange(range.selected.from, range.selected.to) : `Select range` }
+          {renderDateRange(range?.selected?.from, range?.selected?.to) }
           <IconCalendarSimplified className={css.icon} />
         </button>
         <div

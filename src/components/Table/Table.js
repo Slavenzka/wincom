@@ -3,7 +3,7 @@ import css from './Table.module.scss'
 import classnames from 'classnames'
 import TableHeadings from 'components/Table/TableHeadings/TableHeadings'
 import { useSelector } from 'react-redux'
-import { TABLE_ROW_HEIGHT } from 'utils/const'
+import { TABLE_ROW_HEIGHT_MEDIUM } from 'utils/const'
 import useTableHeight from 'hooks/useTableHeight'
 import { FixedSizeList as List } from 'react-window'
 import TableRow from 'components/Table/TableRow/TableRow'
@@ -17,7 +17,7 @@ const Table = ({
   columnsClass,
   filteredData,
   handleClickRow,
-  rowSize = TABLE_ROW_HEIGHT
+  rowSize = TABLE_ROW_HEIGHT_MEDIUM
 }) => {
   const data = filteredData || []
   const fontSize = useSelector(store => store.elastic.curFontSize)

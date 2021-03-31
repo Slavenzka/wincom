@@ -31,7 +31,7 @@ const StatusToggle = ({
           { labelConfirm }
         </span>
       </>
-    ), [checked])
+    ), [checked, iconActive, iconPassive, labelCancel, labelConfirm])
 
   return (
     <label

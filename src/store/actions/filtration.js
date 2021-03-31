@@ -129,8 +129,25 @@ export const applyFiltration = ({rawData, filter = {}}) => {
 
         if (typeof itemField === 'object' && itemField?.from && itemField?.to) {
 
-          return ((itemField.from >= activeDate.from.getTime() && itemField.to <= activeDate.to.getTime()) ||
-            (itemField.from >= activeDate.from.getTime() && itemField.from <= activeDate.to.getTime()))
+          if (activeDate?.from && !activeDate?.to) {
+            const isFullRange = itemField.from >= activeDate.from.getTime()
+            const isPartRange = itemField.from < activeDate.from.getTime() && itemField.to >= activeDate.from.getTime()
+
+            return isFullRange || isPartRange
+          }
+
+          if (!activeDate?.from && activeDate?.to) {
+            const isFullRange = itemField.to <= activeDate.to.getTime()
+            const isPartRange = itemField.to > activeDate.to.getTime() && itemField.from <= activeDate.to.getTime()
+
+            return isFullRange || isPartRange
+          }
+
+          const isFullRange = itemField.from >= activeDate.from.getTime() && itemField.to <= activeDate.to.getTime()
+          const isPartRange = (itemField.from >= activeDate.from.getTime() && itemField.from <= activeDate.to.getTime()) ||
+            (itemField.to >= activeDate.from.getTime() && itemField.to <= activeDate.to.getTime())
+
+          return isFullRange || isPartRange
         }
 
         return activeDate?.to

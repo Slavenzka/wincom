@@ -72,3 +72,13 @@
     z-index: -1;
   }
 }
+
+.buttonSelectLarger {
+  @include fontInfo(500);
+
+  &.buttonSelectActive {
+    &::before {
+      border-radius: 1.5rem;
+    }
+  }
+}

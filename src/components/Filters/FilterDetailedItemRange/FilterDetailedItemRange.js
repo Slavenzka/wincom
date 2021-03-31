@@ -33,11 +33,11 @@ const FilterDetailedItemRange = ({
   const [range, setRange] = useState({
     min: {
       x: 0,
-      value: actualMin || minValue,
+      value: actualMin ?? minValue,
     },
     max: {
       x: 0,
-      value: actualMax || maxValue,
+      value: actualMax ?? maxValue,
     },
     gaugeWidthRem: null
   })
@@ -188,12 +188,20 @@ const FilterDetailedItemRange = ({
   }, [range.gaugeWidthRem, actualMax, maxValue])
 
   useEffect(() => {
-    onChange(+rangeMinDebounced, `from`)
-  }, [rangeMinDebounced, onChange])
+    onChange(+rangeMinDebounced, `from`, {
+      defaultMin: minValue,
+      defaultMax: maxValue,
+      activeMax: rangeMaxDebounced,
+    })
+  }, [rangeMinDebounced, rangeMaxDebounced, onChange, minValue, maxValue])
 
   useEffect(() => {
-    onChange(+rangeMaxDebounced, `to`)
-  }, [rangeMaxDebounced, onChange])
+    onChange(+rangeMaxDebounced, `to`, {
+      defaultMin: minValue,
+      defaultMax: maxValue,
+      activeMin: rangeMinDebounced,
+    })
+  }, [rangeMinDebounced, rangeMaxDebounced, onChange, minValue, maxValue])
 
   return (
     <div className={classnames(css.wrapper, className)}>
