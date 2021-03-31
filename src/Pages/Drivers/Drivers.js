@@ -22,7 +22,7 @@ const Drivers = () => {
   }))
 
   const {data, fetchData, fetchingStatus} = useDataFetch({
-    url: `/api/manager/carrier`,
+    url: `/api/manager/carrierInfo`,
     options: {
       adapter: carriersAdapter
     }
@@ -38,7 +38,6 @@ const Drivers = () => {
 
   const handleClickCreate = useCreateDriver(fetchData)
   const filteredData = useActualPageData()
-  console.log(processedData)
 
   return (
     <ContentHeader

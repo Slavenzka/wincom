@@ -139,13 +139,13 @@ const CarDetails = ({match}) => {
                 className={css.image}
                 altLabel={ `${data?.carNumber?.value} - ${data?.carNumber?.key}` }
               />
-              <ImageInput
-                className={css.inputImage}
-                register={register}
-                images={data?.img}
-                label='Select photo to upload'
-                name='car-details-photo'
-              />
+              {/*<ImageInput*/}
+              {/*  className={css.inputImage}*/}
+              {/*  register={register}*/}
+              {/*  images={data?.img}*/}
+              {/*  label='Select photo to upload'*/}
+              {/*  name='car-details-photo'*/}
+              {/*/>*/}
             </>
           )}
         </DetailsForm>

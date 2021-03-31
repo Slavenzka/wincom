@@ -12,7 +12,7 @@ export const carParkAdapter = data => {
     vehicleThumbnail,
   }) => ({
     id,
-    img: vehicleThumbnail.image,
+    img: vehicleThumbnail?.[0]?.image,
     imgType: vehicleThumbnail.photoType,
     isPublished: approved,
     owner: towTruckOwner,
@@ -56,23 +56,22 @@ export const customersAdapter = data => {
 export const carriersAdapter = data => {
   return data.map(({
     id,
-    name,
-    email,
+    companyName,
     phone,
     carsQuantity,
-    carriageTypes,
-    licenceThumbnail,
+    carTypes,
+    licensePreview,
   }) => {
     return {
       id,
-      name,
+      name: companyName,
       contacts: {
-        phone: phone
+        phone,
       },
-      cars: '0',
-      services: ['testService'],
+      cars: carsQuantity,
+      services: carTypes,
       license: {
-        ...licenceThumbnail,
+        ...licensePreview,
         fullImageUrl: `/api/carrier/${id}/searchFullPhoto/LICENCE`
       },
     }
